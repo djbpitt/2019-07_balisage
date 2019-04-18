@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="21.0">
+    <meta>
+        <filters directoryPatterns="" filePatterns="\Qbalisage-2019.xpr\E" positiveFilePatterns="" showHiddenFiles="false"/>
+        <options/>
+    </meta>
+    <projectTree name="balisage-2019.xpr">
+        <folder path="."/>
+    </projectTree>
+</project>

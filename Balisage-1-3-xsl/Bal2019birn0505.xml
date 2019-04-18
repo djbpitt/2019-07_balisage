@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../Balisage-1-3-rng/balisage-1-3.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-stylesheet type="text/xsl" href="balisage-proceedings-html.xsl"?>
+<article xmlns="http://docbook.org/ns/docbook">
+    <title>The integration of XML databases and content management systems in digital
+        editions</title>
+    <subtitle>Understanding eXist-db through Reese’s Peanut Butter Cups</subtitle>
+    <info>
+        <abstract>
+            <para>We have identified four models for integrating digital edition content into
+                eXist-db [<xref linkend="eXist-db"/>], which are, in decreasing order of eXist-db
+                dependence: 1) TEI Publisher [<xref linkend="teiPublisher"/>], 2) the eXist-db app
+                framework using HTML templating [<xref linkend="templating"/>], 3) the eXist-db app
+                framework without HTML templating [<xref linkend="webapp"/>] (similar to Joe
+                Wicentowski's Punch project [<xref linkend="punch"/>]), and 4) using Apache [<xref
+                    linkend="apache"/>] and PHP [<xref linkend="php"/>] to mediate between the user
+                and eXist-db, so that eXist-db provides only XML database services. Our presentation
+                will examine and compare these ways of conceptualizing and implementing the
+                infrastructure for a digital edition. Each of them has advantages and disadvantages,
+                primarily from the perspective of sustainability, and those concerns apply to
+                edition frameworks generally, and are therefore not specific to eXist-db.</para>
+        </abstract>
+        <author>
+            <personname>
+                <firstname>David</firstname>
+                <othername>J.</othername>
+                <surname>Birnbaum</surname>
+            </personname>
+            <personblurb>
+                <para>David J. Birnbaum is Professor and Chair of the Department of Slavic Languages
+                    and Literatures at the University of Pittsburgh. He has been involved in the
+                    study of electronic text technology since the mid-1980s, has delivered
+                    presentations at a variety of electronic text technology conferences, and has
+                    served on the board of the Association for Computers and the Humanities, the
+                    editorial board of <emphasis role="ital">Markup languages: theory and
+                        practice</emphasis>, and the Text Encoding Initiative Technical Council.
+                    Much of his electronic text work intersects with his research in medieval Slavic
+                    manuscript studies, but he also often writes about issues in the philosophy of
+                    markup.</para>
+            </personblurb>
+            <affiliation>
+                <jobtitle>Professor and Chair</jobtitle>
+                <orgname>Department of Slavic Languages and Literatures, University of Pittsburgh
+                    (US)</orgname>
+            </affiliation>
+            <email>djbpitt@gmail.com</email>
+            <link>http://www.obdurodon.org</link>
+        </author>
+        <author>
+            <personname>
+                <firstname>Leif-Jöran</firstname>
+                <surname>Olsson</surname>
+            </personname>
+            <personblurb>
+                <para>Leif-Jöran Olsson has been employed since 2005 as a systems developer at
+                    Språkbanken, the Swedish Language bank, University of Gothenburg, where he
+                    develops research infrastructure for language technology, both nationally and
+                    within CLARIN ERIC. His project management experience involves both long-term
+                    partner projects (e.g., the Swedish Literary Bank, the Selma Lagerlöf Archive,
+                    the Swedish Drama web) and short-term domain-specific toolboxes (including
+                    training and use case analysis). He has extensive experience with teaching in
+                    language technology and programming. Leif-Jöran obtained his MA in Language
+                    Technology from Uppsala University in 2004, and he is one of the core developers
+                    of the open-source eXist-db native XML database.</para>
+            </personblurb>
+            <affiliation>
+                <jobtitle>Systems developer</jobtitle>
+                <orgname>Språkbanken, Department of Swedish, University of Gothenburg
+                    (Sweden)</orgname>
+            </affiliation>
+            <email>leif-joran.olsson@svenska.gu.se</email>
+            <link>https://spraakbanken.gu.se/personal/ljo</link>
+        </author>
+        <author>
+            <personname>
+                <firstname>Joseph</firstname>
+                <surname>Wicentowski</surname>
+            </personname>
+            <personblurb>
+                <para>Joseph Wicentowski is a historian who specializes in the use of open standards
+                    to improve the accessibility and utility of scholarly editions. Since completing
+                    his Ph.D. in History at Harvard University in 2007, he has spearheaded a project
+                    to convert a major diplomatic documentary edition to TEI, leveraging the XML
+                    family of technologies to enable editors, researchers, and the public to access
+                    texts online in multiple open formats. Wicentowski has led workshops on the
+                    XQuery language and the eXist-db open source native XML database at TEI@Oxford
+                    Summer School in 2010–11 and Digital Humanities 2017, serves as a community
+                    liaison for the eXist-db community, and is co-author of a forthcoming book on
+                    XQuery for digital humanists in the Coding for Humanists series from Texas
+                    A&amp;M University Press.</para>
+            </personblurb>
+            <affiliation>
+                <jobtitle>Digital History Advisor</jobtitle>
+                <orgname>Office of the Historian, US Department of State</orgname>
+            </affiliation>
+            <email>joewiz@gmail.com</email>
+            <link>https://github.com/joewiz</link>
+        </author>
+    </info>
+    <section>
+        <title>Introduction</title>
+        <para>In the 1980s Reese’s Peanut Butter Cups, long owned by the Hershey Corporation and one
+            of the best selling and most popular candy products in the US (<xref linkend="upton"/>),
+            deployed an advertising campaign that portrayed the idea of eating chocolate and peanut
+            butter together as a serendipitous pleasure. In one television advertisement (<xref
+                linkend="reeses"/>), two persons accidentally walk into each other on the street, he
+            eating a chocolate bar and she (perhaps surprisingly) eating peanut butter out of a jar
+            with her finger. They collide, the chocolate bar winds up embedded in the peanut butter,
+            and they protest, in unison: <quote>You got your chocolate in my peanut butter"</quote>
+            and <quote>You got peanut butter on my chocolate!</quote> They both then,
+            simultaneously, realize that they like the taste of the combination, and proclaim, still
+            in unison, <quote>Delicious!</quote>, as an older man (apparently a grocer; he wears an
+            apron) suddenly materializes between them, standing uncomfortably close and silently
+            ogling the packaged Reese’s Peanut Butter Cups that he holds up (for the camera; it is
+            behind the field of view of the two principals).</para>
+        <figure xml:id="reeses_image" xreflabel="Reese’s Peanut Butter Cups (commercial; product)">
+            <mediaobject>
+                <imageobject>
+                    <imagedata format="jpg" fileref="reeses.jpg" width="49%"/>
+                </imageobject>
+                <imageobject>
+                    <imagedata fileref="reeses-wrappers.jpg" width="49%"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+        <para>Meanwhile, in a galaxy far, far away, the eXist-db XML database was born in <emphasis
+                role="bold">[EXPAND]</emphasis>. Since its inception, eXist-db has provided the
+            services one expects from any database management system (DBMS): it stores records (XML
+            documents), builds persistent indexes, supports retrieval with a query language
+            (XQuery), and provides the housekeeping functionality (e.g., user authentication) those
+            processes require. We might consider this functionality as analogous to the peanut
+            butter center of a Reese’s Peanut Butter Cup. eXist-db is commonly hosted inside an HTTP
+            server and servlet container (it ships with <xref linkend="Jetty"/>, but other hosts are
+            also supported), which mediates between the user and the eXist-db functionality, as is
+            illustrated in this image from <xref linkend="exist-book"/>:</para>
+        <figure xml:id="exist-book-jetty"
+            xreflabel="eXist web applicaation  platform architecture (Siegel and Retter 2014: 72)">
+            <mediaobject>
+                <imageobject>
+                    <imagedata format="jpg" fileref="jetty.jpg"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+        <para>Since its early years users have been able to interact with eXist-db by communicating
+            directly with the Jetty server, and over time eXist-db has increasingly come to support
+            features that are more commonly associated with a Content Management System (CMS) than
+            with a database, such as themes, templates, and page management (not just data resource
+            management). We might consider eXist-db CMS services as analogous to the chocolate shell
+            of a Reese’s Peanut Butter Cup. Peanut butter and chocolate have a long history as
+            independently popular foodstuffs, and neither depends in any necessary, obvious, or even
+            intuitive way on the other, yet their combination in a single product has proven
+            impressively popular with consumers. Similarly, there is nothing about a DBMS that
+            requires or expects CMS services, and vice versa, yet the growing integration of the two
+            types of functionality within eXist-db confirms that they can be combined to create a
+            resource for developing and deploying digital editions.</para>
+        <para>With the release of TEI Publisher 4.0 in December 2018 [<xref
+                linkend="teiPublisher4.0"/>], built on a Web Components foundation [<xref
+                linkend="webComponents"/>], eXist-db can be said to provide a hosting platform for
+            digital editions that goes beyond traditional DBMS services:<blockquote>
+                <para>Despite its elegant simplicity, various projects we realized in the past prove
+                    that the TEI Processing Model is: <blockquote>
+                        <para>1. powerful enough to cover complex transformation needs</para>
+                        <para>2. a truly universal tool for any kind of digital edition</para>
+                        <para> 3. efficient and as fast (or faster) as handwritten
+                            transformations</para>
+                        <para>4. suitable for any XML, not just TEI (this documentation is written
+                            in docbook!)</para>
+                    </blockquote> However, online editions require more than just a text
+                    transformation: the text needs to be embedded into an application context,
+                    adding navigation, pagination, search, facsimile display and so on. The larger
+                    part of TEI Publisher deals with those aspects, providing all the necessary
+                    building blocks for an online edition. [<xref linkend="teiPublisherQuick"
+                    />]</para>
+            </blockquote></para>
+        <para>After a digression about model—view—controller (MVC) architecture, which serves as a
+            reference point for comparison and discussion, in the following sections we describe
+            four models for integrating digital edition content into eXist-db. These are, in
+            increasing order of eXist-db dependence: <orderedlist>
+                <listitem>
+                    <para>using Apache [<xref linkend="apache"/>] and PHP [<xref linkend="php"/>] to
+                        mediate between the user and eXist-db, so that eXist-db provides only XML
+                        database services;</para>
+                </listitem>
+                <listitem>
+                    <para>the eXist-db app framework without HTML templating [<xref linkend="webapp"
+                        />];</para>
+                </listitem>
+                <listitem>
+                    <para>the eXist-db app framework using HTML templating [<xref
+                            linkend="templating"/>]; and</para>
+                </listitem>
+                <listitem>
+                    <para>TEI Publisher [<xref linkend="teiPublisher"/>].</para>
+                </listitem>
+            </orderedlist> Each of these ways of conceptualizing and implementing the infrastructure
+            for a digital edition has advantages and disadvantages, primarily from the perspective
+            of sustainability, and those concerns also apply to edition frameworks generally, and
+            are therefore not specific to eXist-db.</para>
+    </section>
+    <section>
+        <title>Model—View—Controller architecture (MVC)</title>
+        <para>blah blah blah</para>
+    </section>
+    <section>
+        <title>Four ways of building an edition with eXist-db</title>
+        <section>
+            <title>PHP</title>
+            <para>blah blah blah</para>
+        </section>
+        <section>
+            <title>Apps without HTML templating</title>
+            <para>blah blah blah</para>
+        </section>
+        <section>
+            <title>Apps with HTML templating</title>
+            <para>blah blah blah</para>
+        </section>
+        <section>
+            <title>TEI Publisher</title>
+            <para>blah blah blah</para>
+        </section>
+    </section>
+    <section>
+        <title>Conclusion</title>
+        <para>blah blah blah</para>
+    </section>
+    <bibliography>
+        <title>Works cited</title>
+        <bibliomixed xml:id="apache" xreflabel="Apache"><quote>Apache HTTP server project.</quote>
+            <link>https://httpd.apache.org</link></bibliomixed>
+        <bibliomixed xml:id="eXist-db" xreflabel="eXist-db"><quote>eXist-db.</quote>
+            <link>http://exist-db.org</link></bibliomixed>
+        <bibliomixed xml:id="templating" xreflabel="eXist-db HTML templating"><quote>eXist-db: HTML
+                Templating Module.</quote>
+            <link>http://exist-db.org/exist/apps/doc/templating.xml</link></bibliomixed>
+        <bibliomixed xml:id="webapp" xreflabel="eXist-db Web application"><quote>eXist-db: Getting
+                started with Web application development.</quote>
+            <link>http://exist-db.org/exist/apps/doc/development-starter</link></bibliomixed>
+        <bibliomixed xml:id="Jetty" xreflabel="Jetty">Eclipse Jetty.
+                <link>https://www.eclipse.org/jetty/</link></bibliomixed>
+        <bibliomixed xml:id="php" xreflabel="PHP"><quote>PHP: hypertext preprocessor.</quote>
+            <link>https://www.php.net/</link></bibliomixed>
+        <bibliomixed xml:id="punch" xreflabel="Punch">Wicentowski, Joe. <quote>Punch. A simple
+                application written in XQuery for eXist demonstrating how to create a dynamic,
+                searchable website for TEI text.</quote>
+            <link>https://github.com/joewiz/punch</link></bibliomixed>
+        <bibliomixed xml:id="reeses" xreflabel="Reese’s"><quote>Vintage 80s Reese’s peanut butter
+                cups commercial with walkers.</quote>
+            <link>https://www.youtube.com/watch?v=DJLDF6qZUX0</link></bibliomixed>
+        <bibliomixed xml:id="exist-book" xreflabel="Siegel and Retter 2014">Siegel, Erik and Adam
+            Retter. <emphasis role="ital">eXist. A NoSQL document database and application
+                platform.</emphasis> Sebastopol, CA: O’Reilly. 2014.</bibliomixed>
+        <bibliomixed xml:id="teiPublisher" xreflabel="TEI Publisher"><quote>TEI publisher.</quote>
+            <link>https://teipublisher.com</link></bibliomixed>
+        <bibliomixed xml:id="teiPublisher4.0" xreflabel="TEI Publisher 4.0"><quote>TEI Publisher
+                4.0.</quote> Product announcement. 2018-12-20.
+                <link>https://teipublisher.com/exist/apps/tei-publisher/doc/blog/tei-publisher-40.xml</link></bibliomixed>
+        <bibliomixed xml:id="teiPublisherQuick" xreflabel="TEI Publisher Quickstart"><quote>TEI
+                Publisher Quickstart.</quote>
+            <link>https://teipublisher.com/exist/apps/tei-publisher/doc/documentation.xml</link></bibliomixed>
+        <bibliomixed xml:id="upton" xreflabel="Upton 2013">Upton, Emily. <quote>The fascinating rise
+                of Reese’s Peanut Butter Cups.</quote>
+            <emphasis role="ital">Business insider.</emphasis> June 30, 2013.
+                <link>https://www.businessinsider.com/the-fascinating-rise-of-reeses-peanut-butter-cups-2013-6</link></bibliomixed>
+        <bibliomixed xml:id="webComponents" xreflabel="Web Components">webcomponents.org.
+                <quote>Introduction.</quote>
+            <link>https://www.webcomponents.org/introduction</link></bibliomixed>
+    </bibliography>
+</article>
