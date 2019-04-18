@@ -128,11 +128,10 @@
             services one expects from any database management system (DBMS): it stores records (XML
             documents), builds persistent indexes, supports retrieval with a query language
             (XQuery), and provides the housekeeping functionality (e.g., user authentication) those
-            processes require. We might consider this functionality as analogous to the peanut
-            butter center of a Reese’s Peanut Butter Cup. eXist-db is commonly hosted inside an HTTP
-            server and servlet container (it ships with <xref linkend="Jetty"/>, but other hosts are
-            also supported), which mediates between the user and the eXist-db functionality, as is
-            illustrated in this image from <xref linkend="exist-book"/>:</para>
+            processes require. eXist-db is commonly hosted inside an HTTP server and servlet
+            container (it ships with <xref linkend="Jetty"/>, but other hosts are also supported),
+            which mediates between the user and the eXist-db functionality, as is illustrated in
+            this image from <xref linkend="exist-book"/>:</para>
         <figure xml:id="exist-book-jetty"
             xreflabel="eXist web applicaation  platform architecture (Siegel and Retter 2014: 72)">
             <mediaobject>
@@ -145,18 +144,24 @@
             directly with the Jetty server, and over time eXist-db has increasingly come to support
             features that are more commonly associated with a Content Management System (CMS) than
             with a database, such as themes, templates, and page management (not just data resource
-            management). We might consider eXist-db CMS services as analogous to the chocolate shell
-            of a Reese’s Peanut Butter Cup. Peanut butter and chocolate have a long history as
-            independently popular foodstuffs, and neither depends in any necessary, obvious, or even
-            intuitive way on the other, yet their combination in a single product has proven
-            impressively popular with consumers. Similarly, there is nothing about a DBMS that
-            requires or expects CMS services, and vice versa, yet the growing integration of the two
-            types of functionality within eXist-db confirms that they can be combined to create a
-            resource for developing and deploying digital editions.</para>
+            management). We might consider the eXist-db core functionality, the innermost layer of
+            an eXist-db installation, as analogous to the peanut butter center of a Reese’s Peanut
+            Butter Cup, and the Jetty servlet container, which can also provide CMS services, as the
+            outer layer of chocolate. But the analogy does not depend only on the fact that the
+            eXist-db DBMS services are wrapped, as it were, inside Jetty’s CMS ones. Peanut butter
+            and chocolate have a long history as independently popular foodstuffs, and neither
+            depends in any necessary, obvious, or even intuitive way on the other, yet their
+            combination in a single product has proven impressively popular with consumers.
+            Similarly, there is nothing about a DBMS that requires or expects CMS services, and vice
+            versa, yet the growing integration of the two types of functionality within eXist-db
+            confirms that they can be combined to create a resource for developing and deploying
+            digital editions.</para>
         <para>With the release of TEI Publisher 4.0 in December 2018 [<xref
                 linkend="teiPublisher4.0"/>], built on a Web Components foundation [<xref
                 linkend="webComponents"/>], eXist-db can be said to provide a hosting platform for
-            digital editions that goes beyond traditional DBMS services:<blockquote>
+            digital editions that both goes very far beyond traditional DBMS services and provides
+            functionality that would normally be expected from a CMS. The TEI Publisher
+            documentation says as much explicitly (see especially the paragraph below the numbered list):<blockquote>
                 <para>Despite its elegant simplicity, various projects we realized in the past prove
                     that the TEI Processing Model is: <blockquote>
                         <para>1. powerful enough to cover complex transformation needs</para>
@@ -165,7 +170,7 @@
                             transformations</para>
                         <para>4. suitable for any XML, not just TEI (this documentation is written
                             in docbook!)</para>
-                    </blockquote> However, online editions require more than just a text
+                    </blockquote>However, online editions require more than just a text
                     transformation: the text needs to be embedded into an application context,
                     adding navigation, pagination, search, facsimile display and so on. The larger
                     part of TEI Publisher deals with those aspects, providing all the necessary
@@ -178,8 +183,8 @@
             increasing order of eXist-db dependence: <orderedlist>
                 <listitem>
                     <para>using Apache [<xref linkend="apache"/>] and PHP [<xref linkend="php"/>] to
-                        mediate between the user and eXist-db, so that eXist-db provides only XML
-                        database services;</para>
+                        mediate between the user and eXist-db, so that eXist-db provides only DBMS
+                        services;</para>
                 </listitem>
                 <listitem>
                     <para>the eXist-db app framework without HTML templating [<xref linkend="webapp"
@@ -192,10 +197,10 @@
                 <listitem>
                     <para>TEI Publisher [<xref linkend="teiPublisher"/>].</para>
                 </listitem>
-            </orderedlist> Each of these ways of conceptualizing and implementing the infrastructure
+            </orderedlist>Each of these ways of conceptualizing and implementing the infrastructure
             for a digital edition has advantages and disadvantages, primarily from the perspective
-            of sustainability, and those concerns also apply to edition frameworks generally, and
-            are therefore not specific to eXist-db.</para>
+            of sustainability. Those concerns are applicable to digital edition frameworks
+            generally, and are therefore not specific to eXist-db.</para>
     </section>
     <section>
         <title>Model—View—Controller architecture (MVC)</title>
