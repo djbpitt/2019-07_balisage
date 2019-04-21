@@ -136,7 +136,7 @@
             xreflabel="eXist web applicaation  platform architecture (Siegel and Retter 2014: 72)">
             <mediaobject>
                 <imageobject>
-                    <imagedata format="jpg" fileref="jetty.jpg"/>
+                    <imagedata format="jpg" fileref="jetty.jpg" width="40%"/>
                 </imageobject>
             </mediaobject>
         </figure>
@@ -204,13 +204,54 @@
     </section>
     <section>
         <title>Model—View—Controller architecture (MVC)</title>
-        <para>blah blah blah</para>
+        <para>MVC is an architecture that separates an applicaation into three components: Model,
+            View, and Controller. The following explanation is based on <xref linkend="mvc"/>): <itemizedlist>
+                <listitem>
+                    <para><emphasis role="bold">Model:</emphasis> the data and core DBMS
+                        functionality.</para>
+                </listitem>
+                <listitem>
+                    <para><emphasis role="bold">View:</emphasis> the user interface (UI), such as
+                        web forms that accept user input and the HTML returned to the user in
+                        response to queries.</para>
+                </listitem>
+                <listitem>
+                    <para><emphasis role="bold">Controller:</emphasis> The interface between the
+                        model and the view. The controller may translate user-supplied values from a
+                        web form (part of the view) into a database query (interacting with the
+                        model) and return the results (drawn from the model) as an HTML page (part
+                        of the view).</para>
+                </listitem>
+            </itemizedlist>These components and the relationships among them may be represented as
+                follows:<figure xml:id="mvc_image"
+                xreflabel="Three-tier MVC architecture (https://www.wideskills.com/struts/introduction-to-mvc-architecture)">
+                <mediaobject>
+                    <imageobject>
+                        <imagedata format="png" fileref="three-tier-mvc.png" width="50%"/>
+                    </imageobject>
+                </mediaobject>
+            </figure></para>
+        <para>The Model in all of the examples below is the XML data stored inside eXist-db and the
+            core eXist-db database functionality that interacts with the data (e.g., the ability to
+            interpret XQuery and navigate collections and resources). The View in all of the
+            examples is the UI, that is, web pages as presented to the user, both those that elicit
+            user input (such as query forms) and those that respond to user input (such as formatted
+            results returned from a query). The most variable aspect of the examples below is the
+            Controller, that is, the part of the architecture that 1) responds to user interaction
+            with the View by interacting with the Model and 2) updates the View in response to user
+            activity, often recruiting and manipulating user-specified information retrieved from
+            the Model.</para>
     </section>
     <section>
         <title>Four ways of building an edition with eXist-db</title>
         <section>
             <title>PHP</title>
-            <para>blah blah blah</para>
+            <para>A common architecture for web interfaces that interact with a DBMS (relational,
+                XML, or other) is that the front end is managed with HTML forms that launch a PHP
+                script when the user hits a Submit button or otherwise causes an event to happen
+                thaat initiates processing. The PHP script then harvests form data submitted by the
+                user and interacts with a DBMS, retrieves the necessary information, shapes it into
+                HTML, and returns it to the user in the context of a web page.</para>
         </section>
         <section>
             <title>Apps without HTML templating</title>
@@ -262,6 +303,9 @@
             <link>http://exist-db.org/exist/apps/doc/development-starter</link></bibliomixed>
         <bibliomixed xml:id="Jetty" xreflabel="Jetty">Eclipse Jetty.
                 <link>https://www.eclipse.org/jetty/</link></bibliomixed>
+        <bibliomixed xml:id="mvc" xreflabel="MVC architecture">Wideskills. <quote>Introduction to
+                MVC architecture.</quote>
+            <link>https://www.wideskills.com/struts/introduction-to-mvc-architecture</link></bibliomixed>
         <bibliomixed xml:id="php" xreflabel="PHP"><quote>PHP: hypertext preprocessor.</quote>
             <link>https://www.php.net/</link></bibliomixed>
         <bibliomixed xml:id="punch" xreflabel="Punch">Wicentowski, Joe. <quote>Punch. A simple
