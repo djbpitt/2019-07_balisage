@@ -246,12 +246,120 @@
         <title>Four ways of building an edition with eXist-db</title>
         <section>
             <title>PHP</title>
-            <para>A common architecture for web interfaces that interact with a DBMS (relational,
-                XML, or other) is that the front end is managed with HTML forms that launch a PHP
-                script when the user hits a Submit button or otherwise causes an event to happen
-                thaat initiates processing. The PHP script then harvests form data submitted by the
-                user and interacts with a DBMS, retrieves the necessary information, shapes it into
-                HTML, and returns it to the user in the context of a web page.</para>
+            <para>A common architecture for web interfaces that incorporate a DBMS (relational, XML,
+                or other) is that users interact only with a standard HTTP server, such as Apache
+                running on port 80. Under this approach, the front end is managed with HTML forms
+                (part of the View) that launch a PHP script (part of the Controller) when the user
+                hits a Submit button or otherwise causes an event to happen that initiates
+                processing. The PHP script then harvests form data submitted by the user and
+                interacts (for example, using a REST call) with a DBMS, retrieves the necessary
+                information, shapes it into HTML, and returns it to the user in the context of a web
+                page (part of the View). This is the foundation of the fundamental open-source LAMP
+                stack: Linux (OS), Apache (HTTP server), MySQL (DBMS), and PHP (controller
+                language).</para>
+            <para>The strictest implementation of this type of system in an eXist-db context relies
+                on eXist-db only as an XML database, that is, as an alternative to the MySQL
+                component of LAMP. For example, a PHP script running inside an Apache server on port
+                80, which is the only direct point of access for the end-user, might incorporate
+                user-supplied form values into an XQuery script that is then passed into eXist-db
+                using the eXist-db REST interface. The results of the query are returned to the PHP
+                script, which then shapes them into HTML, associates CSS and JavaScript, and returns
+                a response page to the user. Under this stricter model, the CSS and JavaScript
+                reside on the Apache server because they are part of the front-end functionality,
+                and not of the DBMS services. And the only part of the content of the returned page
+                (the modified View) that is connected to eXist-db is information that depends on XML
+                stored inside eXist-db. The rest of the HTML returned page is part of the PHP
+                script.</para>
+            <para>Looser implementations of this approach might offload additional Controller
+                functionality onto eXist-db. For example, XML retrieved from inside the database
+                might be transformed to HTML markup inside eXist-db (using the XQuery
+                    <code>typeswitch()</code> function or XSLT by way of the eXist-db
+                    <code>transform:transform()</code> function<footnote>
+                    <para>As of Version 4.6.1 (March 2019) eXist-db supports a custom
+                            <code>transform:transform()</code> function in a custom namespace, but
+                        not the standard XPath 3.1 <code>fn:transform()</code> function in the
+                        standard XPath 3.1 namespace.</para>
+                </footnote>) instead of by the PHP script after the eXist-db query returns. Looser
+                implementations might also store the XQuery script inside eXist-db and pass it
+                user-supplied parameters, instead of integrating the parameters into the query
+                within PHP before passing the entire constructed query into eXist-db. And looser
+                implementations might store some front-end components inside eXist-db, such as CSS
+                and JavaScript, although these might most properly be regarded as aspects of the
+                View, rather than of the Model. What these variations all have in common, though, is
+                that PHP provides all or most or, at least, some of the Controller functionality of
+                the MVC architecture.</para>
+            <para>The principal advantage of using eXist-db only as a DBMS, and limiting its role as
+                Controller, is reducing dependency on custom features of eXist-db. To the extent
+                that this separation of concerns allows the use of standard XQuery, with no
+                non-standard, implementation-specific features, users may replace eXist-db with an
+                alternative XML DBMS, such as BaseX [<xref linkend="basex"/>] or Marklogic [<xref
+                    linkend="marklogic"/>], with minimal adjustment to the Controller. However,
+                insofar as all XML DBMSs rely to some extent on custom functions in custom namespaces<footnote>
+                    <para>See <link>http://exist-db.org/exist/apps/fundocs/browse.html</link> for
+                        eXist-db modules, <link>http://docs.basex.org/wiki/Module_Library</link> for
+                        BaseX modules, and <link>https://docs.marklogic.com/all</link> for Marklogic
+                        modules.</para>
+                </footnote>, it is unlikely that a useful application of any complexity will be able
+                to avoid proprietary features entirely. It is nonetheless the case that an
+                application that does not rely on application-specific features at the Controller
+                level reduces—even if it does not entirely eliminate—the extent of the lock-in to a
+                specific XML DBMS product.</para>
+            <para>The principal disadvantage of using eXist-db only as a DBMS and locating all of
+                the Controller logic in the PHP is an increase in the complexity of the overall
+                architecture. Specifically, in this arrangement the Controller interjects a PHP
+                layer between the View and the core XML DBMS services provided by XQuery within the
+                Model, and the need to communicate between PHP and XQuery introduces an additional
+                potential zone of failure. The separation of concerns (Controller in PHP, which
+                interacts with a Model that underestands XQuery) is generally (and not unreasonably)
+                considered a virtue because of its modularity, since the connectivity between the
+                two is mediated through an API. For example, PHP that knows how to communicate
+                between a web form and a relational DBMS can be reused to communicate between the
+                same form and an XML DBMS by adapting only the API-specific parts (for example, by
+                replacing SQL queries with XQuery ones). But this modularity comes at the price of
+                requiring more complex communication between the View and the Model. For example,
+                when a query fails during development under this approach, the failure may reside in
+                the PHP code, in the XQuery code, or in a miscommunication (REST connectivity, API,
+                or other). The PHP layer also complicates deployment because it requires
+                configuration of both eXist-db and PHP resources on the host. With that said, this
+                is an old and very widespread method in the relational DBMS world, as in the
+                familiar LAMP architecture.</para>
+            <para>We have applied several varieties of this implementation in production. The most
+                manageable (easiest to develop, debug, maintain) arrangement has involved the
+                following workflow:<orderedlist>
+                    <listitem>
+                        <para>The user enters information into an HTML form and submits the form,
+                            which fires a PHP script.</para>
+                    </listitem>
+                    <listitem>
+                        <para>The script collects the input, sanitizes and validates it, and
+                            executes a REST call to an XQuery script that has been installed inside
+                            eXist-db. This avoids the legibility issues that arise when trying to
+                            construct an XQuery script while observing PHP syntax. A sample query as
+                            formulated within a PHP script might look like the following (where
+                                <code>REST_PATH</code> has been declared with a value like
+                                <code>http://example.com:8080/exist/rest</code> in an imported file,
+                            and the <code>$country</code> and <code>$text</code> variables are
+                            user-supplied values retrieved from the query
+                            form):<programlisting>$xql = REST_PATH . "/db/repertorium/xquery/runSearch.xql?country=$country&amp;text=$text";
+echo file_get_contents($xql);</programlisting></para>
+                    </listitem>
+                    <listitem>
+                        <para>eXist-db receives the REST calll, dereferences the parameters, runs
+                            the query (previously stored inside eXist-db), transforms the results to
+                            a well-balanced XHTML fragment using <code>typeswitch()</code> or XSLT
+                            with <code>transform:transform()</code>, and returns it to the PHP
+                            script.</para>
+                    </listitem>
+                    <listitem>
+                        <para>The PHP script inserts the returned result in the correct place, the
+                            location of the <code>echo file_get_contents($xql);</code> instruction
+                            in the example above.</para>
+                    </listitem>
+                    <listitem>
+                        <para>The result is a valid XHTML page, which the PHP script then returns to
+                            the user.</para>
+                    </listitem>
+                </orderedlist></para>
         </section>
         <section>
             <title>Apps without HTML templating</title>
@@ -293,6 +401,8 @@
         <title>Works cited</title>
         <bibliomixed xml:id="apache" xreflabel="Apache"><quote>Apache HTTP server project.</quote>
             <link>https://httpd.apache.org</link></bibliomixed>
+        <bibliomixed xml:id="basex" xreflabel="BaseX">BaseX. The XML framework.
+                <link>http://basex.org</link>/</bibliomixed>
         <bibliomixed xml:id="eXist-db" xreflabel="eXist-db"><quote>eXist-db.</quote>
             <link>http://exist-db.org</link></bibliomixed>
         <bibliomixed xml:id="templating" xreflabel="eXist-db HTML templating"><quote>eXist-db: HTML
@@ -303,6 +413,8 @@
             <link>http://exist-db.org/exist/apps/doc/development-starter</link></bibliomixed>
         <bibliomixed xml:id="Jetty" xreflabel="Jetty">Eclipse Jetty.
                 <link>https://www.eclipse.org/jetty/</link></bibliomixed>
+        <bibliomixed xml:id="marklogic" xreflabel="Marklogic">MarkLogic | Data Integration and NoSQL
+            Databases for Your Business. <link>https://www.marklogic.com/</link></bibliomixed>
         <bibliomixed xml:id="mvc" xreflabel="MVC architecture">Wideskills. <quote>Introduction to
                 MVC architecture.</quote>
             <link>https://www.wideskills.com/struts/introduction-to-mvc-architecture</link></bibliomixed>
