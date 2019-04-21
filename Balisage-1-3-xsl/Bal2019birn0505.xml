@@ -64,7 +64,7 @@
                     of the open-source eXist-db native XML database.</para>
             </personblurb>
             <affiliation>
-                <jobtitle>Systems developer</jobtitle>
+                <jobtitle>Systems Developer</jobtitle>
                 <orgname>Språkbanken, Department of Swedish, University of Gothenburg
                     (Sweden)</orgname>
             </affiliation>
@@ -144,13 +144,13 @@
             directly with the Jetty server, and over time eXist-db has increasingly come to support
             features that are more commonly associated with a Content Management System (CMS) than
             with a database, such as themes, templates, and page management (not just data resource
-            management). We might consider the eXist-db core functionality, the innermost layer of
-            an eXist-db installation, as analogous to the peanut butter center of a Reese’s Peanut
-            Butter Cup, and the Jetty servlet container, which can also provide CMS services, as the
-            outer layer of chocolate. But the analogy does not depend only on the fact that the
-            eXist-db DBMS services are wrapped, as it were, inside Jetty’s CMS ones. Peanut butter
-            and chocolate have a long history as independently popular foodstuffs, and neither
-            depends in any necessary, obvious, or even intuitive way on the other, yet their
+            management). We might consider the eXist-db core functionality, the DBMS services at the
+            innermost layer of an eXist-db installation, as analogous to the peanut butter center of
+            a Reese’s Peanut Butter Cup, and the Jetty servlet container, which can also provide CMS
+            services, as the outer layer of chocolate. But the analogy does not depend only on the
+            fact that the eXist-db DBMS services are wrapped, as it were, inside Jetty’s CMS ones.
+            Peanut butter and chocolate have a long history as independently popular foodstuffs, and
+            neither depends in any necessary, obvious, or even intuitive way on the other, yet their
             combination in a single product has proven impressively popular with consumers.
             Similarly, there is nothing about a DBMS that requires or expects CMS services, and vice
             versa, yet the growing integration of the two types of functionality within eXist-db
@@ -227,7 +227,26 @@
     </section>
     <section>
         <title>Conclusion</title>
-        <para>blah blah blah</para>
+        <section>
+            <title>General</title>
+            <para>Preview of summary conclusions: technical (essentially para-technical, involving
+                sustainability) and philosophical</para>
+        </section>
+        <section>
+            <title>Sustainability</title>
+            <para>CMS supports easy customization within anticipated, supported parameters, while
+                major innovation may be harder than building from scratch</para>
+            <para>CMS supports <emphasis role="ital">.xar</emphasis> packaging for easy replication,
+                distribution, deployment; porting PHP + eXist-db is much more complicated</para>
+            <para>CMS increases lock-in and complicates migration to different XML database</para>
+        </section>
+        <section>
+            <title>The interface and the scholarship</title>
+            <para>Contrast <quote>CMS lets you concentrate on the content and leave the technology
+                    to the tech professionals</quote> with <quote>the interface is part of the
+                    scholarship</quote> (cite Graz 2016 DiXiT presentations by Wout and Tara and
+                Joris)</para>
+        </section>
     </section>
     <bibliography>
         <title>Works cited</title>
