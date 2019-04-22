@@ -204,8 +204,10 @@
     </section>
     <section>
         <title>Model—View—Controller architecture (MVC)</title>
-        <para>MVC is an architecture that separates an applicaation into three components: Model,
-            View, and Controller. The following explanation is based on <xref linkend="mvc"/>): <itemizedlist>
+        <para>MVC is an architecture that separates an application into three components: Model,
+            View, and Controller.<footnote>
+                <para>For a history of MVC see <xref linkend="reenskaug"/>.</para>
+            </footnote> The following explanation is based on <xref linkend="mvc"/>): <itemizedlist>
                 <listitem>
                     <para><emphasis role="bold">Model:</emphasis> the data and core DBMS
                         functionality.</para>
@@ -240,7 +242,27 @@
             Controller, that is, the part of the architecture that 1) responds to user interaction
             with the View by interacting with the Model and 2) updates the View in response to user
             activity, often recruiting and manipulating user-specified information retrieved from
-            the Model.</para>
+            the Model.<footnote>
+                <para>There are several variants in descriptions of MVC to the architecture
+                    illustrated above, two of the most important of which are:<itemizedlist>
+                        <listitem>
+                            <para>In some descriptions, although the Controller translates user
+                                interaction (in the View) into instructions to the Model, the Model
+                                returns directly to the View, without passing through the
+                                Conteroller.</para>
+                        </listitem>
+                        <listitem>
+                            <para>The dividing line between the Controller and the Model is not
+                                always clear. Basic XQuery support (that is, support for XQuery
+                                syntax and the function library) is part of the Model, but whether a
+                                particular XQuery script is part of the Model (perhaps stored inside
+                                the database) or the Controller (perhaps constructed with PHP and
+                                then passed into the database) is less certain. The boundaries may
+                                be even harder to discern when all three parts of the MVC
+                                architecture are implemented inside eXist-db.</para>
+                        </listitem>
+                    </itemizedlist></para>
+            </footnote></para>
     </section>
     <section>
         <title>Four ways of building an edition with eXist-db</title>
@@ -424,6 +446,9 @@ echo file_get_contents($xql);</programlisting></para>
                 application written in XQuery for eXist demonstrating how to create a dynamic,
                 searchable website for TEI text.</quote>
             <link>https://github.com/joewiz/punch</link></bibliomixed>
+        <bibliomixed xml:id="reenskaug" xreflabel="Reenskaug">Reenskaug, Trygve M. H. <quote>MVC.
+                Xerox PARC 1978–79.</quote>
+            <link>http://heim.ifi.uio.no/~trygver/themes/mvc/mvc-index.html</link></bibliomixed>
         <bibliomixed xml:id="reeses" xreflabel="Reese’s"><quote>Vintage 80s Reese’s peanut butter
                 cups commercial with walkers.</quote>
             <link>https://www.youtube.com/watch?v=DJLDF6qZUX0</link></bibliomixed>
