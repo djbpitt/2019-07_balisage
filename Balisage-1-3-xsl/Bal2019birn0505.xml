@@ -207,7 +207,7 @@
         <para>MVC is an architecture that separates an application into three components: Model,
             View, and Controller.<footnote>
                 <para>For a history of MVC see <xref linkend="reenskaug"/>.</para>
-            </footnote> The following explanation is based on <xref linkend="mvc"/>): <itemizedlist>
+            </footnote> The following explanation is based on <xref linkend="mvc"/>: <itemizedlist>
                 <listitem>
                     <para><emphasis role="bold">Model:</emphasis> the data and core DBMS
                         functionality.</para>
@@ -237,19 +237,18 @@
             core eXist-db database functionality that interacts with the data (e.g., the ability to
             interpret XQuery and navigate collections and resources). The View in all of the
             examples is the UI, that is, web pages as presented to the user, both those that elicit
-            user input (such as query forms) and those that respond to user input (such as formatted
-            results returned from a query). The most variable aspect of the examples below is the
-            Controller, that is, the part of the architecture that 1) responds to user interaction
-            with the View by interacting with the Model and 2) updates the View in response to user
-            activity, often recruiting and manipulating user-specified information retrieved from
-            the Model.<footnote>
-                <para>There are several variants in descriptions of MVC to the architecture
-                    illustrated above, two of the most important of which are:<itemizedlist>
+            user input (such as query forms) and those that are returned in response to user input
+            (such as formatted results returned from a query). The most variable aspect of the
+            examples below is the Controller, that is, the part of the architecture that 1) responds
+            to user interaction with the View by interacting with the Model and 2) updates the View
+            in response to user activity, often recruiting and manipulating user-specified
+            information retrieved from the Model.<footnote>
+                <para>Two areas of variation in the description of MVC are:<itemizedlist>
                         <listitem>
                             <para>In some descriptions, although the Controller translates user
                                 interaction (in the View) into instructions to the Model, the Model
                                 returns directly to the View, without passing through the
-                                Conteroller.</para>
+                                Controller.</para>
                         </listitem>
                         <listitem>
                             <para>The dividing line between the Controller and the Model is not
