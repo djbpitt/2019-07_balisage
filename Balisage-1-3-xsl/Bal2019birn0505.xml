@@ -48,6 +48,27 @@
         </author>
         <author>
             <personname>
+                <firstname>Hugh</firstname>
+                <surname>Cayless</surname>
+            </personname>
+            <personblurb>
+                <para>Hugh Cayless is Senior Digital Humanities Developer at Duke University, where
+                    he provides architecture, design, and programming support for the Duke
+                    Collaboratory for Classics Computing (DC3). He has served as an elected member
+                    of the TEI Technical Council since 2012 (as its Chair from 2015–2017), and he is
+                    a founding member of the EpiDoc Collaborative. Hugh earned a PhD in Classics and
+                    an MSIS, both from UNC Chapel Hill. His research interests focus on digital
+                    critical editions and Linked Open Data.</para>
+            </personblurb>
+            <affiliation>
+                <jobtitle>Senior Digital Humanities Developer</jobtitle>
+                <orgname>Duke University</orgname>
+            </affiliation>
+            <email>philomousos@gmail.com </email>
+            <link>http://philomousos.com/</link>
+        </author>
+        <author>
+            <personname>
                 <firstname>Leif-Jöran</firstname>
                 <surname>Olsson</surname>
             </personname>
