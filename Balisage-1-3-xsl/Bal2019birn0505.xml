@@ -69,6 +69,33 @@
         </author>
         <author>
             <personname>
+                <firstname>Emmanuelle</firstname>
+                <surname>Morlock</surname>
+            </personname>
+            <personblurb>
+                <para>Emmanuelle Morlock has been working as an engineer in Digital Humanities at
+                    the French National Center for Scientific Research (CNRS) since 2008. Educated
+                    in French literature and Library and Information Science, she has specialized in
+                    the application of the encoding standard TEI EpiDoc, a version of the guidelines
+                    of the Text Encoding Initiative (TEI) that is dedicated to ancient documents.
+                    Emmanuelle manages several digitial scholarly editions projects within the
+                    History and Sources of the Ancient Worlds (HiSoMA) Research Center, and she is
+                    also involved in the French-speaking digital humanities association Humanistica
+                    as a member of the steering commitee and co-director of the digital open access
+                    journal <emphasis role="ital">Humanités numériques</emphasis>.</para>
+            </personblurb>
+            <affiliation>
+                <jobtitle>Digital Humanities Research Officer</jobtitle>
+                <orgname>French National Center for Scientific Research (CNRS)</orgname>
+            </affiliation>
+            <affiliation>
+                <jobtitle>Full member</jobtitle>
+                <orgname>History and Sources of the Ancient Worlds (HiSoMA) Research Center, Lyon
+                    (France)</orgname>
+            </affiliation>
+        </author>
+        <author>
+            <personname>
                 <firstname>Leif-Jöran</firstname>
                 <surname>Olsson</surname>
             </personname>
