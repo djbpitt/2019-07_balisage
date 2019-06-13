@@ -8,17 +8,18 @@
     <info>
         <abstract>
             <para>We have identified four models for integrating digital edition content into
-                eXist-db [<xref linkend="eXist-db"/>], which are, in decreasing order of eXist-db
-                dependence: 1) TEI Publisher [<xref linkend="teiPublisher"/>], 2) the eXist-db app
-                framework using HTML templating [<xref linkend="templating"/>], 3) the eXist-db app
-                framework without HTML templating [<xref linkend="webapp"/>] (similar to Joe
-                Wicentowski's Punch project [<xref linkend="punch"/>]), and 4) using Apache [<xref
-                    linkend="apache"/>] and PHP [<xref linkend="php"/>] to mediate between the user
-                and eXist-db, so that eXist-db provides only XML database services. Our presentation
-                will examine and compare these ways of conceptualizing and implementing the
-                infrastructure for a digital edition. Each of them has advantages and disadvantages,
-                primarily from the perspective of sustainability, and those concerns apply to
-                edition frameworks generally, and are therefore not specific to eXist-db.</para>
+                eXist-db [<xref linkend="eXist-db"/>], which are, in increasing order of eXist-db
+                dependence: 1) using Apache [<xref linkend="apache"/>] and PHP [<xref linkend="php"
+                />] to mediate between the user and eXist-db, so that eXist-db provides only XML
+                database services, 2) the eXist-db app framework without HTML templating [<xref
+                    linkend="webapp"/>] (similar to Joe Wicentowski's Punch project [<xref
+                    linkend="punch"/>]), 3) the eXist-db app framework using HTML templating [<xref
+                    linkend="templating"/>], and 4) TEI Publisher [<xref linkend="teiPublisher"/>].
+                Our presentation will examine and compare these ways of conceptualizing and
+                implementing the infrastructure for a digital edition. Each of them has advantages
+                and disadvantages, primarily from the perspective of sustainability, and those
+                concerns apply to edition frameworks generally, and are therefore not specific to
+                eXist-db.</para>
         </abstract>
         <author>
             <personname>
@@ -171,15 +172,15 @@
                 </imageobject>
             </mediaobject>
         </figure>
-        <para>Meanwhile, in a galaxy far, far away, the eXist-db XML database was born in <emphasis
-                role="bold">[EXPAND]</emphasis>. Since its inception, eXist-db has provided the
-            services one expects from any database management system (DBMS): it stores records (XML
-            documents), builds persistent indexes, supports retrieval with a query language
-            (XQuery), and provides the housekeeping functionality (e.g., user authentication) those
-            processes require. eXist-db is commonly hosted inside an HTTP server and servlet
-            container (it ships with <xref linkend="Jetty"/>, but other hosts are also supported),
-            which mediates between the user and the eXist-db functionality, as is illustrated in
-            this image from <xref linkend="exist-book"/>:</para>
+        <para>Meanwhile, in a galaxy far, far away, the eXist-db XML database was born in 2001
+                <emphasis role="bold">[EXPAND]</emphasis>. Since its inception, eXist-db has
+            provided the services one expects from any database management system (DBMS): it stores
+            records (XML documents), builds persistent indexes, supports retrieval with a query
+            language (XQuery), and provides the housekeeping functionality (e.g., user
+            authentication) those processes require. eXist-db is commonly hosted inside an HTTP
+            server and servlet container (it ships with <xref linkend="Jetty"/>, but other hosts are
+            also supported), which mediates between the user and the eXist-db functionality, as is
+            illustrated in this image from <xref linkend="exist-book"/>:</para>
         <figure xml:id="exist-book-jetty"
             xreflabel="eXist web applicaation  platform architecture (Siegel and Retter 2014: 72)">
             <mediaobject>
@@ -320,12 +321,12 @@
                 running on port 80. Under this approach, the front end is managed with HTML forms
                 (part of the View) that launch a PHP script (part of the Controller) when the user
                 hits a Submit button or otherwise causes an event to happen that initiates
-                processing. The PHP script then harvests form data submitted by the user and
-                interacts (for example, using a REST call) with a DBMS (the Model), retrieves the
-                necessary information, shapes it into HTML, and returns it to the user in the
-                context of a web page (part of the View). This is the foundation of the fundamental
-                open-source LAMP stack: Linux (OS), Apache (HTTP server), MySQL (DBMS), and PHP
-                (controller language).</para>
+                processing. The PHP script then harvests <emphasis role="bold">[EXPAND]</emphasis>
+                form data submitted by the user and interacts (for example, using a REST call) with
+                a DBMS (the Model), retrieves the necessary information, shapes it into HTML, and
+                returns it to the user in the context of a web page (part of the View). This is the
+                foundation of the fundamental open-source LAMP stack: Linux (OS), Apache (HTTP
+                server), MySQL (DBMS), and PHP (controller language).</para>
             <para>The strictest implementation of this type of system in an eXist-db context relies
                 on eXist-db only as an XML database, that is, as an alternative to the MySQL
                 component of LAMP. For example, a PHP script running inside an Apache server on port
@@ -364,7 +365,7 @@
                 alternative XML DBMS, such as BaseX [<xref linkend="basex"/>] or Marklogic [<xref
                     linkend="marklogic"/>], with minimal adjustment to the Controller. However,
                 insofar as all XML DBMSs rely to some extent on custom functions in custom namespaces<footnote>
-                    <para>See <link>http://exist-db.org/exist/apps/fundocs/browse.html</link> for
+                    <para>See <link>https://exist-db.org/exist/apps/fundocs/browse.html</link> for
                         eXist-db modules, <link>http://docs.basex.org/wiki/Module_Library</link> for
                         BaseX modules, and <link>https://docs.marklogic.com/all</link> for Marklogic
                         modules.</para>
@@ -372,7 +373,8 @@
                 to avoid proprietary features entirely. It is nonetheless the case that an
                 application that does not rely on application-specific features at the Controller
                 level reduces—even if it does not entirely eliminate—the extent of the lock-in to a
-                specific XML DBMS product.</para>
+                specific XML DBMS product. Using of Free Software products as eXist-db and BaseX
+                reduces it further.</para>
             <para>The principal disadvantage of using eXist-db only as a DBMS and locating all of
                 the Controller logic in the PHP is an increase in the complexity of the overall
                 architecture. Specifically, in this arrangement the Controller interjects a PHP
@@ -433,56 +435,50 @@ echo file_get_contents($xql);</programlisting></para>
         </section>
         <section>
             <title>"XQuery, the Server Language"</title>
-            <para>The previous section leverage relegated eXist to the "MySQL"
-                portion of the prototypical LAMP stack: PHP would issue HTTP
-                requests to eXist's XQuery servlet, and an XQuery script would
-                process the request, retrieve results from the database, and
-                return the results back to PHP. However, it is possible to
-                eliminate PHP from the architecture and build applications
-                purely with XQuery. In this model, eXist is the stack,
-                performing all three functions in "AMP"—handling the model,
-                view, and controller (perhaps with a reverse proxy for security
-                purposes). The application can serve customized URL endpoints by
-                means of either eXist's native URL Rewriting facility or its
-                RESTXQ facility. The primary advantage of this model is that the
-                developer need master only a single technology—XQuery—rather
-                than three, and is empowered to create complete applications
-                with these skills. As first articulated by Kurt Cagle in an
-                article published just months after XQuery achieved 1.0 status
-                as a W3C Recommendation:<blockquote>
-                    <para>Over the years, I've had the chance to program in a
-                        lot of different server-side scripting languages--C,
-                        Perl, ASP, JSP, PHP, ASP.NET, Python, Ruby, among
-                        others... As an XML developer, one of the problems that
-                        I come across almost invariably within these languages
-                        is the fact that they are shaped by people who view XML
-                        as something of an afterthought, a small subset of the
-                        overall language that's intended to satisfy those
-                        strange people who think in angle brackets. However, one
-                        side effect of this viewpoint is that a rather
-                        disturbing amount of server code is still being written
-                        with HTML content (and often badly formed HTML at that)
-                        being written inline as successive lines of composed
-                        strings.</para>
+            <para>The previous section leverage relegated eXist to the "MySQL" portion of the
+                prototypical LAMP stack: PHP would issue HTTP requests to eXist-db's XQuery servlet,
+                and an XQuery script would process the request, retrieve results from the database,
+                and return the results back to PHP. However, it is possible to eliminate PHP from
+                the architecture and build applications purely with XQuery. In this model, eXist is
+                the stack, performing all three functions in "AMP"—handling the model, view, and
+                controller (perhaps with a reverse proxy for security purposes). The application can
+                serve customized URL endpoints by means of either eXist-db's native URL Rewriting
+                facility or its RESTXQ facility. The primary advantage of this model is that the
+                developer need master only a single technology—XQuery—rather than three, and is
+                empowered to create complete applications with these skills. As first articulated by
+                Kurt Cagle in an article published just months after XQuery achieved 1.0 status as a
+                W3C Recommendation:<blockquote>
+                    <para>Over the years, I've had the chance to program in a lot of different
+                        server-side scripting languages--C, Perl, ASP, JSP, PHP, ASP.NET, Python,
+                        Ruby, among others... As an XML developer, one of the problems that I come
+                        across almost invariably within these languages is the fact that they are
+                        shaped by people who view XML as something of an afterthought, a small
+                        subset of the overall language that's intended to satisfy those strange
+                        people who think in angle brackets. However, one side effect of this
+                        viewpoint is that a rather disturbing amount of server code is still being
+                        written with HTML content (and often badly formed HTML at that) being
+                        written inline as successive lines of composed strings.</para>
                 </blockquote></para>
-            <para>Cagle's article demonstrates that XQuery is capable of
-                performing not simply database queries, but also performing the
-                full range of REST functions. Indeed, eXist's "request,"
-                "response," and "session" extension modules give developers the
-                ability to access HTTP request methods and parameters (as well
-                as hostnames, server ports, etc.), get and set session
-                parameters, and return responses with customized status,
-                headers, body. </para>
+            <para>Cagle's article demonstrates that XQuery is capable of performing not simply
+                database queries, but also performing the full range of REST functions. Indeed,
+                eXist-db's "request," "response," and "session" extension modules give developers
+                the ability to access HTTP request methods and parameters (as well as hostnames,
+                server ports, etc.), get and set session parameters, and return responses with
+                customized status, headers, body. </para>
             <para>In its simplest form, the developer writes an XQuery
                 module...</para>
         </section>
         <section>
             <title>Apps with HTML templating</title>
-            <para>blah blah blah</para>
+            <para>eXist-db have a templating language as most CMS products. Will be expanded
+                ...</para>
         </section>
         <section>
             <title>TEI Publisher</title>
-            <para>blah blah blah</para>
+            <para>TEI Publisher is building on web components with proper namespaces. This
+                functionality can of course be reached with other View components like building
+                reusuable components with React-js which brings it closer to web apps [in sect
+                3.2].</para>
         </section>
     </section>
     <section>
@@ -498,7 +494,8 @@ echo file_get_contents($xql);</programlisting></para>
                 major innovation may be harder than building from scratch</para>
             <para>CMS supports <emphasis role="ital">.xar</emphasis> packaging for easy replication,
                 distribution, deployment; porting PHP + eXist-db is much more complicated</para>
-            <para>CMS increases lock-in and complicates migration to different XML database</para>
+            <para>CMS increases lock-in and complicates migration to different XML database, however
+                major work with data structures and modeling is still reusable</para>
         </section>
         <section>
             <title>The interface and the scholarship</title>
@@ -515,13 +512,13 @@ echo file_get_contents($xql);</programlisting></para>
         <bibliomixed xml:id="basex" xreflabel="BaseX">BaseX. The XML framework.
                 <link>http://basex.org</link>/</bibliomixed>
         <bibliomixed xml:id="eXist-db" xreflabel="eXist-db"><quote>eXist-db.</quote>
-            <link>http://exist-db.org</link></bibliomixed>
+            <link>https://exist-db.org</link></bibliomixed>
         <bibliomixed xml:id="templating" xreflabel="eXist-db HTML templating"><quote>eXist-db: HTML
                 Templating Module.</quote>
-            <link>http://exist-db.org/exist/apps/doc/templating.xml</link></bibliomixed>
+            <link>https://exist-db.org/exist/apps/doc/templating.xml</link></bibliomixed>
         <bibliomixed xml:id="webapp" xreflabel="eXist-db Web application"><quote>eXist-db: Getting
                 started with Web application development.</quote>
-            <link>http://exist-db.org/exist/apps/doc/development-starter</link></bibliomixed>
+            <link>https://exist-db.org/exist/apps/doc/development-starter</link></bibliomixed>
         <bibliomixed>Cagle, Kurt. "XQuery, the Server Language." 2007-06-06.
                 <link
                 xlink:href="https://www.xml.com/pub/a/2007/06/01/xquery-the-server-language.html"
