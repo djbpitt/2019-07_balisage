@@ -471,9 +471,25 @@ echo file_get_contents($xql);</programlisting></para>
         <section>
             <title>Apps with HTML templating</title>
             <para>eXist-db has a templating functionality as most CMS products. It is completely
-                transparent and supports annotations. By using html5 <programlisting>data-*</programlisting> attributes e.g.
-                <programlisting>data-template</programlisting> the functionalty can be extended with your own namespaced functions. 
-                Even if not using html5 the html class attribute can be used for.</para>
+                transparent and supports annotations. It uses standard html5 <code>data-*</code>
+                attributes e.g. <code>data-template</code> for the template and
+                <code>data-template-*</code> for optional parameters. The functionality can be
+                extended with your own namespaced templating functions.
+                <programlisting>&lt;div data-template="core:butter-peanut" data-template-coating="chocolate"/&gt;</programlisting>
+                Even if not using html5 the html class attribute can be used for template names and
+                static parameters.
+                <programlisting>&lt;div class="core:butter-peanut?coating=chocolate" /&gt;</programlisting></para>
+                <para>In order to keep the current element one uses the <code>%templates:wrap</code> annotation.</para>
+                <para>Nested template calls can be used to utilise the model <code>$model</code> variable to keep application data. 
+                And manual processing control is achieved by calling <code>templates:process</code>. 
+                </para>
+            <para>The templating module can be referenced in your XQuery code: 
+                <programlisting>import module namespace templates="http://exist-db.org/xquery/templates";</programlisting>
+                In the controller you can activate suitable templating processing which is not necessary if you just use the built-in templating functions.</para> 
+            <para>Of the built-in functions <code>templates:surround</code> is probably the most powerful one. E.g. it can be used as   
+                <programlisting>templates:surround?with=templates/page.html&amp;at=produce</programlisting>
+                to insert the content into the <code>with</code> template at the element with <code>ID</code> produce.
+            </para>
         </section>
         <section>
             <title>TEI Publisher</title>
