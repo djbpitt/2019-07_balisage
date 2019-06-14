@@ -490,6 +490,8 @@ echo file_get_contents($xql);</programlisting></para>
                 <programlisting>templates:surround?with=templates/page.html&amp;at=produce</programlisting>
                 to insert the content into the <code>with</code> template at the element with <code>ID</code> produce.
             </para>
+            <para>HTML templating is mostly risky in the sences that you need to translate the templates to antoher template language. The initial 
+                domain knowledge and modeling is still intact and reusable.</para>
         </section>
         <section>
             <title>TEI Publisher</title>
@@ -497,14 +499,17 @@ echo file_get_contents($xql);</programlisting></para>
                 functionality can of course be reached with other View components like building
                 reusuable components with React-js which brings it closer to web apps [in sect
                 3.2].</para>
-            <para> At the heart of TEI Publisher lies the TEI Processing Model (PM) which 
+            <para>At the heart of TEI Publisher lies the TEI Processing Model (PM) which 
                 defines how a TEI document should be rendered in different output formats.
                 The large number of already available web components makes most adaptations possible with some HTML knowledge. 
                 Only if you need further components some modeling experience and knowledge of the html5 specification containing web components is needed.
                 But, luckily, since TEI Publisher provides ways to embed your edition's texts into an application context, 
                 e.g. adding navigation, pagination, search, facsimile display 
-                and much more it basically already provides all the necessary building blocks for an online edition.</para>
-            
+                and much more, it basically already provides all the necessary building blocks for an online edition.</para>
+            <para>As with all decisions about technology choices risks are present since in a small project you usually neither 
+                have the time nor the resources to perform a technology switch. 
+                Reducing the risks by using free software, open formats and following defacto standards as well as actual standards are all in favour of even this, 
+                the most dependant single vendor [we used proprietary above] solution. Being part of a community with shared web components are an appealing idea with additional benefits.</para>
         </section>
     </section>
     <section>
