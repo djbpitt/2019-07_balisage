@@ -63,7 +63,7 @@
             </personblurb>
             <affiliation>
                 <jobtitle>Senior Digital Humanities Developer</jobtitle>
-                <orgname>Duke University</orgname>
+                <orgname>Duke University (US)</orgname>
             </affiliation>
             <email>philomousos@gmail.com </email>
             <link>http://philomousos.com/</link>
@@ -321,7 +321,7 @@
                 running on port 80. Under this approach, the front end is managed with HTML forms
                 (part of the View) that launch a PHP script (part of the Controller) when the user
                 hits a Submit button or otherwise causes an event to happen that initiates
-                processing. The PHP script then harvests <emphasis role="bold">[EXPAND]</emphasis>
+                processing. The PHP script then harvests <emphasis role="bold">[WORDING]</emphasis>
                 form data submitted by the user and interacts (for example, using a REST call) with
                 a DBMS (the Model), retrieves the necessary information, shapes it into HTML, and
                 returns it to the user in the context of a web page (part of the View). This is the
@@ -470,12 +470,14 @@ echo file_get_contents($xql);</programlisting></para>
         </section>
         <section>
             <title>Apps with HTML templating</title>
-            <para>eXist-db have a templating language as most CMS products. Will be expanded
-                ...</para>
+            <para>eXist-db has a templating functionality as most CMS products. It is completely
+                transparent and supports annotations. By using html5 <programlisting>data-*</programlisting> attributes e.g.
+                <programlisting>data-template</programlisting> the functionalty can be extended with your own namespaced functions. 
+                Even if not using html5 the html class attribute can be used for.</para>
         </section>
         <section>
             <title>TEI Publisher</title>
-            <para>TEI Publisher is building on web components with proper namespaces. This
+            <para>TEI Publisher is building on web components with namespaces. This
                 functionality can of course be reached with other View components like building
                 reusuable components with React-js which brings it closer to web apps [in sect
                 3.2].</para>
