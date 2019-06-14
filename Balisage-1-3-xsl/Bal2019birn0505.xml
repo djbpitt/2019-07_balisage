@@ -497,6 +497,14 @@ echo file_get_contents($xql);</programlisting></para>
                 functionality can of course be reached with other View components like building
                 reusuable components with React-js which brings it closer to web apps [in sect
                 3.2].</para>
+            <para> At the heart of TEI Publisher lies the TEI Processing Model (PM) which 
+                defines how a TEI document should be rendered in different output formats.
+                The large number of already available web components makes most adaptations possible with some HTML knowledge. 
+                Only if you need further components some modeling experience and knowledge of the html5 specification containing web components is needed.
+                But, luckily, since TEI Publisher provides ways to embed your edition's texts into an application context, 
+                e.g. adding navigation, pagination, search, facsimile display 
+                and much more it basically already provides all the necessary building blocks for an online edition.</para>
+            
         </section>
     </section>
     <section>
