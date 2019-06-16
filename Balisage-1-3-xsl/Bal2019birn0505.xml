@@ -12,7 +12,7 @@
                 dependence: 1) using Apache [<xref linkend="apache"/>] and PHP [<xref linkend="php"
                 />] to mediate between the user and eXist-db, so that eXist-db provides only XML
                 database services, 2) the eXist-db app framework without HTML templating [<xref
-                    linkend="webapp"/>] (similar to Joe Wicentowski's Punch project [<xref
+                    linkend="webapp"/>] (similar to Joe Wicentowski’s Punch project [<xref
                     linkend="punch"/>]), 3) the eXist-db app framework using HTML templating [<xref
                     linkend="templating"/>], and 4) TEI Publisher [<xref linkend="teiPublisher"/>].
                 Our presentation will examine and compare these ways of conceptualizing and
@@ -182,7 +182,7 @@
             also supported), which mediates between the user and the eXist-db functionality, as is
             illustrated in this image from <xref linkend="exist-book"/>:</para>
         <figure xml:id="exist-book-jetty"
-            xreflabel="eXist web applicaation  platform architecture (Siegel and Retter 2014: 72)">
+            xreflabel="eXist-db web application platform architecture (Siegel and Retter 2014: 72)">
             <mediaobject>
                 <imageobject>
                     <imagedata format="jpg" fileref="jetty.jpg" width="40%"/>
@@ -373,15 +373,15 @@
                 to avoid proprietary features entirely. It is nonetheless the case that an
                 application that does not rely on application-specific features at the Controller
                 level reduces—even if it does not entirely eliminate—the extent of the lock-in to a
-                specific XML DBMS product. Using of Free Software products as eXist-db and BaseX
-                reduces it further.</para>
+                specific XML DBMS product. The use of Free Software products, such as eXist-db and
+                BaseX, reduces it further.</para>
             <para>The principal disadvantage of using eXist-db only as a DBMS and locating all of
                 the Controller logic in the PHP is an increase in the complexity of the overall
                 architecture. Specifically, in this arrangement the Controller interjects a PHP
                 layer between the View and the core XML DBMS services provided by XQuery within the
                 Model, and the need to communicate between PHP and XQuery introduces an additional
                 potential zone of failure. The separation of concerns (Controller in PHP, which
-                interacts with a Model that underestands XQuery) is generally (and not unreasonably)
+                interacts with a Model that understands XQuery) is generally (and not unreasonably)
                 considered a virtue because of its modularity, since the connectivity between the
                 two is mediated through an API. For example, PHP that knows how to communicate
                 between a web form and a relational DBMS can be reused to communicate between the
@@ -434,86 +434,98 @@ echo file_get_contents($xql);</programlisting></para>
                 </orderedlist></para>
         </section>
         <section>
-            <title>"XQuery, the Server Language"</title>
-            <para>The previous section leverage relegated eXist to the "MySQL" portion of the
-                prototypical LAMP stack: PHP would issue HTTP requests to eXist-db's XQuery servlet,
-                and an XQuery script would process the request, retrieve results from the database,
-                and return the results back to PHP. However, it is possible to eliminate PHP from
-                the architecture and build applications purely with XQuery. In this model, eXist is
+            <title><quote>XQuery, the server language</quote></title>
+            <para>The previous section relegated eXist-db to the MySQL portion of the prototypical
+                LAMP stack: PHP would issue HTTP requests to eXist-db’s XQuery servlet, and an
+                XQuery script would process the request, retrieve results from the database, and
+                return the results back to PHP. However, it is possible to eliminate PHP from the
+                architecture and build applications purely with XQuery. In this model, eXist-db is
                 the stack, performing all three functions in "AMP"—handling the model, view, and
                 controller (perhaps with a reverse proxy for security purposes). The application can
-                serve customized URL endpoints by means of either eXist-db's native URL Rewriting
+                serve customized URL endpoints by means of either eXist-db’s native URL Rewriting
                 facility or its RESTXQ facility. The primary advantage of this model is that the
                 developer need master only a single technology—XQuery—rather than three, and is
                 empowered to create complete applications with these skills. As first articulated by
                 Kurt Cagle in an article published just months after XQuery achieved 1.0 status as a
                 W3C Recommendation:<blockquote>
-                    <para>Over the years, I've had the chance to program in a lot of different
+                    <para>Over the years, I’ve had the chance to program in a lot of different
                         server-side scripting languages--C, Perl, ASP, JSP, PHP, ASP.NET, Python,
                         Ruby, among others... As an XML developer, one of the problems that I come
                         across almost invariably within these languages is the fact that they are
                         shaped by people who view XML as something of an afterthought, a small
-                        subset of the overall language that's intended to satisfy those strange
+                        subset of the overall language that’s intended to satisfy those strange
                         people who think in angle brackets. However, one side effect of this
                         viewpoint is that a rather disturbing amount of server code is still being
                         written with HTML content (and often badly formed HTML at that) being
-                        written inline as successive lines of composed strings.</para>
+                        written inline as successive lines of composed strings. [<xref
+                            linkend="cagle"/>]</para>
                 </blockquote></para>
-            <para>Cagle's article demonstrates that XQuery is capable of performing not simply
+            <para>Cagle’s article demonstrates that XQuery is capable of performing not simply
                 database queries, but also performing the full range of REST functions. Indeed,
-                eXist-db's "request," "response," and "session" extension modules give developers
-                the ability to access HTTP request methods and parameters (as well as hostnames,
-                server ports, etc.), get and set session parameters, and return responses with
-                customized status, headers, body. </para>
-            <para>In its simplest form, the developer writes an XQuery
-                module...</para>
+                eXist-db’s Request, Response, and Session extension modules give developers the
+                ability to access HTTP request methods and parameters (as well as hostnames, server
+                ports, etc.), get and set session parameters, and return responses with customized
+                status, headers, body.</para>
+            <para>In its simplest form, the developer writes an XQuery module...</para>
         </section>
         <section>
             <title>Apps with HTML templating</title>
-            <para>eXist-db has a templating functionality as most CMS products. It is powerful and completely
-                transparent in view components and supports annotations. It uses standard html5 <code>data-*</code>
-                attributes e.g. <code>data-template</code> for the template and
-                    <code>data-template-*</code> for optional parameters. The functionality can be
-                extended with your own namespaced templating functions.
+            <para>Like most CMS products, eXist-db has a templating functionality, one that is
+                powerful and completely transparent in view components, and that supports
+                annotations. The eXist-db templating functionality uses standard HTML5
+                    <code>@data-*</code> attributes, e.g. <code>@data-template</code> for the
+                template and <code>@data-template-*</code> for optional parameters, and that
+                functionality can be extended with user-specified namespaced templating functions,
+                e.g.:
                 <programlisting>&lt;div data-template="core:peanut-butter" data-template-coating="chocolate"/&gt;</programlisting>
-                Even if not using html5 the html class attribute can be used for template names and
-                static parameters.
+                Even if not using HTML5, the HTML <code>@class</code> attribute can be used for
+                template names and static parameters, e.g.:
                 <programlisting>&lt;div class="core:peanut-butter?coating=chocolate" /&gt;</programlisting></para>
-                <para>In order to keep the current element one uses the <code>%templates:wrap</code> annotation.</para>
-                <para>Nested template calls can be used to utilise the model <code>$model</code> variable to keep application data. 
-                And manual processing control is achieved by calling <code>templates:process</code>. 
-            </para>
-            <para>The templating module can be referenced in your XQuery code: 
+            <para>Within templating, the current element is available the
+                    <code>%templates:wrap</code> annotation, and nested template calls have access
+                to application data through the <code>$model</code> variable. Manual processing
+                control is achieved by calling <code>templates:process</code>.</para>
+            <para>The templating module can be referenced in the XQuery code:
                 <programlisting>import module namespace templates="http://exist-db.org/xquery/templates";</programlisting>
-                In the controller you can activate suitable templating processing which is not necessary if you just use the built-in templating functions.</para> 
-            <para>Of the built-in functions <code>templates:surround</code> is probably the most powerful one. E.g. it can be used as   
+                Within the controller, the user can activate suitable templating processing, which
+                is not necessary if you just use the built-in templating functions.</para>
+            <para>Of the built-in functions, <code>templates:surround</code> is probably the most
+                powerful one; it can be used with:
                 <programlisting>templates:surround?with=templates/page.html&amp;at=produce</programlisting>
-                to insert the content into the <code>with</code> template at the element with <code>ID</code> produce.
-            </para>
-            <para>Benefits with a(n) HTML templating aproach in eXist-db is that you very quicly can produce mock-ups as well as production view components with  
-                more advanced search forms and result pages without turning to other solutions thanks to the powerful nested template calls.  
-            </para>
-            <para>HTML templating is mostly risky in the sence that you need to translate the
-                templates to antoher template language. The initial domain knowledge and modeling is
-                still intact and reusable.</para>
+                to insert the content into the <code>with</code> template at the element with
+                    <code>ID</code> produce. </para>
+            <para>Thanks to the power of nested template calls, a major benefit of an HTML
+                templating approach in eXist-db is the ability produce both mock-ups and production
+                view components with more advanced search forms and result pages without turning to
+                other solutions. The principal cost of HTML templating is the need to translate the
+                templates to another template language. The initial domain knowledge and modeling
+                remains intact and reusable.</para>
         </section>
         <section>
             <title>TEI Publisher</title>
-            <para>TEI Publisher is building on web components with namespaces. This
-                functionality can of course be reached with other View components like building
-                reusuable components with React-js which brings it closer to web apps [in sect
-                3.2].</para>
-            <para>At the heart of TEI Publisher lies the TEI Processing Model (PM) which 
-                defines how a TEI document should be rendered in different output formats.
-                The large number of already available web components makes most adaptations possible with some HTML knowledge. 
-                Only if you need further components some modeling experience and knowledge of the html5 specification containing web components is needed.
-                But, luckily, since TEI Publisher provides ways to embed your edition's texts into an application context, 
-                e.g. adding navigation, pagination, search, facsimile display 
-                and much more, it basically already provides all the necessary building blocks for an online edition.</para>
-            <para>As with all decisions about technology choices risks are present since in a small project you usually neither 
-                have the time nor the resources to perform a technology switch. 
-                Reducing the risks by using free software, open formats and following defacto standards as well as actual standards are all in favour of even this, 
-                the most dependant single vendor [we used proprietary above] solution. Being part of a community with shared web components are an appealing idea with additional benefits.</para>
+            <para>TEI Publisher is built on a foundation of web components with namespaces.<footnote>
+                    <para>This functionality could be achieved with other View components, such as
+                        by building reusuable components with React.js [<xref linkend="React.js"/>],
+                        which brings it closer to web apps, as described in the preceding
+                        section.</para>
+                </footnote> At the heart of TEI Publisher lies the TEI Processing Model (PM) which
+                defines how a TEI document should be rendered in different output formats. The large
+                number of already available web components makes most adaptations possible with just
+                some foundational HTML knowledge, but users with advanced requirements can implement
+                additional components on the basis of modeling experience and knowledge of the HTML5
+                specification, and specifically of containing web components. Most userss, however,
+                are likely to find that TEI Publisher provides ways to embed texts into an
+                application context, supporting the integration of navigation, pagination, search,
+                facsimile display, and more.</para>
+            <para>The principal costs of TEI Publisher, as with other web publishing frameworks, are
+                twofold. The first cost lies in the start-up, that is, in the time and resource
+                requirements to perform a technology switch. The second cost, also shared with any
+                web publishing framework, involves the potential for lock-in, since building a site
+                within a particular framework implicitly discourages migration to a different
+                framework at a later date. TEI Publisher cannot eliminate these costs, but it
+                mitigates both by using Free Software and open formats, and by following both actual
+                (such as HTML5) and de facto (such as TEI) standards, it reduces both the start-up
+                cost and the cost of potential future migration.</para>
         </section>
     </section>
     <section>
@@ -546,6 +558,10 @@ echo file_get_contents($xql);</programlisting></para>
             <link>https://httpd.apache.org</link></bibliomixed>
         <bibliomixed xml:id="basex" xreflabel="BaseX">BaseX. The XML framework.
                 <link>http://basex.org</link>/</bibliomixed>
+        <bibliomixed xml:id="cagle" xreflabel="Cagle 2007">Cagle, Kurt. <quote>XQuery, the server
+                language.</quote> 2007-06-06. <link
+                xlink:href="https://www.xml.com/pub/a/2007/06/01/xquery-the-server-language.html"
+                xmlns:xlink="http://www.w3.org/1999/xlink"/></bibliomixed>
         <bibliomixed xml:id="eXist-db" xreflabel="eXist-db"><quote>eXist-db.</quote>
             <link>https://exist-db.org</link></bibliomixed>
         <bibliomixed xml:id="templating" xreflabel="eXist-db HTML templating"><quote>eXist-db: HTML
@@ -554,10 +570,6 @@ echo file_get_contents($xql);</programlisting></para>
         <bibliomixed xml:id="webapp" xreflabel="eXist-db Web application"><quote>eXist-db: Getting
                 started with Web application development.</quote>
             <link>https://exist-db.org/exist/apps/doc/development-starter</link></bibliomixed>
-        <bibliomixed>Cagle, Kurt. "XQuery, the Server Language." 2007-06-06.
-                <link
-                xlink:href="https://www.xml.com/pub/a/2007/06/01/xquery-the-server-language.html"
-                xmlns:xlink="http://www.w3.org/1999/xlink"/></bibliomixed>
         <bibliomixed xml:id="Jetty" xreflabel="Jetty">Eclipse Jetty.
                 <link>https://www.eclipse.org/jetty/</link></bibliomixed>
         <bibliomixed xml:id="marklogic" xreflabel="Marklogic">MarkLogic | Data Integration and NoSQL
@@ -574,6 +586,8 @@ echo file_get_contents($xql);</programlisting></para>
         <bibliomixed xml:id="reenskaug" xreflabel="Reenskaug">Reenskaug, Trygve M. H. <quote>MVC.
                 Xerox PARC 1978–79.</quote>
             <link>http://heim.ifi.uio.no/~trygver/themes/mvc/mvc-index.html</link></bibliomixed>
+        <bibliomixed xreflabel="React" xml:id="React.js">React. A JavaScript library for building
+            user interfaces. <link>https://reactjs.org/</link></bibliomixed>
         <bibliomixed xml:id="reeses" xreflabel="Reese’s"><quote>Vintage 80s Reese’s peanut butter
                 cups commercial with walkers.</quote>
             <link>https://www.youtube.com/watch?v=DJLDF6qZUX0</link></bibliomixed>
