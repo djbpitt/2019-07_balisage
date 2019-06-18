@@ -466,7 +466,10 @@ echo file_get_contents($xql);</programlisting></para>
                 ability to access HTTP request methods and parameters (as well as hostnames, server
                 ports, etc.), get and set session parameters, and return responses with customized
                 status, headers, body.</para>
-            <para>In its simplest form, the developer writes an XQuery module...</para>
+            <para>In its simplest form, the developer writes an XQuery module. [EXPAND]
+                This is what many eXist-db developers have done through the almost two decades since then, 
+                firstly as XQuery modules alone and later on as fullblown XAR apps. And, hey, there is 
+                even one app for text collation with CollateX on its way out of initial testing.</para>
         </section>
         <section>
             <title>Apps with HTML templating</title>
@@ -513,7 +516,7 @@ echo file_get_contents($xql);</programlisting></para>
                 number of already available web components makes most adaptations possible with just
                 some foundational HTML knowledge, but users with advanced requirements can implement
                 additional components on the basis of modeling experience and knowledge of the HTML5
-                specification, and specifically of containing web components. Most userss, however,
+                specification, and specifically of containing web components. Most users, however,
                 are likely to find that TEI Publisher provides ways to embed texts into an
                 application context, supporting the integration of navigation, pagination, search,
                 facsimile display, and more.</para>
