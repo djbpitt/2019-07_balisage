@@ -198,10 +198,10 @@
                     building blocks for an online edition. [<xref linkend="teiPublisherQuick"
                     />]</para>
             </blockquote></para>
-        <para>After a digression about model—view—controller (MVC) architecture, which serves as a
-            reference point for comparison and discussion, in the following sections we describe
-            four models for integrating digital edition content into eXist-db. These are, in
-            increasing order of eXist-db dependence: <orderedlist>
+        <para>After a digression about web application architecture, which serves as a reference
+            point for comparison and discussion, in the following sections we describe four models
+            for integrating digital edition content into eXist-db. These are, in increasing order of
+            eXist-db dependence: <orderedlist>
                 <listitem>
                     <para>using Apache [<xref linkend="apache"/>] and PHP [<xref linkend="php"/>] to
                         mediate between the user and eXist-db, so that eXist-db provides only DBMS
@@ -224,7 +224,46 @@
             generally, and are therefore not specific to eXist-db.</para>
     </section>
     <section>
-        <title>Model—View—Controller architecture (MVC)</title>
+        <title>Web application architecture </title>
+        <para>Digtal editions have some important differences from typical web applications. A
+            typical web application architecture has a "front end" or user-facing interface, a
+            middle tier which handles interactions between the user and the application's data, and
+            a "back end"—a data store of some kind. In most web applications, the front end is HTML,
+            CSS, and Javascript, the middle tier is dealt with by some piece of software, often
+            developed using a framework with takes care of common tasks. In a digital edition, the
+            content, the text of the edition(s), is the primary feature of the application's data
+            model. Unless the edition is in a development phase, its content tends to be relatively
+            static. Fine details of the edition's structure are apt to matter a great deal., but
+            there may be little of no notion of a "user" in the application's data model. Even if it
+            is paywalled, access may well be controlled at another level. Its data is
+            semi-structured and may have to be made available in a variety of ways. Business logic
+            and workflows tend to be applied on the creation and editing side of things, and may
+            happen entirely outside the application that publishes the data. </para>
+        <para>A digital edition based on the Text Encoding Initiative's guidelines has some
+            decisions to make about its back-end and front-end architecture. How will the
+            information be stored? Generally, it is sensible to decide on a single "canonical"
+            version of the text, from which everything else will derive. If not, there is a risk
+            that different representations of the text may get out of sync with one another. So
+            where will the canonical version live? On disk, in a data store, or elsewhere (e.g. in a
+            remote repository)? How will it be presented? Transformed to HTML using XSLT, XQuery,
+            some other mechanism? When will that conversion occur? Ahead of time or upon request?
+            Will the conversion be cached or always live? Bound up with these questions is the
+            decision of how to structure the software that mediates between the back-end content and
+            the front-end presentation. With eXist as the data store, we will have to choose how
+            much of the application logic and source-conversion will be handled by eXist
+            itself.</para>
+        <para>The decision of where to place the application logic of a digital edition and how to
+            structure it will be influenced by many factors, including performance, available
+            developer expertise, and software functionality. The latter issue can be acute because
+            of the stagnation of XML technology development in some areas. Common application
+            frameworks such as Ruby on Rails, Flask (Python), or Django (also Python-based) rely on
+            libxml2 and libxslt for XML processing, and so are limited to XSLT 1.0. Java or
+            ASP.Net-based systems can make use of the more modern XSLT support available in Saxon.
+            EXist-db supports XQuery 3.0, but a decision to use it as a complete solution may mean
+            relying upon it for things like user management and other functionality which is easier
+            to implement on top of a web framework. In addition, it may be far easier to find
+            developers qualified to work with a common web application framework than with
+            eXist.</para>
         <para>MVC is an architecture that separates an application into three components: Model,
             View, and Controller.<footnote>
                 <para>For a history of MVC see <xref linkend="reenskaug"/>.</para>
@@ -287,18 +326,24 @@
     <section>
         <title>Four ways of building an edition with eXist-db</title>
         <section>
-            <title>PHP</title>
+            <title>Web application middleware</title>
             <para>A common architecture for web interfaces that incorporate a DBMS (relational, XML,
-                or other) is that users interact only with a standard HTTP server, such as Apache
-                running on port 80. Under this approach, the front end is managed with HTML forms
-                (part of the View) that launch a PHP script (part of the Controller) when the user
-                hits a Submit button or otherwise causes an event to happen that initiates
-                processing. The PHP script then harvests form data submitted by the user and
-                interacts (for example, using a REST call) with a DBMS (the Model), retrieves the
-                necessary information, shapes it into HTML, and returns it to the user in the
-                context of a web page (part of the View). This is the foundation of the fundamental
-                open-source LAMP stack: Linux (OS), Apache (HTTP server), MySQL (DBMS), and PHP
-                (controller language).</para>
+                or other) is that user requests are mediated by a standard HTTP server, such as
+                Apache running on ports 80 and/or 443, which delegates the job of processing
+                requests to some middleware, such as PHP scripts, web frameworks like Ruby on Rails
+                or Django, or many other alternatives. Under this approach, the front end is
+                generated by the middleware, which queries the database (probably via its REST
+                interface) for information to be presented in the view.  Views might be created by
+                transforming XML to HTML with XSLT, or by including HTML fragments generated
+                directly from eXist using XQuery</para>
+            <para>managed with HTML forms (part of the View) that launch a PHP script (part of the
+                Controller) when the user hits a Submit button or otherwise causes an event to
+                happen that initiates processing. The PHP script then harvests form data submitted
+                by the user and interacts (for example, using a REST call) with a DBMS (the Model),
+                retrieves the necessary information, shapes it into HTML, and returns it to the user
+                in the context of a web page (part of the View). This is the foundation of the
+                fundamental open-source LAMP stack: Linux (OS), Apache (HTTP server), MySQL (DBMS),
+                and PHP (controller language).</para>
             <para>The strictest implementation of this type of system in an eXist-db context relies
                 on eXist-db only as an XML database, that is, as an alternative to the MySQL
                 component of LAMP. For example, a PHP script running inside an Apache server on port
