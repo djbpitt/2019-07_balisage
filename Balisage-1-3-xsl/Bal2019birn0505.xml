@@ -199,28 +199,32 @@
             features that are more commonly associated with a Content Management System (CMS) than
             with a database, such as themes, templates, and page management (not just data resource
             management). We might consider the eXist-db core functionality, the DBMS services at the
-            innermost layer of an eXist-db installation, as analogous to the peanut butter center of
-            a Reese’s Peanut Butter Cup, and the Jetty servlet container, which can also provide CMS
-            services, as the outer layer of chocolate. But the analogy does not depend only on the
-            fact that the eXist-db DBMS services are wrapped, as it were, inside Jetty’s CMS ones.
-            Peanut butter and chocolate have a long history as independently popular foodstuffs, and
-            neither depends in any necessary, obvious, or even intuitive way on the other, yet their
-            combination in a single product has proven impressively popular with consumers.
-            Similarly, there is nothing about a DBMS that requires or expects CMS services, and vice
-            versa, yet the growing integration of the two types of functionality within eXist-db
-            confirms that they can be combined to create a resource for developing and deploying
-            digital editions.</para>
-        <para>With the release of TEI Publisher 4.0 in December 2018 [<xref
-                linkend="teiPublisher4.0"/>], built on a Web Components foundation [<xref
-                linkend="webComponents"/>], eXist-db can be said to provide a hosting platform for
-            digital editions that both goes very far beyond traditional DBMS services and provides
-            functionality that would normally be expected from a CMS. The TEI Publisher
-            documentation says as much explicitly (see especially the paragraph below the numbered list):<blockquote>
+            innermost layer of an eXist-db installation, as analogous to the thick peanut butter
+            center of a Reese’s Peanut Butter Cup, and the Jetty servlet container, which provides
+            eXist-db's REST interface, as the thin outer layer of chocolate. But the analogy does
+            not depend only on the fact that the eXist-db DBMS services are wrapped, as it were,
+            inside Jetty’s CMS ones. Peanut butter and chocolate have a long history as
+            independently popular foodstuffs, and neither depends in any necessary, obvious, or even
+            intuitive way on the other, yet their combination in a single product has proven
+            impressively popular with consumers. Similarly, there is nothing about a DBMS that
+            requires or expects CMS services, and vice versa, yet the growing integration of the two
+            types of functionality within eXist-db confirms that they can be combined to create a
+            resource for developing and deploying digital editions.</para>
+        <para>While digital editions based on eXist-db have been released using a variety of
+            architectures, the release of TEI Publisher 4.0 in December 2018 [<xref
+                linkend="teiPublisher4.0"/>] caused educators and creators of digital editions, such
+            as the authors of this paper, to review the existing architectures against this new one.
+            An implementation of the TEI Processing Model that leverages Web Components for its
+            default user interface [<xref linkend="webComponents"/>], TEI Publisher can be said to
+            turn eXist-db into a hosting platform for digital editions that both goes very far
+            beyond traditional DBMS services and provides functionality that would normally be
+            expected from a CMS. The TEI Publisher documentation says as much explicitly (see
+            especially the paragraph below the numbered list):<blockquote>
                 <para>Despite its elegant simplicity, various projects we realized in the past prove
                     that the TEI Processing Model is: <blockquote>
                         <para>1. powerful enough to cover complex transformation needs</para>
                         <para>2. a truly universal tool for any kind of digital edition</para>
-                        <para> 3. efficient and as fast (or faster) as handwritten
+                        <para>3. efficient and as fast (or faster) as handwritten
                             transformations</para>
                         <para>4. suitable for any XML, not just TEI (this documentation is written
                             in docbook!)</para>
