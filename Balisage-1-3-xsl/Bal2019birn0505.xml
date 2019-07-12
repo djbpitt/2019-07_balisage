@@ -807,12 +807,13 @@ let $text := $doc/id($section)</programlisting></para>
                 <programlisting>templates:surround?with=templates/page.html&amp;at=produce</programlisting>
                 to insert the content into the <code>with</code> template at the element with
                     <code>ID</code> produce. </para>
-            <para>Thanks to the power of nested template calls, a major benefit of an HTML
-                templating approach in eXist-db is the ability produce both mock-ups and production
-                view components with more advanced search forms and result pages without turning to
-                other solutions. The principal cost of HTML templating is the need to translate the
-                templates to another template language. The initial domain knowledge and modeling
-                remains intact and reusable.</para>
+            <para>Thanks to the power of nested template calls, major benefits of the HTML
+                templating approach in eXist-db are (1) a clean separation between HTML and the
+                XQuery code that populates the HTML and (2) the ability produce both mock-ups and
+                production view components with more advanced search forms and result pages without
+                turning to other solutions. The principal cost of HTML templating is the possible
+                need to translate the templates to another template language. However, the initial
+                domain knowledge and modeling remains intact and reusable.</para>
         </section>
         <section>
             <title>TEI Publisher</title>
