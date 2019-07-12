@@ -172,15 +172,20 @@
                 </imageobject>
             </mediaobject>
         </figure>
-        <para>Meanwhile, in a galaxy far, far away, the eXist-db XML database was born in 2001
-                <emphasis role="bold">[EXPAND]</emphasis>. Since its inception, eXist-db has
-            provided the services one expects from any database management system (DBMS): it stores
-            records (XML documents), builds persistent indexes, supports retrieval with a query
-            language (XQuery), and provides the housekeeping functionality (e.g., user
-            authentication) those processes require. eXist-db is commonly hosted inside an HTTP
-            server and servlet container (it ships with <xref linkend="Jetty"/>, but other hosts are
-            also supported), which mediates between the user and the eXist-db functionality, as is
-            illustrated in this image from <xref linkend="exist-book"/>:</para>
+        <para>Meanwhile, in a galaxy far, far away, the eXist-db native XML database was born in
+            2001. Created by Wolfgang Meier, who at the time was a researcher in the field of
+            sociology, to support his projects which required efficient processing of XML documents,
+            eXist-db was released as a free, open source project that has enjoyed a broad following
+            in the world of XML and NoSQL databases, and is particularly strong in publishing and,
+            for the purposes of this paper, digital edition projects in the humanities. Since its
+            inception, eXist-db has provided the services one expects from any database management
+            system (DBMS): it stores records (XML documents), builds persistent indexes, supports
+            retrieval with a query language (first DOM and XPath, and later XQuery), and provides
+            the housekeeping functionality (e.g., user authentication) those processes require.
+            eXist-db is commonly hosted inside an HTTP server and servlet container (it ships with
+                <xref linkend="Jetty"/>, but other hosts are also supported), which mediates between
+            the user and the eXist-db functionality, as is illustrated in this image from <xref
+                linkend="exist-book"/>:</para>
         <figure xml:id="exist-book-jetty"
             xreflabel="eXist-db web application platform architecture (Siegel and Retter 2014: 72)">
             <mediaobject>
