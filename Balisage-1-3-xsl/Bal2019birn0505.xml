@@ -816,20 +816,36 @@ let $text := $doc/id($section)</programlisting></para>
         </section>
         <section>
             <title>TEI Publisher</title>
-            <para>TEI Publisher is built on a foundation of web components with namespaces.<footnote>
+            <para>TEI Publisher consists of two parts: a core library, which implements the TEI
+                Processing Model (PM), and a development environment for customized web applications
+                with built-in facilities for navigation, pagination, search, facsimile display,
+                faceted browsing, etc. PM is a TEI-native vocabulary for expressing how XML
+                documents should be transformed and rendered into various output formats (HTML,
+                EPUB, PDF, etc.). PM lets users map TEI structures onto a dozen or so fundamental
+                processing "behaviors" (e.g., treat <code>&lt;p></code> elements as "block",
+                    <code>&lt;hi></code> elements as "inline", <code>&lt;list></code> and
+                    <code>&lt;item></code> elements as components of "list" structures, etc.), and
+                TEI Publisher ships with sane defaults for ensuring, for example, that PM's
+                CSS-centric style language is faithfully conveyed to the various output formats. TEI
+                Publisher also supports overriding these defaults with custom, output
+                format-specific affordances (such as LaTeX boilerplate or XSL-FO font definitions).
+                It supports extension points to XQuery functions for cases where PM alone cannot
+                accomplish the desired results. TEI Publisher even leverages PM's theoretical
+                support for documents encoded in non-TEI vocabularies, and ships with support for
+                DocBook-encoded documents. The most recent major release, 4.0, was redesigned to use
+                Web Components in its views, allowing users to freely add, remove, and combine
+                panels containing different views, such as facsimile, translations, and maps.<footnote>
                     <para>This functionality could be achieved with other View components, such as
                         by building reusuable components with React.js [<xref linkend="React.js"/>],
                         which brings it closer to web apps, as described in the preceding
                         section.</para>
-                </footnote> At the heart of TEI Publisher lies the TEI Processing Model (PM) which
-                defines how a TEI document should be rendered in different output formats. The large
-                number of already available web components makes most adaptations possible with just
-                some foundational HTML knowledge, but users with advanced requirements can implement
-                additional components on the basis of modeling experience and knowledge of the HTML5
-                specification, and specifically of containing web components. Most users, however,
-                are likely to find that TEI Publisher provides ways to embed texts into an
-                application context, supporting the integration of navigation, pagination, search,
-                facsimile display, and more.</para>
+                </footnote>The large number of already available web components makes most
+                adaptations possible with just some foundational HTML knowledge, but users with
+                advanced requirements can implement additional components on the basis of modeling
+                experience and knowledge of the HTML5 specification, and specifically of containing
+                web components. Most users, however, are likely to find that TEI Publisher provides
+                ways to embed texts into an application context, supporting the integration of
+                navigation, pagination, search, facsimile display, and more.</para>
             <para>The principal costs of TEI Publisher, as with other web publishing frameworks, are
                 twofold. The first cost lies in the start-up, that is, in the time and resource
                 requirements to perform a technology switch. The second cost, also shared with any
