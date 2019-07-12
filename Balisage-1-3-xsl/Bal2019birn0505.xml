@@ -245,15 +245,15 @@
                         services;</para>
                 </listitem>
                 <listitem>
-                    <para>the eXist-db app framework without HTML templating [<xref linkend="webapp"
-                        />];</para>
+                    <para>using pure XQuery, as implemented in eXist-db, as the server language for
+                        building web applications [<xref linkend="webapp"/>];</para>
                 </listitem>
                 <listitem>
-                    <para>the eXist-db app framework using HTML templating [<xref
-                            linkend="templating"/>]; and</para>
+                    <para>using the eXist-db HTML templating framework [<xref linkend="templating"
+                        />]; and</para>
                 </listitem>
                 <listitem>
-                    <para>TEI Publisher [<xref linkend="teiPublisher"/>].</para>
+                    <para>using TEI Publisher [<xref linkend="teiPublisher"/>].</para>
                 </listitem>
             </orderedlist>Each of these ways of conceptualizing and implementing the infrastructure
             for a digital edition has advantages and disadvantages, primarily from the perspective
@@ -296,7 +296,7 @@
             frameworks such as Ruby on Rails, Flask (Python), or Django (Python) rely on libxml2 and
             libxslt for XML processing, and so are limited to XSLT 1.0. Java or ASP.Net-based
             systems can make use of the more modern XSLT support available in Saxon. EXist-db
-            supports XQuery 3.0, but a decision to use it as a complete solution may mean relying
+            supports XQuery 3.1, but a decision to use it as a complete solution may mean relying
             upon it for things like user management and other functionality which is easier to
             implement on top of a web framework. In addition, it may be far easier to find
             developers qualified to work with a common web application framework than with
@@ -396,11 +396,11 @@
             <para>Looser implementations of this approach might offload additional Controller
                 functionality onto eXist-db. For example, XML retrieved from inside the database
                 might be transformed to HTML markup inside eXist-db (using the XQuery
-                    <code>typeswitch()</code> function or XSLT by way of the eXist-db
+                    <code>typeswitch()</code> expression or XSLT by way of the eXist-db
                     <code>transform:transform()</code> function<footnote>
                     <para>As of Version 4.6.1 (March 2019) eXist-db supports a custom
                             <code>transform:transform()</code> function in a custom namespace, but
-                        not the standard XPath 3.1 <code>fn:transform()</code> function in the
+                        not yet the standard XPath 3.1 <code>fn:transform()</code> function in the
                         standard XPath 3.1 namespace.</para>
                 </footnote>instead of by the PHP script after the eXist-db query returns. Looser
                 implementations might also store the XQuery script inside eXist-db and pass it
@@ -498,10 +498,10 @@ echo file_get_contents($xql);</programlisting></para>
                 In this architecture, eXist-db functions as the entire AMP portion of the
                 stack—handling the model, view, and controller (perhaps with a reverse proxy like
                 Apache or Nginx in production scenarios for security purposes). The primary
-                advantage of this model is that the developer need master only one core
+                advantage of this model is that the edition's developer need master only one core
                 technology—XQuery—rather than many disparate ones. Kurt Cagle articulated this
                 potential in an article published just months after XQuery achieved 1.0 status as a
-                W3C Recommendation in 2017:<blockquote>
+                W3C Recommendation in 2007:<blockquote>
                     <para>Over the years, I’ve had the chance to program in a lot of different
                         server-side scripting languages--C, Perl, ASP, JSP, PHP, ASP.NET, Python,
                         Ruby, among others... As an XML developer, one of the problems that I come
@@ -533,7 +533,7 @@ echo file_get_contents($xql);</programlisting></para>
                 knowledge of TEI XML to teach them enough XQuery to create a simple, dynamic,
                 database driven web-based application. The purpose of the application was to let
                 users browse through 20 TEI-encoded issues of Punch, a satirical, Victorian-era
-                magazine used throughout the institute as a sample dataset. Each issue has a title
+                periodical used throughout the institute as a sample dataset. Each issue has a title
                 and a number of sections, many of which are accompanied by illustrations. The
                 application would present the reader with a list of issues, then let the reader
                 click on an issue to view the contents of the issue by transforming the source TEI
@@ -767,19 +767,18 @@ let $text := $doc/id($section)</programlisting></para>
                 seminar. Rather, the purpose was to expose students to the iterative approach to
                 hand-crafting one's own edition using pure XQuery, as implemented by eXist-db, and
                 limited dependencies on external libraries: XQuery for querying data, transforming
-                it, and publishing it via web technologies. </para>
-            <para>While the approach is feasible for individuals, the primary weakness of this
-                approach is that a hand-crafted application, in which all HTML is generated directly
-                by XQuery script, may lead larger projects with a division of labor between multiple
-                people (e.g., the visual designer or text encoding specialist) to depend too heavily
-                on the XQuery programmer or face a steep learning curve. A visual designer would
-                need to learn XQuery to alter the HTML structures generated by the XQuery. Likewise,
-                an editor whose focus is the TEI encoding itself would need to learn XQuery to
-                understand and adjust how the TEI is transformed into HTML. In addition, new
-                XQuery-based TEI-to-anything transformation  library modules need to be written for
-                each output format (e.g., PDF, ebook). </para>
-            <para>The following two sections describe approaches developed in response to these
-                limitations of the "pure XQuery" approach.</para>
+                it, and publishing it via web technologies.  </para>
+            <para>While this approach has merits and is feasible, its primary weakness is its mixing
+                of concerns and dependence on XQuery expertise. Some projects have modest-sized
+                teams that enjoy a division of labor between members: a visual designer, a
+                programmer, and a text encoding specialist. In the Punch application, in which all
+                HTML output is generated directly by XQuery script, a visual designer would need to
+                learn XQuery to alter the HTML structures generated by the XQuery, and the editor
+                whose focus is the TEI encoding itself would need to learn XQuery to understand and
+                adjust how the TEI is transformed into HTML.  </para>
+            <para>Recognizing these challenges, the eXist-db and TEI user communities developed new
+                techniques to accomplish a finer-grained separation of concerns required by many
+                teams in practice.</para>
         </section>
         <section>
             <title>Apps with HTML templating</title>
