@@ -306,32 +306,33 @@
     <section>
         <title>Web application architecture </title>
         <para>Digtal editions have some important differences from typical web applications. A
-            typical web application architecture has a "front end" or user-facing interface, a
-            middle tier which handles interactions between the user and the application's data, and
-            a "back end"—a data store of some kind. In most web applications, the front end is HTML,
-            CSS, and Javascript, the middle tier is dealt with by some piece of software, often
-            developed using a framework with takes care of common tasks. In a digital edition, the
-            content, the text of the edition(s), is the primary feature of the application's data
-            model. Unless the edition is in a development phase, its content tends to be relatively
-            static. Fine details of the edition's structure are apt to matter a great deal., but
-            there may be little of no notion of a "user" in the application's data model. Even if it
-            is paywalled, access may well be controlled at another level. Its data is
-            semi-structured and may have to be made available in a variety of ways. Business logic
-            and workflows tend to be applied on the creation and editing side of things, and may
-            happen entirely outside the application that publishes the data. </para>
+            typical web application architecture has a <emphasis role="ital">front end</emphasis>,
+            or user-facing interface, a middle tier which handles interactions between the user and
+            the application's data, and a <emphasis role="ital">back end</emphasis>—a data store of
+            some kind. In most web applications, the front end is HTML, CSS, and Javascript, the
+            middle tier is dealt with by some piece of software, often developed using a framework
+            with takes care of common tasks. In a digital edition, the content, the text of the
+            edition(s), is the primary feature of the application's data model. Unless the edition
+            is in a development phase, its content tends to be relatively static. Fine details of
+            the edition's structure are apt to matter a great deal., but there may be little of no
+            notion of a user in the application’s data model. Even if it is paywalled, access may
+            well be controlled at another level. Its data is semi-structured and may have to be made
+            available in a variety of ways. Business logic and workflows tend to be applied on the
+            creation and editing side of things, and may happen entirely outside the application
+            that publishes the data. </para>
         <para>A digital edition based on the Text Encoding Initiative's guidelines has some
             decisions to make about its back-end and front-end architecture. How will the
-            information be stored? Generally, it is sensible to decide on a single "canonical"
-            version of the text, from which everything else will derive. If not, there is a risk
-            that different representations of the text may get out of sync with one another. So
-            where will the canonical version live? On disk, in a data store, or elsewhere (e.g. in a
-            remote repository)? How will it be presented? Transformed to HTML using XSLT, XQuery,
-            some other mechanism? When will that conversion occur? Ahead of time or upon request?
-            Will the conversion be cached or always live? Bound up with these questions is the
-            decision of how to structure the software that mediates between the back-end content and
-            the front-end presentation. With eXist-db as the data store, we will have to choose how
-            much of the application logic and source-conversion will be handled by eXist-db
-            itself.</para>
+            information be stored? Generally, it is sensible to decide on a single <emphasis
+                role="ital">canonical</emphasis> version of the text, from which everything else
+            will derive. If not, there is a risk that different representations of the text may get
+            out of sync with one another. So where will the canonical version live? On disk, in a
+            data store, or elsewhere (e.g. in a remote repository)? How will it be presented?
+            Transformed to HTML using XSLT, XQuery, some other mechanism? When will that conversion
+            occur? Ahead of time or upon request? Will the conversion be cached or always live?
+            Bound up with these questions is the decision of how to structure the software that
+            mediates between the back-end content and the front-end presentation. With eXist-db as
+            the data store, we will have to choose how much of the application logic and
+            source-conversion will be handled by eXist-db itself.</para>
         <para>The decision of where to place the application logic of a digital edition and how to
             structure it will be influenced by many factors, including performance, available
             developer expertise, and software functionality. The latter issue can be acute because
@@ -624,7 +625,7 @@ echo file_get_contents($xql);</programlisting></para>
                 elements. Students then extend this core XPath expression, using an XQuery FLWOR
                 expression to iterate over the sequence and return a new sequence of HTML
                     <code>&lt;li></code> elements, an enclosed expression to obtain the string value
-                of the title, and an "Order by" clause to sort the sequence
+                of the title, and an <code>order by</code> clause to sort the sequence
                 alphabetically:<programlisting>for $issue in collection('/db/apps/punch/data')/tei:TEI
 let $title := $issue/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title
 order by $title
@@ -745,15 +746,16 @@ declare function tei-to-html:dispatch($node as node()*, $options) as item()* {
                 output. This exercise demonstrates that students can easily customize and extend the
                 HTML transformation for around the needs of their edition.</para>
             <para>While readers familiar with XSLT may object to this method of transforming XML
-                ("use XQuery to query, use XSLT to transform!"), this is a perfectly valid and has
-                the advantage of allowing students to focus their limited time on mastering XQuery.
-                It is certainly a better alternative to forcing them to learn another language
-                before being able to transform their data. That would certainly not be possible in
-                the space of a 3-hour seminar. For users who have mastered XSLT or are interested in
-                learning it, though, eXist-db has a module for performing XSLT transformations,
-                which under the hood passes the node and stylesheet to Saxon. But this recursive
-                Typeswitch method does empower students to perform transformations in the same,
-                unified "server" language—XQuery—as the rest of their application. </para>
+                    (<quote>use XQuery to query, use XSLT to transform!</quote>), this is a
+                perfectly valid and has the advantage of allowing students to focus their limited
+                time on mastering XQuery. It is certainly a better alternative to forcing them to
+                learn another language before being able to transform their data. That would
+                certainly not be possible in the space of a 3-hour seminar. For users who have
+                mastered XSLT or are interested in learning it, though, eXist-db has a module for
+                performing XSLT transformations, which under the hood passes the node and stylesheet
+                to Saxon. But this recursive Typeswitch method does empower students to perform
+                transformations in the same, unified "server" language—XQuery—as the rest of their
+                application. </para>
             <para>The first version application works, but students quickly realize that it doesn't
                 make much sense to display an entire issue on one web page. Thus, in the second
                 version of the application, students replace the <code>view-whole-issue.xq</code>
@@ -799,13 +801,13 @@ let $text := $doc/id($section)</programlisting></para>
                     xmlns:xlink="http://www.w3.org/1999/xlink"/>.</para>
             <para>The result is a fairly polished application that is highly customized around the
                 needs of our edition. The application demonstrates all of the core techniques needed
-                to build an edition: a collection view listing all "issues", a table of contents
-                view of each "issue", and an item-level view of each "section"; the use of URL
-                parameters to pass identifiers needed to locate items in the database; the use of
-                XQuery to transform whole TEI documents or portions thereof into HTML; the use of
-                functions and library modules to encapsulate code and facilitate its reuse; the use
-                of the EXPath Package specification to facilitate distribution and sharing of code;
-                and the use of eXist-db's full text index facility.</para>
+                to build an edition: a collection view listing all issues, a table of contents view
+                of each issue, and an item-level view of each section; the use of URL parameters to
+                pass identifiers needed to locate items in the database; the use of XQuery to
+                transform whole TEI documents or portions thereof into HTML; the use of functions
+                and library modules to encapsulate code and facilitate its reuse; the use of the
+                EXPath Package specification to facilitate distribution and sharing of code; and the
+                use of eXist-db's full text index facility.</para>
             <para>Students were not expected to master all of these techniques in the course of the
                 seminar. Rather, the purpose was to expose students to the iterative approach to
                 hand-crafting one's own edition using pure XQuery, as implemented by eXist-db, and
@@ -865,19 +867,20 @@ let $text := $doc/id($section)</programlisting></para>
                 faceted browsing, etc. PM is a TEI-native vocabulary for expressing how XML
                 documents should be transformed and rendered into various output formats (HTML,
                 EPUB, PDF, etc.). PM lets users map TEI structures onto a dozen or so fundamental
-                processing "behaviors" (e.g., treat <code>&lt;p></code> elements as "block",
-                    <code>&lt;hi></code> elements as "inline", <code>&lt;list></code> and
-                    <code>&lt;item></code> elements as components of "list" structures, etc.), and
-                TEI Publisher ships with sane defaults for ensuring, for example, that PM's
-                CSS-centric style language is faithfully conveyed to the various output formats. TEI
-                Publisher also supports overriding these defaults with custom, output
-                format-specific affordances (such as LaTeX boilerplate or XSL-FO font definitions).
-                It supports extension points to XQuery functions for cases where PM alone cannot
-                accomplish the desired results. TEI Publisher even leverages PM's theoretical
-                support for documents encoded in non-TEI vocabularies, and ships with support for
-                DocBook-encoded documents. The most recent major release, 4.0, was redesigned to use
-                Web Components in its views, allowing users to freely add, remove, and combine
-                panels containing different views, such as facsimile, translations, and maps.<footnote>
+                processing <emphasis role="ital">behaviors</emphasis> (e.g., treat
+                    <code>&lt;p></code> elements as <code>block</code>, <code>&lt;hi></code>
+                elements as <code>inline</code>, <code>&lt;list></code> and <code>&lt;item></code>
+                elements as components of <code>list</code> structures, etc.), and TEI Publisher
+                ships with sane defaults for ensuring, for example, that PM's CSS-centric style
+                language is faithfully conveyed to the various output formats. TEI Publisher also
+                supports overriding these defaults with custom, output format-specific affordances
+                (such as LaTeX boilerplate or XSL-FO font definitions). It supports extension points
+                to XQuery functions for cases where PM alone cannot accomplish the desired results.
+                TEI Publisher even leverages PM's theoretical support for documents encoded in
+                non-TEI vocabularies, and ships with support for DocBook-encoded documents. The most
+                recent major release, 4.0, was redesigned to use Web Components in its views,
+                allowing users to freely add, remove, and combine panels containing different views,
+                such as facsimile, translations, and maps.<footnote>
                     <para>This functionality could be achieved with other View components, such as
                         by building reusuable components with React.js [<xref linkend="React.js"/>],
                         which brings it closer to web apps, as described in the preceding
