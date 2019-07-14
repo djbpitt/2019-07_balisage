@@ -8,18 +8,19 @@
     <info>
         <abstract>
             <para>We have identified four models for integrating digital edition content into
-                eXist-db [<xref linkend="eXist-db"/>], which are in increasing order of dependence
+                eXist-db [<xref linkend="eXist-db"/>], which are, in increasing order of dependence
                 on eXist-db itself: 1) using Apache [<xref linkend="apache"/>] and PHP [<xref
                     linkend="php"/>] to mediate between the user and eXist-db, so that eXist-db
-                provides only XML database services, 2) the pure XQuery framework for building an
-                    [<xref linkend="webapp"/>], 3) the eXist-db HTML templating framework [<xref
-                    linkend="templating"/>], and 4) TEI Publisher [<xref linkend="teiPublisher"/>].
-                Our presentation will examine and compare these ways of conceptualizing and
-                implementing the infrastructure for a digital edition. Each of them has advantages
-                and disadvantages, primarily from the perspective of sustainability. These
-                considerations apply to edition frameworks generally, and are therefore not specific
-                to eXist-db, but eXist-db is discussed here because of the number of editions that
-                use it and the variety of models employed.</para>
+                provides only XML database services, 2) a pure XQuery framework for building an
+                eXist-db web application [<xref linkend="webapp"/>], 3) the eXist-db HTML templating
+                framework [<xref linkend="templating"/>], and 4) TEI Publisher [<xref
+                    linkend="teiPublisher"/>]. Our examination and comparison of these ways of
+                conceptualizing and implementing the infrastructure for a digital edition reveals
+                that each of them has advantages and disadvantages, primarily from the perspective
+                of sustainability. These considerations apply to edition frameworks generally, and
+                are therefore not specific to eXist-db, which has been used here as an example
+                because of the number of editions that employ it and the variety of models it
+                currently supports.</para>
         </abstract>
         <author>
             <personname>
