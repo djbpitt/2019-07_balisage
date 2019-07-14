@@ -216,18 +216,18 @@
         </figure>
         <para>Meanwhile, in a galaxy far, far away, the eXist-db native XML database was born in
             2001. Created by Wolfgang Meier, who at the time was a researcher in the field of
-            sociology, to support his projects which required efficient processing of XML documents,
+            sociology, to support projects that required the efficient processing of XML documents,
             eXist-db was released as a free, open source project that has enjoyed a broad following
-            in the world of XML and NoSQL databases, and is particularly strong in publishing and,
-            for the purposes of this paper, digital edition projects in the humanities. Since its
-            inception, eXist-db has provided the services one expects from any database management
-            system (DBMS): it stores records (XML documents), builds persistent indexes, supports
-            retrieval with a query language (first DOM and XPath, and later XQuery), and provides
-            the housekeeping functionality (e.g., user authentication) those processes require.
-            eXist-db is commonly hosted inside an HTTP server and servlet container (it ships with
-                <xref linkend="Jetty"/>, but other hosts are also supported), which mediates between
-            the user and the eXist-db functionality, as is illustrated in this image from <xref
-                linkend="exist-book"/>:</para>
+            in the world of XML and NoSQL databases. In particular, eXist-db has often been used in
+            publishing digital editon projects in the humanities, including some designed and
+            implemented by authors of the present report, Since its inception, eXist-db has provided
+            the services one expects from any database management system (DBMS): it stores records
+            (XML documents), builds persistent indexes, supports retrieval with a query language
+            (first DOM and XPath, and later XQuery), and provides the housekeeping functionality
+            (e.g., user authentication) those processes require. eXist-db is commonly hosted inside
+            an HTTP server and servlet container (it ships with <xref linkend="Jetty"/>, but other
+            hosts are also supported), which mediates between the user and the eXist-db
+            functionality, as is illustrated in this image from <xref linkend="exist-book"/>:</para>
         <figure xml:id="exist-book-jetty"
             xreflabel="eXist-db web application platform architecture (Siegel and Retter 2014: 72)">
             <mediaobject>
@@ -252,16 +252,17 @@
             requires or expects CMS services, and vice versa, yet the growing integration of the two
             types of functionality within eXist-db confirms that they can be combined to create a
             resource for developing and deploying digital editions.</para>
-        <para>While digital editions based on eXist-db have been released using a variety of
+        <para>While digital editions based on eXist-db have been produced using a variety of
             architectures, the release of TEI Publisher 4.0 in December 2018 [<xref
-                linkend="teiPublisher4.0"/>] caused educators and creators of digital editions, such
-            as the authors of this paper, to review the existing architectures against this new one.
-            An implementation of the TEI Processing Model that leverages Web Components for its
-            default user interface [<xref linkend="webComponents"/>], TEI Publisher can be said to
-            turn eXist-db into a hosting platform for digital editions that both goes very far
-            beyond traditional DBMS services and provides functionality that would normally be
-            expected from a CMS. The TEI Publisher documentation says as much explicitly (see
-            especially the paragraph below the numbered list):<blockquote>
+                linkend="teiPublisher4.0"/>] provides an opportunity for creators of digital
+            editions, such as the authors of this paper, to review and assess the existing
+            architectures in the context of this new one. An implementation of the TEI Processing
+            Model [<xref linkend="tei_pm"/>, <xref linkend="turska_pm"/>] that leverages Web
+            Components for its default user interface [<xref linkend="webComponents"/>], TEI
+            Publisher can be said to turn eXist-db into a hosting platform for digital editions that
+            both goes very far beyond traditional DBMS services and provides functionality that
+            would normally be expected from a CMS. The TEI Publisher documentation says as much
+            explicitly (see especially the paragraph below the numbered list):<blockquote>
                 <para>Despite its elegant simplicity, various projects we realized in the past prove
                     that the TEI Processing Model is: <blockquote>
                         <para>1. powerful enough to cover complex transformation needs</para>
@@ -980,6 +981,10 @@ let $text := $doc/id($section)</programlisting></para>
         <bibliomixed xml:id="exist-book" xreflabel="Siegel and Retter 2014">Siegel, Erik and Adam
             Retter. <emphasis role="ital">eXist. A NoSQL document database and application
                 platform.</emphasis> Sebastopol, CA: O’Reilly. 2014.</bibliomixed>
+        <bibliomixed xml:id="tei_pm" xreflabel="TEI Processing Model"><quote>Processing
+                models.</quote> (Part of <emphasis role="ital">P5: Guidelines for electronic text
+                encoding and interchange</emphasis>.)
+                <link>https://www.tei-c.org/release/doc/tei-p5-doc/en/html/TD.html#TDPMPM</link></bibliomixed>
         <bibliomixed xml:id="teiPublisher" xreflabel="TEI Publisher"><quote>TEI publisher.</quote>
             <link>https://teipublisher.com</link></bibliomixed>
         <bibliomixed xml:id="teiPublisher4.0" xreflabel="TEI Publisher 4.0"><quote>TEI Publisher
@@ -995,6 +1000,10 @@ let $text := $doc/id($section)</programlisting></para>
                 digital scholarly editing: papers presented at the Dixit conferences in The Hague,
                 Cologne, and Antwerp</emphasis>, 361–64. Leiden: Sidestone Press, 2017.
                 <link>https://www.scribd.com/embeds/364391508/content</link></bibliomixed>-->
+        <bibliomixed xml:id="turska_pm" xreflabel="Turska 2015"><quote>TEI Simple self-documenting
+                abstraction layer for XML processing.</quote> (Slide deck)
+                <link>https://slides.com/magdalenaturska/deck#/</link>
+        </bibliomixed>
         <bibliomixed xml:id="upton" xreflabel="Upton 2013">Upton, Emily. <quote>The fascinating rise
                 of Reese’s Peanut Butter Cups.</quote>
             <emphasis role="ital">Business insider.</emphasis> June 30, 2013.
