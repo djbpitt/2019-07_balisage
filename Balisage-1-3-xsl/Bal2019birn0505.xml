@@ -701,36 +701,129 @@ let $text := $doc/id($section)</programlisting></para>
         </section>
         <section>
             <title>TEI Publisher</title>
-            <para>TEI Publisher consists of two parts: a core library, which implements the TEI Processing Model (PM),
-                and a development environment for customized web applications with built-in facilities for navigation,
-                pagination, search, facsimile display, faceted browsing, etc. PM is a TEI-native vocabulary for
-                expressing how XML documents should be transformed and rendered into various output formats (HTML, EPUB,
-                PDF, etc.). PM lets users map TEI structures onto a dozen or so fundamental processing "behaviors"
-                (e.g., treat <code>&lt;p></code> elements as "block", <code>&lt;hi></code> elements as "inline",
-                <code>&lt;list></code> and <code>&lt;item></code> elements as components of "list" structures, etc.),
-                and TEI Publisher ships with sane defaults for ensuring, for example, that PM's CSS-centric style
-                language is faithfully conveyed to the various output formats. TEI Publisher also supports overriding
-                these defaults with custom, output format-specific affordances (such as LaTeX boilerplate or XSL-FO font
-                definitions). It supports extension points to XQuery functions for cases where PM alone cannot
-                accomplish the desired results. TEI Publisher even leverages PM's theoretical support for documents
-                encoded in non-TEI vocabularies, and ships with support for DocBook-encoded documents. The most recent
-                major release, 4.0, was redesigned to use Web Components in its views, allowing users to freely add,
-                remove, and combine panels containing different views, such as facsimile, translations, and
-                maps.<footnote> <para>This functionality could be achieved with other View components, such as by
-                building reusuable components with React.js [<xref linkend="React.js"/>], which brings it closer to web
-                apps, as described in the preceding section.</para> </footnote>The large number of already available web
-                components makes most adaptations possible with just some foundational HTML knowledge, but users with
-                advanced requirements can implement additional components on the basis of modeling experience and
-                knowledge of the HTML5 specification, and specifically of containing web components. Most users,
-                however, are likely to find that TEI Publisher provides ways to embed texts into an application context,
-                supporting the integration of navigation, pagination, search, facsimile display, and more.</para>
+            <para>TEI Publisher is built and distributed as a specialised eXist-db web application. It consists of two
+                main parts: a core library, which implements the TEI Processing Model (PM), and a development
+                environment to create standalone customised web applications with built-in facilities for navigation,
+                pagination, search, facsimile display, faceted browsing, etc. </para>
+            <para>PM is a TEI-native vocabulary for expressing how XML documents should be transformed and rendered into
+                various output formats (HTML, EPUB, PDF, etc.). PM lets users map TEI structures onto two dozen or so
+                fundamental abstract processing or rendering primitives called "behaviors" (e.g., treat
+                <code>&lt;p></code> elements as "block", <code>&lt;hi></code> elements as "inline",
+                <code>&lt;list></code> and <code>&lt;item></code> elements as components of "list" structures, etc.).
+                They are described in the Chapter 22 of the TEI guidelines dedicated to the Documentation elements.<footnote>
+                <para>See <link xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="https://tei-c.org/release/doc/tei-p5-doc/de/html/TD.html#TDPM"
+                    >https://tei-c.org/release/doc/tei-p5-doc/de/html/TD.html#TDPM</link></para>
+                </footnote>The PM can hence be defined as both as formal documentation and processing instructions,
+                expressed in TEI, independantly of any format or software language. They were conceived with the double
+                aim of being simple enough to be used by the editor, and formalized enough to be used as operable
+                instruction by a machine. Practically, to record his or her etorial decisions, a user will express in a
+                formal way his or her intentions or expectations in adding <code>model</code> child elements to the
+                specifications of an element in the ODD specification file. The model elements will bind these
+                processing expectations to a element in a given xpath context with a behaviour through the use of
+                attributes. For example, to define how a hi element should be rendered, a user could write this chunk of
+                code in the ODD file monitoring its TEI collection of documents of corpus.
+                <programlisting>&lt;elementSpec ident="hi" mode="change">
+     &lt;model predicate="@rend ='it'" behaviour="inline">
+         &lt;param name="content" value="."/>
+         &lt;outputRendition>font-style: italic;&lt;/outputRendition>
+     &lt;/model>
+&lt;/elementSpec></programlisting>
+                the model presented here targets the hi elements with a rend attribute set to 'it' and expresses the
+                intended rendition (italics) with a child element <code>outputRendition</code>. The parameter content is
+                use to chose in the nodes of the hi elements what will be added to the content, typically the content of
+                the element (represented by the dot). </para>
+            <para>Two kinds of high level decisions are considered in this approach: structural ones (block vs inline,
+                in case of a parralelised paradigmatic encoding (e.g. original vs correction, abbreviation vs expansion,
+                or parallel encoding of several witnesses) and appearences decisions (e.g. italics or small caps). The
+                PM mechanism offers the encoder to define, for a given element both the content and the rendition
+                associated to it, with a given behaviour. For example, to render an regularisation, the encoder can
+                choose the behaviour "alternate" and chose to put the content of the regularisation in the base text,
+                with the original source text in a tooltip displayed on mouse over. Or vice-versa. The behaviour can be
+                "omit" is it is not pertinent for the output considered. If no outpub is specified, the renditions
+                defined will be translated throught the xquery function for each output format will be used. </para>
+            <para>As the processing models were developped in connexion with the definition of the TEI Simple schema, a
+                schema offering explicit and standardized options for displaying and querying texts that a developper
+                could make use of to build transformations for a given output device (web, print, epub, etc.). The
+                implementation choice of PM by the TEI publisher authors is to offer a library of built-in pre-coded
+                behaviours as XQuery functions for each output format. This implementation strategy offers a sane
+                defaults mechanism for ensuring, for example, that PM's CSS-centric style language is faithfully
+                conveyed to the various output formats. TEI Publisher also supports overriding these defaults with
+                custom, output format-specific affordances (such as LaTeX boilerplate or XSL-FO font definitions). It
+                supports extension points to XQuery functions for cases where the default PM defined in the frame of the
+                TEI simple schema alone cannot accomplish the desired results. For example, if we look at the XQuery
+                function of the punch tutorial <code>tei-to-html:hi()</code> presented above, we see that the rule
+                establishing that a <code>hi</code> element with a <code>@rend</code> attribute set to
+                <code>'it'</code>(<code>hi[@rend='it'])</code> needs a custom behaviour that is not in the list of
+                common behaviours defined by the TEI guidelines that is mainly used in the teiSimple Schema that is used
+                as a default PM specification by TEI publisher. In its earlier versions, TEI Publisher provided a way to
+                extend the behaviours defined in the TEI Guidelines in writing it as an XQuery function. For example, if
+                this new behaviour was to be called 'emphaisis', it could be written like
+                that:<programlisting>declare function pmf:emphais($config as map(*), $node as node(), $class as xs:string+, $content) {
+    &lt;em>{pmf:apply-children($config, $node, $content)}&lt;/title>
+};</programlisting>The
+                corresponding odd model specification could then be mapped to this new
+                behaviour:<programlisting>&lt;elementSpec ident="hi" mode="change">
+    &lt;model predicate="@rend ='it'" behaviour="emphasis">
+        &lt;param name="content" value="."/>                       
+    &lt;/model>
+&lt;/elementSpec></programlisting></para>
+            <para>The library part of TEI Publisher (tei-publisher-lib) release 2.5.0 introduced a support for templates
+                and user-defined behaviours within the ODD that lets the user write the same new behaviour directly in
+                the ODD. For example, this emphasis behaviour could be written as:
+                <programlisting>&lt;pb:behaviour ident="emphasis-custom">
+    &lt;desc xml:lang="en">emphasis custom&lt;/desc>
+    &lt;pb:template>
+        &lt;em xmlns="">[[content]]&lt;/em>
+    &lt;/pb:template>
+&lt;/pb:behaviour></programlisting>The
+                added value here is also that some discursive documentation can be added with the <code>desc</code>
+                element. </para>
+            <para>TEI Publisher even leverages PM's theoretical support for documents encoded in non-TEI vocabularies,
+                and ships with support for DocBook-encoded documents. The most recent major release, 4.0, was redesigned
+                to use Web Components in its views, allowing users to freely add, remove, and combine panels containing
+                different views, such as facsimile, translations, and maps. <footnote>
+                <para>This functionality could be achieved with other View components, such as by building reusable
+                    components with React.js [<xref linkend="React.js"/>], which brings it closer to web apps, as
+                    described in the preceding section.</para>
+                </footnote></para>
+            <para>xxxx</para>
+            <para>The large number of already available web components makes most adaptations possible with just some
+                foundational HTML knowledge, but users with advanced requirements can implement additional components on
+                the basis of modeling experience and knowledge of the HTML5 specification, and specifically of
+                containing web components. Most users, however, are likely to find that TEI Publisher provides ways to
+                embed texts into an application context, supporting the integration of navigation, pagination, search,
+                facsimile display, and more.</para>
             <para>The principal costs of TEI Publisher, as with other web publishing frameworks, are twofold. The first
                 cost lies in the start-up, that is, in the time and resource requirements to perform a technology
                 switch. The second cost, also shared with any web publishing framework, involves the potential for
                 lock-in, since building a site within a particular framework implicitly discourages migration to a
                 different framework at a later date. TEI Publisher cannot eliminate these costs, but it mitigates both
                 by using Free Software and open formats, and by following both actual (such as HTML5) and de facto (such
-                as TEI) standards, it reduces both the start-up cost and the cost of potential future migration.</para>
+                as TEI) standards, it reduces both the start-up cost and the cost of potential future migration. </para>
+            <para>It's main advantage which is put forward by the documentation and the way its creators have presented
+                it lies in the fact that it substantially reduces the amount of lines of codes dedicated to writing the
+                transformations but also represents a considerable advantage for reducing the burden of code
+                maintenance.</para>
+            <para>With regard to this question of potential future migration, it's interesting to reverse the
+                persepective, and see it, throught the implementation of the TEI Processing models as documentation
+                driven. If one accepts the idea that in the long term, if html and web components were to be outdated
+                and replaced by other technologies, its only the formal documentation provided by the TEI PM that will
+                provide consistent and sufficient information about the logics of the intended processing and rendrering
+                of the elements. It is also very likely that instead of migration from a translation of web componenent
+                in a new technology, it will prove more efficient to start anew at the source of the intention, that is
+                the TEI expression of these expercations or instructions. In that perspective, the PM make the
+                publication framework be documentation driven. As the TEI publisher forces the user to define these
+                instruction in a documentative manner, it can be said that it enforces the documentation et from there
+                is the best guarantee we can have for a long term transmission maybe not of the result, but of the
+                scholarly editorial intention. The TEI Publisher implementation of the TEI PM acts then in a controller
+                perspective, establishing an efficient binding to the view but also completely separate from it. It can
+                also be said that the views (templates) assembling streams of documents as autonomous API, that can be
+                assembled like lego blocks, will constitute a collection of template primitive highly reusable from one
+                template to another. Maybe the full potential of the TEI Publisher will be reached when this collection
+                of webcomponents will be grounded in a robust editorial theory or a series of editorial theories, each
+                potentially populated by a subcollection of web components.</para>
+            <para> </para>
         </section>
     </section>
     <section>
