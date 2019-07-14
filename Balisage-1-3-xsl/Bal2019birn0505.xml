@@ -305,65 +305,95 @@
     </section>
     <section>
         <title>Web application architecture </title>
-        <para>Digtal editions have some important differences from typical web applications. A
-            typical web application architecture has a <emphasis role="ital">front end</emphasis>,
-            or user-facing interface, a middle tier which handles interactions between the user and
-            the application’s data, and a <emphasis role="ital">back end</emphasis>—a data store of
-            some kind. In most web applications, the front end is HTML, CSS, and Javascript, the
+        <para>A typical web application architecture has a <emphasis role="ital">front
+                end</emphasis>, or user-facing interface; a <emphasis role="ital">middle
+                tier</emphasis>, which handles interactions between the user and the application
+            data; and a <emphasis role="ital">back end</emphasis>, which is a data store of some
+            kind. In most web applications the front end is HTML, CSS, and JavaScript, and the
             middle tier is dealt with by some piece of software, often developed using a framework
-            with takes care of common tasks. In a digital edition, the content, the text of the
-            edition(s), is the primary feature of the application’s data model. Unless the edition
-            is in a development phase, its content tends to be relatively static. Fine details of
-            the edition’s structure are apt to matter a great deal., but there may be little of no
-            notion of a user in the application’s data model. Even if it is paywalled, access may
-            well be controlled at another level. Its data is semi-structured and may have to be made
-            available in a variety of ways. Business logic and workflows tend to be applied on the
-            creation and editing side of things, and may happen entirely outside the application
-            that publishes the data. </para>
-        <para>A digital edition based on the Text Encoding Initiative guidelines has some
-            decisions to make about its back-end and front-end architecture. How will the
-            information be stored? Generally, it is sensible to decide on a single <emphasis
-                role="ital">canonical</emphasis> version of the text, from which everything else
-            will derive. If not, there is a risk that different representations of the text may get
-            out of sync with one another. So where will the canonical version live? On disk, in a
-            data store, or elsewhere (e.g. in a remote repository)? How will it be presented?
-            Transformed to HTML using XSLT, XQuery, some other mechanism? When will that conversion
-            occur? Ahead of time or upon request? Will the conversion be cached or always live?
-            Bound up with these questions is the decision of how to structure the software that
-            mediates between the back-end content and the front-end presentation. With eXist-db as
-            the data store, we will have to choose how much of the application logic and
-            source-conversion will be handled by eXist-db itself.</para>
+            that takes care of common tasks (see the examples below). In many digital editions, the
+            text exposed by the edition on the front end may be be relatively isomorphic with the
+            source TEI XML on the back end. This is typically the case to a large extent because the
+            TEI XML markup is an operationalization of a theory of the text, and the model expressed
+            by the markup is a large part of the scholarly content that is to be made accessible to
+            the user. Applications like TEI Boilerplate [<xref linkend="boilerplate"/>] and the
+            Versioning Machine [<xref linkend="versioning"/>] are designed for this type of
+            situation; in different ways they select, style, and present a view of underlying TEI
+            XML that is organized primarily by the XML hierarchy. CETEIcean offers an in-browser
+            JavaScript strategy for rendering the XML TEI directly through the use of web
+            components, and specifically of HTML custom elements. [<xref linkend="cayless"/>, <xref
+                linkend="ceteicean"/>] CETEIcean is capable of reorganizing the DOM to support
+            transformation, and can even create new content, but its developers describe it as
+            appropriate especially <quote>in situations where the TEI’s model of the text can be
+                usefully leveraged to allow interesting dynamic functionality in the
+            browser</quote>. [<xref linkend="cayless"/>]. Other types of editions, though, may rely
+            very substantially on structural transformation of the underlying TEI XML, and on the
+            creation of new data objects. For example, an SVG graph of character interactions in a
+            novel (where the individual nodes and edges do not correspond to specific XML elements
+            or attributes in the TEI XML source) or a table of part-of-speech counts (where the
+            counts are generated atomic values not present in any overt way in the TEI XML source)
+            is also an expression of the data, but one that is not at all isomorphic to the TEI XML
+            model. These views, too, may play a role in a digital edition that is designed to
+            express interpretive aspects of textual scholarship that go beyond discrete source-level
+            textual data.</para>
+        <para>A digital edition based on the Text Encoding Initiative guidelines has some decisions
+            to make about its back-end and front-end architecture. The methods we discuss here all
+            assume that on the back end the data is stored in one or more TEI XML documents.<footnote>
+                <para>By <quote>or more</quote> we mean not only that different witnesses in a
+                    critical edition might be stored in separate files, but also that an edition
+                    might draw on information stored in ancillary documents. For example, an edition
+                    that includes epistolary correspondence, such as Digital Mitford [<xref
+                        linkend="mitford"/>], encodes each letter as a separate TEI XML document,
+                    but metadata about persons, places, etc. for all letters is stored not in the
+                    individual letters (which would create massive repetition), but in a shared
+                    resource called the <emphasis role="ital">site index</emphasis>. An edition of a
+                    letter as exposed to readers must incorporate information drawn from the site
+                    index.</para>
+            </footnote> How will the content on the front end be created and presented? Transformed
+            to HTML or SVG or somethhing else using XSLT, XQuery, some other mechanism? When will
+            that conversion occur—ahead of time or upon request? Will the conversion be cached or
+            always live? Will it happen on the server or in the browser? Bound up with these
+            questions is the decision of how to structure the software that mediates between the
+            back-end content and the front-end presentation. We use eXist-db as the data store in
+            all of the examples below, but in each case we will have to make different choices about
+            how much of the application logic and source-conversion will be handled by eXist-db
+            itself.</para>
         <para>The decision of where to place the application logic of a digital edition and how to
             structure it will be influenced by many factors, including performance, available
             developer expertise, and software functionality. The latter issue can be acute because
             of the stagnation of XML technology development in some areas. Common application
-            frameworks such as Ruby on Rails, Flask (Python), or Django (Python) rely on libxml2 and
-            libxslt for XML processing, and so are limited to XSLT 1.0. Java or ASP.Net-based
-            systems can make use of the more modern XSLT support available in Saxon. EXist-db
-            supports XQuery 3.1, but a decision to use it as a complete solution may mean relying
-            upon it for things like user management and other functionality which is easier to
-            implement on top of a web framework. In addition, it may be far easier to find
-            developers qualified to work with a common web application framework than with
-            eXist.</para>
+            frameworks such as Ruby on Rails [<xref linkend="ruby"/>], Flask (Python) [<xref
+                linkend="flask"/>], or Django (Python) [<xref linkend="django"/>] rely on libxml2
+            and libxslt for XML processing, and so are limited to XSLT 1.0. Java or ASP.Net-based
+            systems can make use of the more modern XSLT support available in Saxon [<xref
+                linkend="saxon"/>], and the same is true of Saxon-JS [<xref linkend="saxonjs"/>].
+            eXist-db supports XQuery 3.1, but a decision to use it as a complete solution may mean
+            relying upon it for things like user management and other functionality that is easier
+            to implement on top of a web framework. In addition, it is likely to be far easier to
+            find developers qualified to work with a common web application framework than with
+            eXist-db.</para>
         <para>MVC is an architecture that separates an application into three components: Model,
             View, and Controller.<footnote>
                 <para>For a history of MVC see <xref linkend="reenskaug"/>.</para>
             </footnote> The following explanation is based on <xref linkend="mvc"/>: <itemizedlist>
                 <listitem>
                     <para><emphasis role="bold">Model:</emphasis> the data and core DBMS
-                        functionality.</para>
+                        functionality. This corresponds to what we describe above as the back
+                        end.</para>
                 </listitem>
                 <listitem>
                     <para><emphasis role="bold">View:</emphasis> the user interface (UI), such as
                         web forms that accept user input and the HTML returned to the user in
-                        response to queries.</para>
+                        response to queries. This corresopnds to what we describe as the front
+                        end.</para>
                 </listitem>
                 <listitem>
                     <para><emphasis role="bold">Controller:</emphasis> The interface between the
                         model and the view. The controller may translate user-supplied values from a
                         web form (part of the view) into a database query (interacting with the
                         model) and return the results (drawn from the model) as an HTML page (part
-                        of the view).</para>
+                        of the view). This corresponds to what we describe above as
+                        middleware.</para>
                 </listitem>
             </itemizedlist>These components and the relationships among them may be represented as
                 follows:<figure xml:id="mvc_image"
@@ -946,12 +976,25 @@ let $text := $doc/id($section)</programlisting></para>
                 language.</quote> 2007-06-06. <link
                 xlink:href="https://www.xml.com/pub/a/2007/06/01/xquery-the-server-language.html"
                 xmlns:xlink="http://www.w3.org/1999/xlink"/></bibliomixed>
+        <bibliomixed xml:id="cayless" xreflabel="Cayless and Viglianti 2018">Cayless, Hugh, and
+            Raffaele Viglianti. <quote>CETEIcean: TEI in the browser.</quote> Presented at Balisage:
+            The Markup Conference 2018, Washington, DC, July 31–August 3, 2018. In <emphasis
+                role="ital">Proceedings of Balisage: The Markup Conference 2018.</emphasis> Balisage
+            Series on Markup Technologies, vol. 21 (2018).
+                <link>https://doi.org/10.4242/BalisageVol21.Cayless01</link>. Available at
+                <link>https://www.balisage.net/Proceedings/vol21/html/Cayless01/BalisageVol21-Cayless01.html</link>.</bibliomixed>
+        <bibliomixed xml:id="ceteicean" xreflabel="CETEIcean">CETEIcean.
+                <link>https://github.com/TEIC/CETEIcean</link></bibliomixed>
         <bibliomixed xml:id="cummings" xreflabel="Cummings 2019">Cummings, James. <quote>Opening the
                 book: data models and distractions in digital scholarly editing, </quote> July 2019,
             Volume 1, Issue 2, pp 179–93. <emphasis role="ital">International journal of Digital
                 Humanities</emphasis> (2019) 1: 179.
                 <link>https://doi.org/10.1007/s42803-019-00016-6</link>,
                 <link>https://link.springer.com/article/10.1007%2Fs42803-019-00016-6</link>. </bibliomixed>
+        <bibliomixed xml:id="mitford" xreflabel="Mitford">Digital Mitford: the Mary Russell Mitford
+            archive. <link>https://digitalmitford.org/</link></bibliomixed>
+        <bibliomixed xml:id="django" xreflabel="Django">Django.
+                <link>https://www.djangoproject.com</link></bibliomixed>
         <bibliomixed xml:id="eXist-db" xreflabel="eXist-db"><quote>eXist-db.</quote>
             <link>https://exist-db.org</link></bibliomixed>
         <bibliomixed xml:id="templating" xreflabel="eXist-db HTML templating"><quote>eXist-db: HTML
@@ -962,6 +1005,8 @@ let $text := $doc/id($section)</programlisting></para>
             <link>https://exist-db.org/exist/apps/doc/development-starter</link></bibliomixed>
         <bibliomixed xml:id="Jetty" xreflabel="Jetty">Eclipse Jetty.
                 <link>https://www.eclipse.org/jetty/</link></bibliomixed>
+        <bibliomixed xml:id="flask" xreflabel="Flask">Flask.
+                <link>https://palletsprojects.com/p/flask/</link></bibliomixed>
         <bibliomixed xml:id="marklogic" xreflabel="Marklogic">MarkLogic | Data Integration and NoSQL
             Databases for Your Business. <link>https://www.marklogic.com/</link></bibliomixed>
         <bibliomixed xml:id="mvc" xreflabel="MVC architecture">Wideskills. <quote>Introduction to
@@ -973,17 +1018,25 @@ let $text := $doc/id($section)</programlisting></para>
                 application written in XQuery for eXist-db demonstrating how to create a dynamic,
                 searchable website for TEI text.</quote>
             <link>https://github.com/joewiz/punch</link></bibliomixed>
+        <bibliomixed xreflabel="React" xml:id="React.js">React. A JavaScript library for building
+            user interfaces. <link>https://reactjs.org/</link></bibliomixed>
         <bibliomixed xml:id="reenskaug" xreflabel="Reenskaug">Reenskaug, Trygve M. H. <quote>MVC.
                 Xerox PARC 1978–79.</quote>
             <link>http://heim.ifi.uio.no/~trygver/themes/mvc/mvc-index.html</link></bibliomixed>
-        <bibliomixed xreflabel="React" xml:id="React.js">React. A JavaScript library for building
-            user interfaces. <link>https://reactjs.org/</link></bibliomixed>
         <bibliomixed xml:id="reeses" xreflabel="Reese’s"><quote>Vintage 80s Reese’s peanut butter
                 cups commercial with walkers.</quote>
             <link>https://www.youtube.com/watch?v=DJLDF6qZUX0</link></bibliomixed>
+        <bibliomixed xml:id="saxon" xreflabel="Saxon">Saxon.
+                <link>https://www.djangoproject.com</link></bibliomixed>
+        <bibliomixed xml:id="saxonjs" xreflabel="Saxon-JS">Saxon-JS.
+                <link>http://www.saxonica.com/saxon-js/index.xml</link></bibliomixed>
+        <bibliomixed xml:id="ruby" xreflabel="Ruby on Rails">Ruby on Rails.
+                <link>https://rubyonrails.org</link></bibliomixed>
         <bibliomixed xml:id="exist-book" xreflabel="Siegel and Retter 2014">Siegel, Erik and Adam
             Retter. <emphasis role="ital">eXist. A NoSQL document database and application
                 platform.</emphasis> Sebastopol, CA: O’Reilly. 2014.</bibliomixed>
+        <bibliomixed xml:id="boilerplate" xreflabel="TEI Boilerplate">TEI Boilerplate.
+                <link>http://dcl.ils.indiana.edu/teibp/</link></bibliomixed>
         <bibliomixed xml:id="tei_pm" xreflabel="TEI Processing Model"><quote>Processing
                 models.</quote> (Part of <emphasis role="ital">P5: Guidelines for electronic text
                 encoding and interchange</emphasis>.)
@@ -1011,6 +1064,9 @@ let $text := $doc/id($section)</programlisting></para>
                 of Reese’s Peanut Butter Cups.</quote>
             <emphasis role="ital">Business insider.</emphasis> June 30, 2013.
                 <link>https://www.businessinsider.com/the-fascinating-rise-of-reeses-peanut-butter-cups-2013-6</link></bibliomixed>
+        <bibliomixed xml:id="versioning" xreflabel="Versioning Machine">Versioning Machine 5.0 A
+            tool for displaying and comparing different versions of a literary text.
+                <link>http://v-machine.org/</link></bibliomixed>
         <bibliomixed xml:id="webComponents" xreflabel="Web Components">webcomponents.org.
                 <quote>Introduction.</quote>
             <link>https://www.webcomponents.org/introduction</link></bibliomixed>
