@@ -574,11 +574,11 @@ echo file_get_contents($xql);</programlisting></para>
                 knowledge of TEI XML to teach them enough XQuery to create a simple, dynamic,
                 database driven web-based application. The purpose of the application was to let
                 users browse through 20 TEI-encoded issues of Punch, a satirical, Victorian-era
-                periodical used throughout the institute as a sample dataset. Each issue has a title
-                and a number of sections, many of which are accompanied by illustrations. The
-                application would present the reader with a list of issues, then let the reader
-                click on an issue to view the contents of the issue by transforming the source TEI
-                into HTML.</para>
+                periodical used throughout the institute as a sample dataset. [<xref linkend="punch"
+                />] Each issue has a title and a number of sections, many of which are accompanied
+                by illustrations. The application would present the reader with a list of issues,
+                then let the reader click on an issue to view the contents of the issue by
+                transforming the source TEI into HTML.</para>
             <para>The approach to developing the application consists of 4 major stages, each
                 designed to introduce a new set of techniques in application development or
                 capabilities of eXist-db: <orderedlist>
@@ -923,16 +923,18 @@ let $text := $doc/id($section)</programlisting></para>
         </section>
     </section>
     <bibliography>
+        <!-- Works not currently, but from which we might later wish to cite, are commented out.-->
         <title>Works cited</title>
         <bibliomixed xml:id="apache" xreflabel="Apache"><quote>Apache HTTP server project.</quote>
             <link>https://httpd.apache.org</link></bibliomixed>
-        <bibliomixed xml:id="barabucci" xreflabel="Barabucci et al. 2017">Barabucci, Gioele, Elena
+        <!--<bibliomixed xml:id="barabucci" xreflabel="Barabucci et al. 2017">Barabucci, Gioele, Elena
             Spadini, and Magdalena Turska. <quote>Data vs. presentation: what is the core of a
                 scholarly digital edition?</quote> In Peter Boot, Anna Cappellotto, Wout Dillen,
             Franz Fischer, Aodhán Kelly, Andreas Mertgens, Anna-Maria Sichani, Elena Spadini, and
             Dirk van Hulle, eds., <emphasis role="ital">Advances in digital scholarly editing:
                 papers presented at the Dixit conferences in The Hague, Cologne, and
-                Antwerp</emphasis>, 37–46. Leiden: Sidestone Press, 2017.</bibliomixed>
+                Antwerp</emphasis>, 37–46. Leiden: Sidestone Press, 2017.
+                <link>https://www.scribd.com/embeds/364391508/content</link></bibliomixed>-->
         <bibliomixed xml:id="basex" xreflabel="BaseX">BaseX. The XML framework.
                 <link>http://basex.org</link>/</bibliomixed>
         <bibliomixed xml:id="cagle" xreflabel="Cagle 2007">Cagle, Kurt. <quote>XQuery, the server
@@ -985,13 +987,13 @@ let $text := $doc/id($section)</programlisting></para>
         <bibliomixed xml:id="teiPublisherQuick" xreflabel="TEI Publisher Quickstart"><quote>TEI
                 Publisher Quickstart.</quote>
             <link>https://teipublisher.com/exist/apps/tei-publisher/doc/documentation.xml</link></bibliomixed>
-        <bibliomixed xml:id="turska" xreflabel="Turska 2017">Turska, Magdalena. <quote>TEI simple
+        <!--<bibliomixed xml:id="turska" xreflabel="Turska 2017">Turska, Magdalena. <quote>TEI simple
                 processing model: An abstraction layer for XML processing.</quote> In In Peter Boot,
             Anna Cappellotto, Wout Dillen, Franz Fischer, Aodhán Kelly, Andreas Mertgens, Anna-Maria
             Sichani, Elena Spadini, and Dirk van Hulle, eds., <emphasis role="ital">Advances in
                 digital scholarly editing: papers presented at the Dixit conferences in The Hague,
-                Cologne, and Antwerp</emphasis>, 361–64. Leiden: Sidestone Press,
-            2017.</bibliomixed>
+                Cologne, and Antwerp</emphasis>, 361–64. Leiden: Sidestone Press, 2017.
+                <link>https://www.scribd.com/embeds/364391508/content</link></bibliomixed>-->
         <bibliomixed xml:id="upton" xreflabel="Upton 2013">Upton, Emily. <quote>The fascinating rise
                 of Reese’s Peanut Butter Cups.</quote>
             <emphasis role="ital">Business insider.</emphasis> June 30, 2013.
