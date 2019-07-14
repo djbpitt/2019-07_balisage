@@ -146,6 +146,46 @@
             <link>https://github.com/joewiz</link>
         </author>
     </info>
+    <!-- 
+    (Cummings 2019)
+    
+    as much as possible editors of scholarly digital editions should not be distracted from editorial tasks 
+    by technological concerns if these technological concerns do not affect their edition
+    
+    a truly conceptual editorial object is malleable and recombinable, and an encoded edition, by itself, 
+    is not [... but ...] by forcing us to formalise some of our assumptions, the structures and vocabularies 
+    of an encoded edition do help us foreground the theories of text we use when creating scholarly digital 
+    editions
+    
+    djb: In adjudicating the extent to which the data and the presentation participate in constituting the digital
+    edition, Cummings 2019 strikes a middle ground. The data is essential, the presentation is an aspect of
+    the scholarship, and interaction with the afforded presentations addresses the need for malleability and
+    recombination. But insofar as presentations may be limited by what the editor has anticipaated, envisioned,
+    and facilitated, an API with which the scholarly reader can engege addresses both the editor’s scholarly
+    responsibility and the extent to which the reader’s decisions may also be part of what makes an edition.
+    
+    it is not the presentation layer that is a requirement, as the presentation layer is merely one or more 
+    additional views on the data. Rather, it is the ability to reshape, query, transform, and reconceive of 
+    the data in the same way as (and in the case of a digital edition in more ways than) a reader might do 
+    when translating a printed critical apparatus into a mental construct representing the various document 
+    instances and their relationship to the work [... ]the true form of a scholarly digital edition would be 
+    better expressed as a well-documented API for the manipulation and description of editorial objects 
+    following an open international standard for the representation of digital text
+    
+    djb: Cummings 2019 focuses on the reuse of the editorial objects underlying  an edition by others when he
+    writes the following (see paragraph below). This view is compatible with regarding the original editor, 
+    that is, the person who
+    encodes the digital objects, as the first such researcher. In that capacity, the digital objects (in, for
+    example, TEI XML) are one scholarly product, the views created by that editor iss a different scholarly
+    product (cite Andrews and Zundert), and the API that Cummings advocates is yet another scholarly product.
+    All,then, are digital scholarly parts of a digital scholarly edition.
+    
+    the underlying data may in fact have been created not for a scholarly digital edition as a publication, but 
+    as a resource to be interrogated, analysed, or queried, rather than published. The publication of a scholarly 
+    digital edition can, and perhaps more often should, be a mere byproduct of the real research undertaken. That 
+    such information resources, in this case datasets of editorial objects, become corpora for research analysis
+    
+    -->
     <section>
         <title>Introduction</title>
         <para>In the 1980s Reese’s Peanut Butter Cups, long owned by the Hershey Corporation and one
@@ -162,7 +202,8 @@
             apron) suddenly materializes between them, standing uncomfortably close and silently
             ogling the packaged Reese’s Peanut Butter Cups that he holds up (for the camera; it is
             behind the field of view of the two principals).</para>
-        <figure xml:id="reeses_image" xreflabel="Reese’s Peanut Butter Cups (commercial; product)">
+        <figure xml:id="reeses_image"
+            xreflabel="Reese’s Peanut Butter Cups (advertisement; product)">
             <mediaobject>
                 <imageobject>
                     <imagedata format="jpg" fileref="reeses.jpg" width="49%"/>
@@ -767,7 +808,7 @@ let $text := $doc/id($section)</programlisting></para>
                 seminar. Rather, the purpose was to expose students to the iterative approach to
                 hand-crafting one's own edition using pure XQuery, as implemented by eXist-db, and
                 limited dependencies on external libraries: XQuery for querying data, transforming
-                it, and publishing it via web technologies.  </para>
+                it, and publishing it via web technologies. </para>
             <para>While this approach has merits and is feasible, its primary weakness is its mixing
                 of concerns and dependence on XQuery expertise. Some projects have modest-sized
                 teams that enjoy a division of labor between members: a visual designer, a
@@ -775,7 +816,7 @@ let $text := $doc/id($section)</programlisting></para>
                 HTML output is generated directly by XQuery script, a visual designer would need to
                 learn XQuery to alter the HTML structures generated by the XQuery, and the editor
                 whose focus is the TEI encoding itself would need to learn XQuery to understand and
-                adjust how the TEI is transformed into HTML.  </para>
+                adjust how the TEI is transformed into HTML. </para>
             <para>Recognizing these challenges, the eXist-db and TEI user communities developed new
                 techniques to accomplish a finer-grained separation of concerns required by many
                 teams in practice.</para>
@@ -885,12 +926,25 @@ let $text := $doc/id($section)</programlisting></para>
         <title>Works cited</title>
         <bibliomixed xml:id="apache" xreflabel="Apache"><quote>Apache HTTP server project.</quote>
             <link>https://httpd.apache.org</link></bibliomixed>
+        <bibliomixed xml:id="barabucci" xreflabel="Barabucci et al. 2017">Barabucci, Gioele, Elena
+            Spadini, and Magdalena Turska. <quote>Data vs. presentation: what is the core of a
+                scholarly digital edition?</quote> In Peter Boot, Anna Cappellotto, Wout Dillen,
+            Franz Fischer, Aodhán Kelly, Andreas Mertgens, Anna-Maria Sichani, Elena Spadini, and
+            Dirk van Hulle, eds., <emphasis role="ital">Advances in digital scholarly editing:
+                papers presented at the Dixit conferences in The Hague, Cologne, and
+                Antwerp</emphasis>, 37–46. Leiden: Sidestone Press, 2017.</bibliomixed>
         <bibliomixed xml:id="basex" xreflabel="BaseX">BaseX. The XML framework.
                 <link>http://basex.org</link>/</bibliomixed>
         <bibliomixed xml:id="cagle" xreflabel="Cagle 2007">Cagle, Kurt. <quote>XQuery, the server
                 language.</quote> 2007-06-06. <link
                 xlink:href="https://www.xml.com/pub/a/2007/06/01/xquery-the-server-language.html"
                 xmlns:xlink="http://www.w3.org/1999/xlink"/></bibliomixed>
+        <bibliomixed xml:id="cummings" xreflabel="Cummings 2019">Cummings, James. <quote>Opening the
+                book: data models and distractions in digital scholarly editing, </quote> July 2019,
+            Volume 1, Issue 2, pp 179–93. <emphasis role="ital">International journal of Digital
+                Humanities</emphasis> (2019) 1: 179.
+                <link>https://doi.org/10.1007/s42803-019-00016-6</link>,
+                <link>https://link.springer.com/article/10.1007%2Fs42803-019-00016-6</link>. </bibliomixed>
         <bibliomixed xml:id="eXist-db" xreflabel="eXist-db"><quote>eXist-db.</quote>
             <link>https://exist-db.org</link></bibliomixed>
         <bibliomixed xml:id="templating" xreflabel="eXist-db HTML templating"><quote>eXist-db: HTML
@@ -931,6 +985,13 @@ let $text := $doc/id($section)</programlisting></para>
         <bibliomixed xml:id="teiPublisherQuick" xreflabel="TEI Publisher Quickstart"><quote>TEI
                 Publisher Quickstart.</quote>
             <link>https://teipublisher.com/exist/apps/tei-publisher/doc/documentation.xml</link></bibliomixed>
+        <bibliomixed xml:id="turska" xreflabel="Turska 2017">Turska, Magdalena. <quote>TEI simple
+                processing model: An abstraction layer for XML processing.</quote> In In Peter Boot,
+            Anna Cappellotto, Wout Dillen, Franz Fischer, Aodhán Kelly, Andreas Mertgens, Anna-Maria
+            Sichani, Elena Spadini, and Dirk van Hulle, eds., <emphasis role="ital">Advances in
+                digital scholarly editing: papers presented at the Dixit conferences in The Hague,
+                Cologne, and Antwerp</emphasis>, 361–64. Leiden: Sidestone Press,
+            2017.</bibliomixed>
         <bibliomixed xml:id="upton" xreflabel="Upton 2013">Upton, Emily. <quote>The fascinating rise
                 of Reese’s Peanut Butter Cups.</quote>
             <emphasis role="ital">Business insider.</emphasis> June 30, 2013.
