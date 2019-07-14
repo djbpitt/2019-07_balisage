@@ -789,6 +789,32 @@ let $text := $doc/id($section)</programlisting></para>
                 professionals</quote> with <quote>the interface is part of the scholarship</quote> (cite Graz 2016 DiXiT
                 presentations by Wout and Tara and Joris)</para>
         </section>
+        <!-- from Joe, about the conclusion
+            TEI Publisher is, by any fair measure, the most developed, whole-cloth conception of a "starter" system for 
+            publishing editions, but that each project needs to evaluate which model serves it best, i.e., which of the 
+            following is most important:
+
+            minimizing the dependency on any one DBMS (M layer is limited to storage and retrieval of data) 
+              OR 
+            minimizing the number of layers and languages (XQuery does it all)
+              + separating HTML templates from the XQuery code that dynamically populates the templates (XQuery does all 
+                except HTML scaffolding)
+              + maximizing use of TEI PM to minimize custom transformation code and leverage common behaviors (One Document 
+                Does it all, except HTML scaffolding, with XQuery limited to PM extension behaviors)
+            
+            I can see 4 different projects each making different choices from this menu.  
+            
+            if I were to extend Punch to demonstrate all of the ideas in our paper, I'd add a v5 with HTML Templating and a 
+            v6 with TEI Publisher.  (Could you think of a way to demonstrate a v0 (or v7) with LA(eXist-db)P?)
+            
+            The only other point I think might be worth noting is that neither eXist's HTML Templating module nor 
+            TEI Publisher are fundamentally "locked" to eXist.  They could easily be ported to, say, BaseX, since they are 
+            implemented entirely with standard XQuery 3 higher order functions and map/array item types.  The eXist 
+            features I'd say are truly lock-in prone are eXist's URL Rewriting facility, its Lucene-based full text index 
+            and query functions, and its newest feature in the forthcoming eXist 5, faceted browsing system (also using 
+            Lucene).  A project most concerned about lock-in would probably be advised to worry about those layers rather
+            than HTML Templating or TEI Publisher per se.  
+        -->
     </section>
     <bibliography>
         <!-- Works not currently, but from which we might later wish to cite, are commented out.-->
