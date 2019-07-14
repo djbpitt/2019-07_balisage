@@ -243,7 +243,7 @@
             management). We might consider the eXist-db core functionality, the DBMS services at the
             innermost layer of an eXist-db installation, as analogous to the thick peanut butter
             center of a Reese’s Peanut Butter Cup, and the Jetty servlet container, which provides
-            eXist-db's REST interface, as the thin outer layer of chocolate. But the analogy does
+            eXist-db’s REST interface, as the thin outer layer of chocolate. But the analogy does
             not depend only on the fact that the eXist-db DBMS services are wrapped, as it were,
             inside Jetty’s CMS ones. Peanut butter and chocolate have a long history as
             independently popular foodstuffs, and neither depends in any necessary, obvious, or even
@@ -308,19 +308,19 @@
         <para>Digtal editions have some important differences from typical web applications. A
             typical web application architecture has a <emphasis role="ital">front end</emphasis>,
             or user-facing interface, a middle tier which handles interactions between the user and
-            the application's data, and a <emphasis role="ital">back end</emphasis>—a data store of
+            the application’s data, and a <emphasis role="ital">back end</emphasis>—a data store of
             some kind. In most web applications, the front end is HTML, CSS, and Javascript, the
             middle tier is dealt with by some piece of software, often developed using a framework
             with takes care of common tasks. In a digital edition, the content, the text of the
-            edition(s), is the primary feature of the application's data model. Unless the edition
+            edition(s), is the primary feature of the application’s data model. Unless the edition
             is in a development phase, its content tends to be relatively static. Fine details of
-            the edition's structure are apt to matter a great deal., but there may be little of no
+            the edition’s structure are apt to matter a great deal., but there may be little of no
             notion of a user in the application’s data model. Even if it is paywalled, access may
             well be controlled at another level. Its data is semi-structured and may have to be made
             available in a variety of ways. Business logic and workflows tend to be applied on the
             creation and editing side of things, and may happen entirely outside the application
             that publishes the data. </para>
-        <para>A digital edition based on the Text Encoding Initiative's guidelines has some
+        <para>A digital edition based on the Text Encoding Initiative guidelines has some
             decisions to make about its back-end and front-end architecture. How will the
             information be stored? Generally, it is sensible to decide on a single <emphasis
                 role="ital">canonical</emphasis> version of the text, from which everything else
@@ -542,7 +542,7 @@ echo file_get_contents($xql);</programlisting></para>
                 In this architecture, eXist-db functions as the entire AMP portion of the
                 stack—handling the model, view, and controller (perhaps with a reverse proxy like
                 Apache or Nginx in production scenarios for security purposes). The primary
-                advantage of this model is that the edition's developer need master only one core
+                advantage of this model is that the edition’s developer need master only one core
                 technology—XQuery—rather than many disparate ones. Kurt Cagle articulated this
                 potential in an article published just months after XQuery achieved 1.0 status as a
                 W3C Recommendation in 2007:<blockquote>
@@ -561,7 +561,7 @@ echo file_get_contents($xql);</programlisting></para>
                         various session objects--request, response, server, and so forth--are
                         instead brought into the XQuery engine as externally defined XQuery methods.
                         In other words, in this situation, the server-side scripting language is not
-                        PHP or ASP.NET or JSP, it's XQuery. [<xref linkend="cagle"/>]</para>
+                        PHP or ASP.NET or JSP, it’s XQuery. [<xref linkend="cagle"/>]</para>
                 </blockquote></para>
             <para>Cagle argues that XQuery need not be limited to querying and analyzing XML
                 documents; it is fully capable as a server language for web applications. eXist-db’s
@@ -571,9 +571,9 @@ echo file_get_contents($xql);</programlisting></para>
                 An eXist-db application can even serve customized URL endpoints via its native URL
                 Rewriting facility or through its support for RESTXQ.</para>
             <para>To illustrate the appeal of such an architecture, consider the syllabus of a
-                half-day long seminar taught by one of this paper's authors at digital humanities
+                half-day long seminar taught by one of this paper’s authors at digital humanities
                 institutes to students who had completed the Text Encoding Initiative track. In this
-                short span of time, the instructor leveraged the participants' newly acquired
+                short span of time, the instructor leveraged the participants’ newly acquired
                 knowledge of TEI XML to teach them enough XQuery to create a simple, dynamic,
                 database driven web-based application. The purpose of the application was to let
                 users browse through 20 TEI-encoded issues of Punch, a satirical, Victorian-era
@@ -614,7 +614,7 @@ echo file_get_contents($xql);</programlisting></para>
                 create a customized application around their edition. </para>
             <para>In preparation for building the application, the students download and install
                 eXist-db on their workstations and upload the sample collection of Punch issues to
-                the database, using eXide, eXist-db's built-in integrated development environment
+                the database, using eXide, eXist-db’s built-in integrated development environment
                 for XQuery. </para>
             <para>In the first stage, students build up from simple XPath expressions to a
                 bare-bones application that shows a list of issues and lets readers choose an issue
@@ -638,20 +638,20 @@ return
                 for modules for the first version of the application:
                 <code>v1/list-issues.xq</code>. </para>
             <para>Students then leave eXide to see how their query looks in a web browser. They
-                opening up a new browser window and navigating to the query's web URL:
+                opening up a new browser window and navigating to the query’s web URL:
                     <code>http://localhost:8080/exist/apps/punch/v1/list-issues.xq</code>. This URL
-                is serviced by eXist's Jetty server, which is configured to execute queries stored
+                is serviced by eXist’s Jetty server, which is configured to execute queries stored
                 within the <code>/db/apps</code> database collection via the
                     <code>/exist/apps</code> URL space. Students then learn how to apply an XQuery
                 serialization declaration to their query, so that the browser displays the HTML
                 result of the query as a web page rather than as raw XML. Finally, students add an
                 HTML link to each title, pointing to a second stored query and including a URL
-                parameter, called <code>issue</code>, containing the issue's unique identifier (the
-                issue's file name). </para>
+                parameter, called <code>issue</code>, containing the issue’s unique identifier (the
+                issue’s file name). </para>
             <para>Students then create a second module, <code>v1/view-whole-issue.xq</code>, which
-                uses eXist's <code>request:get-parameter()</code> function to retrieve the
+                uses eXist’s <code>request:get-parameter()</code> function to retrieve the
                     <code>issue</code> URL parameter. The query uses this issue identifier to select
-                the issue's TEI document from the database:
+                the issue’s TEI document from the database:
                 <programlisting>let $issue := request:get-parameter("issue", "")
 (: We take $issue, e.g. 1914-07-01.xml, and can reconstruct the path to this document in the 
  : database by concatenating the base path to all Punch data with the $issue parameter. :)
@@ -690,7 +690,7 @@ return
                 module supplied to the students, <code>modules/tei-to-html.xqm</code>, which we
                 import in the prolog of the <code>view-whole-issue.xq</code>
                 query:<programlisting>import module namespace tei-to-html = "http://history.state.gov/ns/tei-to-html" at "../modules/tei-to-html.xqm";</programlisting></para>
-            <para>The TEI-to-HTML module's primary function, <code>tei-to-html:render()</code>,
+            <para>The TEI-to-HTML module’s primary function, <code>tei-to-html:render()</code>,
                 recursively walks through the entire TEI document, using the XQuery Typeswitch
                 expression to look at each node of the TEI document and pass the node off to the
                 appropriate function:
@@ -756,17 +756,17 @@ declare function tei-to-html:dispatch($node as node()*, $options) as item()* {
                 to Saxon. But this recursive Typeswitch method does empower students to perform
                 transformations in the same, unified "server" language—XQuery—as the rest of their
                 application. </para>
-            <para>The first version application works, but students quickly realize that it doesn't
+            <para>The first version application works, but students quickly realize that it doesn’t
                 make much sense to display an entire issue on one web page. Thus, in the second
                 version of the application, students replace the <code>view-whole-issue.xq</code>
                 query with a table of contents: <code>view-issue-toc.xq</code>. This query uses a
                 simple XPath <code>//tei:div</code> expression to retrieve all TEI
                     <code>&lt;div></code> elements and build a link using their child
                     <code>&lt;head></code> element as the title of the section and its
-                    <code>@xml:id</code> attributes as the section's unique identifier for the link
+                    <code>@xml:id</code> attributes as the section’s unique identifier for the link
                 to a third query, <code>view-section.xq</code>. This query retrieves two URL
                 parameters: issue identifier and section identifier. With this information, we can
-                select the section's
+                select the section’s
                 node:<programlisting>let $issue := request:get-parameter("issue", "")
 let $section := request:get-parameter("section", "")
 let $doc := doc(concat("/db/apps/punch/data/", $issue))
@@ -775,7 +775,7 @@ let $text := $doc/id($section)</programlisting></para>
                 function. </para>
             <para>This completes the second version of the application. The table of contents view
                 is a major enhancement, but it is lacking: it displays the sections as a flat list,
-                rather than a nested list. Also, it doesn't give any sense of the length of a
+                rather than a nested list. Also, it doesn’t give any sense of the length of a
                 section, which might range from a paragraph to many pages. Also, in the case of
                 sections without titles, it simply displays, "(No title)". </para>
             <para>Thus, in the third version of the application, we focus on enhancing the table of
@@ -791,7 +791,7 @@ let $text := $doc/id($section)</programlisting></para>
                 needs of their edition.</para>
             <para>In the final version of the application, we refactor the code base by moving
                 repeated code into a library module—creating a <code>style:assemble-page()</code>
-                function, to which we send each page's title and content and which applies a common
+                function, to which we send each page’s title and content and which applies a common
                 layout to our HTML page—and adding an application-wide search box, served by a
                     <code>search.xq</code> query that presents the results and supported by an
                 eXist-db full text index.</para>
@@ -807,10 +807,10 @@ let $text := $doc/id($section)</programlisting></para>
                 transform whole TEI documents or portions thereof into HTML; the use of functions
                 and library modules to encapsulate code and facilitate its reuse; the use of the
                 EXPath Package specification to facilitate distribution and sharing of code; and the
-                use of eXist-db's full text index facility.</para>
+                use of eXist-db’s full text index facility.</para>
             <para>Students were not expected to master all of these techniques in the course of the
                 seminar. Rather, the purpose was to expose students to the iterative approach to
-                hand-crafting one's own edition using pure XQuery, as implemented by eXist-db, and
+                hand-crafting one’s own edition using pure XQuery, as implemented by eXist-db, and
                 limited dependencies on external libraries: XQuery for querying data, transforming
                 it, and publishing it via web technologies. </para>
             <para>While this approach has merits and is feasible, its primary weakness is its mixing
@@ -871,12 +871,12 @@ let $text := $doc/id($section)</programlisting></para>
                     <code>&lt;p></code> elements as <code>block</code>, <code>&lt;hi></code>
                 elements as <code>inline</code>, <code>&lt;list></code> and <code>&lt;item></code>
                 elements as components of <code>list</code> structures, etc.), and TEI Publisher
-                ships with sane defaults for ensuring, for example, that PM's CSS-centric style
+                ships with sane defaults for ensuring, for example, that PM’s CSS-centric style
                 language is faithfully conveyed to the various output formats. TEI Publisher also
                 supports overriding these defaults with custom, output format-specific affordances
                 (such as LaTeX boilerplate or XSL-FO font definitions). It supports extension points
                 to XQuery functions for cases where PM alone cannot accomplish the desired results.
-                TEI Publisher even leverages PM's theoretical support for documents encoded in
+                TEI Publisher even leverages PM’s theoretical support for documents encoded in
                 non-TEI vocabularies, and ships with support for DocBook-encoded documents. The most
                 recent major release, 4.0, was redesigned to use Web Components in its views,
                 allowing users to freely add, remove, and combine panels containing different views,
