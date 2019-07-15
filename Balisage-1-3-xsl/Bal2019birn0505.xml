@@ -862,12 +862,12 @@ let $text := $doc/id($section)</programlisting></para>
                 TEI Publisher at the <code>tei-to-html:hi()</code> XQuery function in the <emphasis role="ital"
                 >Punch</emphasis> tutorial described above, we see that it requires mapping a <code>&lt;hi&gt;</code>
                 element with a <code>@rend</code> attribute set to <code>it</code> (<code>&lt;hi[@rend='it']&gt;</code>)
-                in a way that is not served the list of common behaviors defined by the TEI Guidelines and used mainly
+                in a way that is not served in the list of common behaviors defined by the TEI Guidelines and used mainly
                 in the TEI Simple schema that serves as a default PM specification for TEI Publisher. Earlier versions
                 of TEI Publisher provided a way to extend the behaviors defined in the TEI Guidelines by writing
                 additional XQuery functions. For example, if this new behavior was to be called <emphasis role="ital"
                 >emphasis</emphasis>, it could be written
-                as:<programlisting>declare function pmf:emphais($config as map(*), $node as node(), $class as xs:string+, $content) {
+                as:<programlisting>declare function pmf:emphasis($config as map(*), $node as node(), $class as xs:string+, $content) {
     &lt;em>{pmf:apply-children($config, $node, $content)}&lt;/em>
 };</programlisting>The
                 corresponding ODD model specification could then be mapped to this new behavior as
@@ -880,8 +880,8 @@ let $text := $doc/id($section)</programlisting></para>
                 introduced support for templates and user-defined behaviors within the ODD that lets the user write the
                 same new behavior directly in the ODD. For example, this emphasis behaviour could(= should) now be
                 written as:
-                <programlisting>&lt;pb:behaviour ident="emphasis-custom">
-    &lt;desc xml:lang="en">emphasis custom&lt;/desc>
+                <programlisting>&lt;pb:behaviour ident="emphasis">
+    &lt;desc xml:lang="en">custom emphasis&lt;/desc>
     &lt;pb:template>
         &lt;em xmlns="">[[content]]&lt;/em>
     &lt;/pb:template>
@@ -905,12 +905,12 @@ let $text := $doc/id($section)</programlisting></para>
             <para>The principal advantage of TEI Publisher, emphasized in the documentation, is that by relying on
                 reusable high-level, generic behaviors, it can substantially reduce the amount of code needed to create
                 transformation, a benefit that inheres both in code creation and in code maintenance. For example,
-                Turska and Cummings write that <blockquote> <para>For the Office of Historian project figures suggest
+                Turska and Cummings write that: <blockquote> <para>For the Office of Historian project figures suggest
                 code reduction by at least two-thirds in size. Numbers are even more impressive realizing that the
                 resulting ODD file is not only smaller, but much less dense, consisting mostly of formulaic
                 <code>&lt;model></code> expressions that make it easier to read, understand and maintain, even by less
                 skilled developers. [<xref linkend="turska_2016"/>]</para> </blockquote> Wicentowski and Turska describe
-                the advantaage of TEI Publisher for this same set of projects as follows: <blockquote> <para>[T]he new
+                the advantage of TEI Publisher for this same set of projects as follows: <blockquote> <para>[T]he new
                 TEI Processing Model (TEI PM) played a key role in the site’s plan for scalability and sustainability.
                 By replacing custom-written code with TEI PM, the project shed years of legacy, custom-written
                 code–laden with duplication and conditional branches for different publications and output formats–and
@@ -927,13 +927,13 @@ let $text := $doc/id($section)</programlisting></para>
                 and by following both actual (such as HTML5) and de facto (such as TEI) standards, it reduces both the
                 start-up cost and the cost of potential future migration.</para>
             <para>With regard to the question of potential future migration, it is illuminating to reverse the
-                persepective and see it throught the implementation of the TEI Processing models as documentation
+                perspective and see it throught the implementation of the TEI Processing models as documentation
                 driven. If one accepts the possibility that in the long term, should HTML and web components become
                 outdated and replaced by other technologies, the technology-agnostic aspect of the formal documentation
                 within PM will provide consistent and sufficient information about the logics of the intended processing
                 and rendering of the elements. The eventual transformation to new output code may be inevitable, but the
                 output-independent aspects of PM can at least shorten the portion of the pipeline that will need to be
-                rewritten. It is also likely that instead of migration from a translation of web componenents into a new
+                rewritten. It is also likely that instead of migration from a translation of web components into a new
                 technology it will prove more efficient to start anew at the source of the intention, that is, the
                 formal TEI expression of user output expectations or instructions. From that perspective, within PM the
                 publication framework is documentation driven. By this we mean that because TEI Publisher forces the
