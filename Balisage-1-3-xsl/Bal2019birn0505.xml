@@ -355,21 +355,21 @@
             all of the examples below, but in each case we will have to make different choices about
             how much of the application logic and source-conversion will be handled by eXist-db
             itself.</para>
-            <!-- Is the following paragraph not a tad too negative in tone? -->
         <para>The decision of where to place the application logic of a digital edition and how to
-            structure it will be influenced by many factors, including performance, available
+            structure it may be influenced by many factors, including performance, available
             developer expertise, and software functionality. The latter issue can be acute because
             of the stagnation of XML technology development in some areas. Common application
             frameworks such as Ruby on Rails [<xref linkend="ruby"/>], Flask (Python) [<xref
                 linkend="flask"/>], or Django (Python) [<xref linkend="django"/>] rely on libxml2
-            and libxslt for XML processing, and so are limited to XSLT 1.0. Java or ASP.Net-based
-            systems can make use of the more modern XSLT support available in Saxon [<xref
-                linkend="saxon"/>], and the same is true of Saxon-JS [<xref linkend="saxonjs"/>].
-            eXist-db supports XQuery 3.1, but a decision to use it as a complete solution may mean
-            relying upon it for things like user management and other functionality that is easier
-            to implement on top of a web framework. In addition, it is likely to be far easier to
-            find developers qualified to work with a common web application framework than with
-            eXist-db.</para>
+            and libxslt for XML processing, and there are restricted to XSLT 1.0. Java or
+            ASP.Net-based systems can make use of the more modern XSLT support available in Saxon
+                [<xref linkend="saxon"/>], and the same is true of Saxon-JS [<xref linkend="saxonjs"
+            />]. eXist-db supports XQuery 3.1, but a decision to use it as a complete solution may
+            mean relying upon it for things like user management and other functionality that could
+            be easier to implement on top of a web framework. In addition, it is likely to be easier
+            to find developers qualified to work with a common web application framework than with
+            eXist-db. With all of that said, there are obvious advantages to working with
+            XML-related processing solutions when dealing with XML data resources.</para>
         <para>MVC is an architecture that separates an application into three components: Model,
             View, and Controller.<footnote>
                 <para>For a history of MVC see <xref linkend="reenskaug"/>.</para>
@@ -702,20 +702,20 @@ let $title :=
                 <para>Institute participants then leave eXide and navigate in their browsers to the
                     URL that eXist-db exposes for their stored query: <emphasis role="ital"
                         >http://localhost:8080/exist/apps/punch/v1/list-issues.xq</emphasis>. This
-                    URL is serviced by eXist’s Jetty server, which is configured to execute queries
-                    stored within the <emphasis role="ital">/db/apps</emphasis> database collection
-                    via the <code>/exist/apps</code> URL space. By itself the FLWOR expression
-                    returns raw XML, which is not the desired result, so the participants next learn
-                    how to add an XQuery serialization declaration to their query, which instructs
-                    eXist-db to return the HTML result of the query as a web page instead of as raw
-                    XML. Finally, the participants wrap an HTML link around each title, pointing to
-                    a second stored query and including a URL parameter, called <code>issue</code>,
-                    containing the issue’s unique identifier (the issue’s file name). This will be
-                    used to return a specified issue when a site visitor eventually clicks on an
-                    issue title in the list of issues.</para>
+                    URL is serviced by eXist-db’s Jetty server, which is configured to execute
+                    queries stored within the <emphasis role="ital">/db/apps</emphasis> database
+                    collection via the <code>/exist/apps</code> URL space. By itself the FLWOR
+                    expression returns raw XML, which is not the desired result, so the participants
+                    next learn how to add an XQuery serialization declaration to their query, which
+                    instructs eXist-db to return the HTML result of the query as a web page instead
+                    of as raw XML. Finally, the participants wrap an HTML link around each title,
+                    pointing to a second stored query and including a URL parameter, called
+                        <code>issue</code>, containing the issue’s unique identifier (the issue’s
+                    file name). This will be used to return a specified issue when a site visitor
+                    eventually clicks on an issue title in the list of issues.</para>
                 <para>To provide that issue view, participants next create a second module,
                         <emphasis role="ital">v1/view-whole-issue.xq</emphasis>, which calls on
-                    eXist’s <code>request:get-parameter()</code> function to retrieve the
+                    eXist-db’s <code>request:get-parameter()</code> function to retrieve the
                         <code>issue</code> URL parameter. The query uses this issue identifier to
                     select the full textual content of the issue, its <code>&lt;text&gt;</code>
                     element, in the database:
@@ -1042,7 +1042,7 @@ let $text := $doc/id($section)</programlisting></para>
                 applications, like TEI Publisher itself, can be distributed as <emphasis role="ital"
                     >xar</emphasis> archives and installed into any running eXist-db instance.<footnote>
                     <para>eXist-db app packaging is described in <xref linkend="xar"/>.</para>
-                </footnote></para><!-- IDE xar explanation superfluous? -->
+                </footnote></para>
             <para>PM is a TEI-native vocabulary for expressing how XML documents should be
                 transformed and rendered into various output formats (HTML, EPUB, PDF, etc.). It
                 builds on the TEI ODD (<quote>one document does it all</quote>, <xref linkend="odd"
@@ -1311,7 +1311,7 @@ let $text := $doc/id($section)</programlisting></para>
                 purposes. Doing that within the framework of TEI Publisher, they will then produce
                 new template designs—or views—that could potentially be shared by pushing them to
                 the Open Source code repository of TEI Publisher.</para>
-            <!-- The following paragraph is a bit lengthy. Can it be shortened? -->
+            <!-- The following paragraph is a bit lengthy. Can it be shortened? djb: yes, to be revised-->
             <para>To be sure, what is at stake here is not only, or even primarily, the technical
                 reusability of the UI web blocks; it is also the underlying theoretical approach
                 supporting the design of the interface template. For that reason, the theoretical
