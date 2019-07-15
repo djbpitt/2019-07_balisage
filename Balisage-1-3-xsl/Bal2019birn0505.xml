@@ -990,7 +990,7 @@ let $text := $doc/id($section)</programlisting></para>
                 reusability principle, the blog post written by TEI Publisher's main developer Wolfgang Maier use the
                 metaphor of Lego blocks: <blockquote> <para>Moving towards the emerging web component standard, TEI
                 Publisher 4.0 implements all this functionality as small "lego" blocks to be freely arranged, recombined
-                and extended.</para> </blockquote><footnote> <para>See also the new menu entry "vision" that outilines
+                and extended.</para> </blockquote><footnote> <para>See also the new menu entry "vision" that outlines
                 the positionning of TEI Publisher as a community effort firmly grounded in the principles of Open
                 Source, standards and reusability.</para> </footnote>The TEI Publisher documentation states that:
                 <quote>You do not need to know much about Web Components to use them in TEI Publisher.</quote> As a
