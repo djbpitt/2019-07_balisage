@@ -1289,6 +1289,78 @@ let $text := $doc/id($section)</programlisting></para>
     <section>
         <title>Conclusion</title>
         <section>
+            <title>The interface and the scholarship</title>
+            <para>Two presentations at the 2016 University of Graz DiXiT conference <quote>Digital
+                    scholarly editions as interfaces</quote> offered compelling arguments for
+                regarding the vehicle for presenting edition data, that is, the interface, as a
+                scholarly product. This means that researchers who develop digital editions not only
+                have a legitimate interest in the interface, but may also regard themselves as under
+                a scholarly obligation to consider its meaning, because with or without their active
+                intellectual engagement, the way a digital edition communicates with its readers is
+                part of how it expresses and argues for a theory of the text. And this, in turn,
+                means, among other things, that the way TEI XML is rendered in an edition is not an
+                independent presentation of a scholarly argument that inheres entirely in the TEI
+                XML markup, but an inalienable part of that argument. Tara Andrews and Joris van
+                Zundert write that: <blockquote>
+                    <para>The user interface of digital scholarly editions is often treated as a
+                        content-free and ideally interchangeable appendage to that which is actually
+                        considered the scholarly effort or work–the examination and preparation of
+                        the text and the scholarly justification for how this preparation was
+                        carried out. (4) [… but …] Just as there is no clean separation between data
+                        and interpretation, there is no clean separation between the scholarly
+                        content of an argument and its rhetorical form (Galey 94).<footnote>
+                            <para>Galey, Alan. <quote>The human presence in digital
+                                    artifacts.</quote> Willard McCarty, ed., <emphasis role="ital"
+                                    >Text and genre in reconstruction: effects of digitalization on
+                                    ideas, behaviors, products and institutions</emphasis>, 93–118.
+                                Open Book Publishers, 2010.</para>
+                        </footnote> We contend, moreover, that visual display and interactive
+                        functionality are an integral part of rhetorical form. The interface is thus
+                        an integral part of the argument that an edition makes about a text. (8) […]
+                        User interfaces are a means of communication of a scholarly argument, and
+                        the decisions that go into their design are informed by the message or
+                        messages that the editor wishes to convey about the text. (30) [<xref
+                            linkend="andrews"/>]</para>
+                </blockquote></para>
+            <para>Wout Dillen advocated for a similar perspective:<blockquote>
+                    <para>[D]ata visualisations or interfaces are not the endpoints of our research,
+                        they are just the beginning. We use them to try to make a point about our
+                        data (36) …[T]he interface can be regarded as a second layer of editorial
+                        interpretation: after offering an interpretation of the edition’s documents
+                        by transcribing them, the editor offers the user an interpretation of her
+                        transcriptions when she decides on how to present them. Stronger still, it
+                        can be argued that the visualisation itself is at least as important for
+                        conveying the editor’s interpretation as the transcription on which it is
+                        based: as the main text the average (non-TEI proficient) user will come into
+                        contact with, the interface displays the edited text in a way that
+                        determines how the user will read and interpret the edition’s documents. The
+                        same goes for the edition’s navigation, lay-out, and its selection of tools.
+                        In a way, the interface is the digital scholarly edition’s new paratext: not
+                        exactly part of the edited text itself, it still has an undeniable impact on
+                        the way the user reads and understands the edition. This makes the interface
+                        an important place for the editor to convey her views on the material. 42)
+                            [<xref linkend="dillen"/> 36]</para>
+                </blockquote></para>
+            <para>To the extent that the presentation of the edition information, then, is a
+                scholarly product, it is the proper business of scholars.<footnote>
+                    <para>The acknowledgement that interface is scholarship should not be
+                        misconstrued as advocating against providing full and open access to all
+                        data, which may include TEI XML document instances and the ODD that defines
+                        and documents how TEI has been used in the edition. There is no
+                        incompatibility between regarding the interface as scholarship and providing
+                        reusable access to all work products.</para>
+                </footnote> The TEI XML alone is not the full or only scholarly product, and neither
+                is its transformation with a generic presentation script, such as that provided by
+                uncustomized use of TEi Boilerplate or the TEI Stylesheets. [<xref
+                    linkend="boilerplate"/>, <xref linkend="tei_stylesheets"/>] For that reason, a
+                digital edition publishing framework, such as the four explored in this study,
+                should be 1) maximally configurable and 2) usable by digitally capable and digitally
+                willing textual scholars. Each of the four frameworks is fully configurable,
+                although they differ in their ease of use, perhaps in general, and certainly
+                according to an individual researcher’s technical expertise. Those differences are
+                explored below.</para>
+        </section>
+        <section>
             <title>General</title>
             <para>Each of the four architectures outlined above is capable of generating a digital
                 edition from TEI XML source using eXist-db, and the differences among them may be
@@ -1343,7 +1415,7 @@ let $text := $doc/id($section)</programlisting></para>
             <para>Different projects might reasonably make different choices from this menu.</para>
         </section>
         <section>
-            <title>A few observations</title>
+            <title>Sustainability</title>
             <para>All methods described above except the middleware one can use eXist-db’s <emphasis
                     role="ital">xar</emphasis> packaging for one-step replication, distribution, and
                 deployment. In contrast, porting a middleware implementation means configuring PHP
@@ -1353,72 +1425,43 @@ let $text := $doc/id($section)</programlisting></para>
                     >xar</emphasis> file than install eXist-db, load data and XQuery into it, and
                 also install and configure Apache, install and configure PHP scripts, and ensure
                 that the pieces all commmunicate effectively.</para>
-            <para>The four methods described above, in order from first to last, increasingly
-                simplify configuration and customization within anticipated, supported parameters,
-                requiring less—and often much less—custom code than a traditional LAMP architecture.
-                On the other hand, in distributing responsibilities these more CMS-like methods may
-                require a different type of coordination across parts of the CNS. For example, all
-                of the code for the middleware approach, as the developer sees it, it located in
-                just two places: the scripting language (such as PHP), which processes user input
-                and creates output views, and the XQuery inside eXist, which retrieves information
-                from the model. At the other extreme, TEI Publisher information may be distributed
-                over multiple files in multiple libraries, and while in many cases the user may not
-                have to interact explicitly with most of them, customization (such as the
-                incorporation of a new behavior) requires the ability to navigate a more complex
-                environment. It may be helpful in this context to think of different roles in the
-                development process: the greater complexity of the TEI Publisher model may fall only
-                to a professional developer, who can reasonably be expected to have or to acquire
-                the necessary skill, while the scholar-editor may need only to choose among
-                supported behaviors and CSS-like rendering instructions. In comparison, the
-                middleware organization, while architecturally simpler overall than TEI Publisher,
-                requires much more advanced programming skills from the user at even the lowest
-                levels.</para>
         </section>
         <section>
-            <title>The interface and the scholarship</title>
-            <para>Two presentations at the 2016 University of Graz DiXiT conference <quote>Digital
-                    scholarly editions as interfaces</quote> offered compelling arguments for
-                regarding the vehicle for presenting edition data, that is, the interface, as a
-                scholarly product. This means that researchers who develop digital editions not only
-                have a legitimate interest in the interface, but may also regard themselves as under
-                a scholarly obligation to consider its meaning, because with or without the active
-                intellectual engagement of the researcher, the way a digital edition communicates
-                with its readers is part of how it expresses and argues for a theory of the text.
-                This means, among other things, that the way TEI XML is rendered in an edition is
-                not an independent presentation of a scholarly argument that inheres entirely in the
-                TEI XML markup, but a inalienable part of that argument. Andrews and van Zundert
-                write: <blockquote>
-                    <para>The user interface of digital scholarly editions is often treated as a
-                        content-free and ideally interchangeable appendage to that which is actually
-                        considered the scholarly effort or work–the examination and preparation of
-                        the text and the scholarly justification for how this preparation was
-                        carried out. (4) [… but …] Just as there is no clean separation between data
-                        and interpretation, there is no clean separation between the scholarly
-                        content of an argument and its rhetorical form (Galey 94).<footnote>
-                            <para>Galey, Alan. <quote>The human presence in digital
-                                    artifacts.</quote> Willard McCarty, ed., <emphasis role="ital"
-                                    >Text and genre in reconstruction: effects of digitalization on
-                                    ideas, behaviors, products and institutions</emphasis>, 93–118.
-                                Open Book Publishers, 2010.</para>
-                        </footnote> We contend, moreover, that visual display and interactive
-                        functionality are an integral part of rhetorical form. The interface is thus
-                        an integral part of the argument that an edition makes about a text. (8) […]
-                        User interfaces are a means of communication of a scholarly argument, and
-                        the decisions that go into their design are informed by the message or
-                        messages that the editor wishes to convey about the text. (30) [<xref
-                            linkend="andrews"/>]</para>
-                </blockquote></para>
-            <para>Wout Dillen advocated for a similar perspective:<blockquote>
-                    <para>[D]ata visualisations or interfaces are not the endpoints of our research,
-                        they are just the beginning. We use them to try to make a point about our
-                        data [<xref linkend="dillen"/> 36]</para>
-                </blockquote></para>
+            <title>Ease of use</title>
+            <para>Ease of use may be experienced in different ways. On the one hand, the four
+                methods described above, in order from first to last, increasingly simplify
+                configuration and customization within anticipated, supported parameters, requiring
+                less—and often much less—custom code than a traditional LAMP architecture. On the
+                other hand, in distributing responsibilities these more CMS-like methods may require
+                increasingly greater coordination across parts of the CMS. For example, all of the
+                code for the middleware approach, as the developer sees it, it located in just two
+                places: the scripting language (such as PHP), which processes user input and creates
+                output views, and the XQuery inside eXist, which retrieves information from the
+                model. At the other extreme, TEI Publisher information may be distributed over
+                multiple files in multiple libraries, and while in many cases the user may not have
+                to interact explicitly with most of them, customization (such as the incorporation
+                of a new behavior) requires the ability to navigate a more complex resource
+                structure. It may be helpful in this context to think of different roles in the
+                development process. From this perspective, the greater complexity of the TEI
+                Publisher model may fall only to a professional developer, who can reasonably be
+                expected to have or to acquire the necessary skill. Meanwhile, the scholar-editor
+                may need only to choose among supported behaviors and CSS-like rendering
+                instructions, which is a low requirement for technical expertise. In comparison, the
+                middleware organization, while architecturally simpler overall than TEI Publisher,
+                requires much more advanced programming skills from the user because it does not aim
+                to distinguish clearly a scholar-editor role and a developer role.</para>
         </section>
-        <!-- from Joe, about the conclusion
-            
-            if I were to extend Punch to demonstrate all of the ideas in our paper, I'd add a v5 with HTML Templating and a 
-            v6 with TEI Publisher.  (Could you think of a way to demonstrate a v0 (or v7) with LA(eXist-db)P?)
-        -->
+        <section>
+            <title>So what about those peanut bugger cups?</title>
+            <para>If we return to our analogy of eXist-db’s XML DBMS services as the peanut butter
+                core of a Reese’s Peanut Butter Cup and other eXist-db services (not only Jetty
+                HTTPS servcies, but now also app processing, HTML templating, and PM), we might say
+                that the researcher has a choice. With any of the frameworks described above the
+                developer has control over the selection, arrangement, and presentation of the
+                information. But to what extent do you want to combine your own peanut butter with
+                your own chocolate and to what extent do you feel that the combination offered by
+                Reese’s is superior to what you might produce yourself?</para>
+        </section>
     </section>
     <bibliography>
         <!-- Works not currently, but from which we might later wish to cite, are commented out.-->
@@ -1562,6 +1605,8 @@ let $text := $doc/id($section)</programlisting></para>
                 abstraction layer for XML processing.</quote> (Slide deck)
                 <link>https://slides.com/magdalenaturska/deck#/</link>
         </bibliomixed>
+        <bibliomixed xml:id="tei_stylesheets" xreflabel="TEI Stylesheets">TEI stylesheets.
+                <link>https://github.com/TEIC/Stylesheets</link></bibliomixed>
         <bibliomixed xml:id="turska_2016" xreflabel="Turska and Cummings 2016">Turska, Magdalena and
             James Cummings. <quote>A lesson in applied minimalism: adopting the TEI processing
                 model.</quote> ADHO 2016 abstracts, 698–99. Retrieved from
