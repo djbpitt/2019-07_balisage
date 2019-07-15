@@ -834,8 +834,8 @@ let $text := $doc/id($section)</programlisting></para>
 &lt;elementSpec ident="reg" mode="change"&gt;
     &lt;model behaviour="inline"/&gt;
 &lt;/elementSpec&gt;
-    &lt;elementSpec ident="orig" mode="change"&gt;
-&lt;model behaviour="inline"/&gt;
+&lt;elementSpec ident="orig" mode="change"&gt;
+    &lt;model behaviour="inline"/&gt;
 &lt;/elementSpec&gt;</programlisting>
                 The value of <code>@behaviour</code> can be set to <code>omit</code> if the matched element is not be
                 included in the output. For example, TEI page beginning (<code>&lt;pb&gt;</code>) elements can be
