@@ -765,14 +765,16 @@ let $title :=
                         >modules/tei-to-html.xqm</emphasis>, which we import in the prolog of the
                         <emphasis role="ital">view-whole-issue.xq</emphasis>
                     query:<programlisting>import module namespace tei-to-html = 
-                        "http://history.state.gov/ns/tei-to-html" at "../modules/tei-to-html.xqm";</programlisting></para>
+                        "http://history.state.gov/ns/tei-to-html" at 
+                        "../modules/tei-to-html.xqm";</programlisting></para>
                 <para>The TEI-to-HTML module’s primary function, <code>tei-to-html:render()</code>,
                     does a bit of housekeeping and then calls <code>tei-to-html:dispatch()</code>,
                     which recursively walks through the entire TEI document, using the XQuery
                         <code>typeswitch()</code> expression to look at each node of the TEI
                     document and pass it to the appropriate function:
-                    <programlisting>(: Typeswitch routine: Takes any node in a TEI content and either dispatches it to a dedicated 
- : function that handles that content (e.g. div), ignores it by passing it to the recurse() function
+                    <programlisting>(: Typeswitch routine: Takes any node in a TEI content and 
+ : either dispatches it to a dedicated function that handles that content (e.g. div),
+ : ignores it by passing it to the recurse() function
  : (e.g. text), or handles it directly (e.g. lb). :)
 declare function tei-to-html:dispatch($node as node()*, $options) as item()* {
     typeswitch($node)
@@ -836,7 +838,7 @@ declare function tei-to-html:dispatch($node as node()*, $options) as item()* {
                 <para>For example, when the Typeswitch expression encounters a TEI
                         <code>&lt;hi></code> element, it calls the <code>tei-to-html:hi()</code>
                     function:<programlisting>declare function tei-to-html:hi($node as element(tei:hi), 
-                                             $options) as element()* {
+                                $options) as element()* {
     let $rend := $node/@rend
     return
         if ($rend eq "it") then
