@@ -355,6 +355,7 @@
             all of the examples below, but in each case we will have to make different choices about
             how much of the application logic and source-conversion will be handled by eXist-db
             itself.</para>
+            <!-- Is the following paragraph not a tad too negative in tone? -->
         <para>The decision of where to place the application logic of a digital edition and how to
             structure it will be influenced by many factors, including performance, available
             developer expertise, and software functionality. The latter issue can be acute because
@@ -445,9 +446,9 @@
                 to HTML with XSLT, or by including HTML fragments generated directly from eXist-db
                 using XQuery. This architecture is similar to that of the fundamental open-source
                 LAMP stack: Linux (OS), Apache (HTTP server), MySQL (DBMS), and PHP (middleware
-                language), with the DBMS role replaced by eXist. Obviously, PHP is only one option
-                for the middle tier language, and here it should be understood to be replaceable by
-                any language filling a similar niche.<footnote>
+                language), with the DBMS role replaced by eXist-db. Obviously, PHP is only one
+                option for the middle tier language, and here it should be understood to be
+                replaceable by any language filling a similar niche.<footnote>
                     <para>Some other such languages have already been mentioned above, and include
                         Python, Ruby, and JavaScript.</para>
                 </footnote></para>
@@ -549,7 +550,8 @@
                             and the <code>$country</code> and <code>$text</code> variables are
                             user-supplied values retrieved from the web form, after validation and
                             sanitation:
-                            <programlisting>$xql = REST_PATH . "/db/repertorium/xquery/runSearch.xql?country=$country&amp;text=$text";
+                            <programlisting>$xql = REST_PATH .
+"/db/repertorium/xquery/runSearch.xql?country=$country&amp;text=$text";
 echo file_get_contents($xql);</programlisting></para>
                     </listitem>
                     <listitem>
@@ -598,7 +600,7 @@ echo file_get_contents($xql);</programlisting></para>
                             eXist-db project, has gone somewhat further, by inverting the normal
                             sequence of working with XML where the XML object or data store is
                             passed in as an object to the XQuery filter within the context of a
-                            server session. In the case of eXist, the various session
+                            server session. In the case of eXist-db, the various session
                             objects—request, response, server, and so forth—are instead brought into
                             the XQuery engine as externally defined XQuery methods. In other words,
                             in this situation, the server-side scripting language is not PHP or
@@ -669,7 +671,8 @@ echo file_get_contents($xql);</programlisting></para>
                     shows a list of issues and lets readers choose an issue to view. They begin this
                     process by opening a new XQuery window in eXide and creating an XPath expression
                     that points to the titles of all issues in the
-                    collection:<programlisting>collection('/db/apps/punch/data')/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title</programlisting></para>
+                    collection:<programlisting>collection('/db/apps/punch/data')
+/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title</programlisting></para>
                 <para>Submitting this query in eXide returns a sequence of TEI
                         <code>&lt;title></code> elements. Participants then extend this core XPath
                     expression by constructing an XQuery FLWOR expression that iterates over the
@@ -678,9 +681,10 @@ echo file_get_contents($xql);</programlisting></para>
                     XQuery uses an enclosed expression to obtain the string value of the title,
                     preceded by an <code>order by</code> clause to sort the sequence
                     alphabetically:<programlisting>for $issue in collection('/db/apps/punch/data')/tei:TEI
-let $title := $issue/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title
-order by $title
-return 
+let $title := 
+  $issue/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title
+  order by $title
+  return 
     &lt;li>{$title/string()}&lt;/li>
 </programlisting></para>
                 <para>Because HTML <code>&lt;li&gt;</code> elements are valid only as children of
@@ -716,8 +720,9 @@ return
                     select the full textual content of the issue, its <code>&lt;text&gt;</code>
                     element, in the database:
                     <programlisting>let $issue := request:get-parameter("issue", "")
-(: We take $issue, e.g. 1914-07-01.xml, and can reconstruct the path to this document in the 
- : database by concatenating the base path to all Punch data with the $issue parameter. :)
+(: We take $issue, e.g. 1914-07-01.xml, and can reconstruct the path 
+ : to this document in the database by concatenating the base path 
+ : to all Punch data with the $issue parameter. :)
 let $doc := doc(concat("/db/apps/punch/data/", $issue))
 let $text := $doc//tei:text
 (: snip :)</programlisting></para>
@@ -727,9 +732,10 @@ let $text := $doc//tei:text
                     inserts the results as a well-balanced HTML block inside a
                         <code>&lt;div&gt;</code>
                     element:<programlisting>(: continued :)
-let $title := $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title/text()
-return
-    &lt;html xmlns="http://www.w3.org/1999/xhtml">
+let $title := 
+  $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title/text()
+  return
+     &lt;html xmlns="http://www.w3.org/1999/xhtml">
         &lt;head>
             &lt;title>{$title}&lt;/title>
         &lt;/head>
@@ -739,13 +745,15 @@ return
                 {
                 (: The tei-to-html:render() function takes 2 arguments: 
                  : 1. The TEI we want to display
-                 : 2. An optional set of parameters.  In this case, we provide the 
-                 :    "relative-image-path" for all TEI graphic elements; and we use
-                 :    "show-page-breaks" to specify that TEI pb elements should be shown.
+                 : 2. An optional set of parameters.  In this case, we provide
+                 :    the "relative-image-path" for all TEI graphic elements;
+                 :    and we use "show-page-breaks" to specify that 
+                 :    TEI pb elements should be shown.
                  :)
                 tei-to-html:render($text, 
                     &lt;parameters xmlns="">
-                        &lt;param name="relative-image-path" value="/exist/apps/punch/data/"/>
+                        &lt;param name="relative-image-path"
+                                  value="/exist/apps/punch/data/"/>
                         &lt;param name="show-page-breaks" value="true"/>
                     &lt;/parameters>)
                 }
@@ -756,7 +764,8 @@ return
                     module supplied to the participants, <emphasis role="ital"
                         >modules/tei-to-html.xqm</emphasis>, which we import in the prolog of the
                         <emphasis role="ital">view-whole-issue.xq</emphasis>
-                    query:<programlisting>import module namespace tei-to-html = "http://history.state.gov/ns/tei-to-html" at "../modules/tei-to-html.xqm";</programlisting></para>
+                    query:<programlisting>import module namespace tei-to-html = 
+                        "http://history.state.gov/ns/tei-to-html" at "../modules/tei-to-html.xqm";</programlisting></para>
                 <para>The TEI-to-HTML module’s primary function, <code>tei-to-html:render()</code>,
                     does a bit of housekeeping and then calls <code>tei-to-html:dispatch()</code>,
                     which recursively walks through the entire TEI document, using the XQuery
@@ -768,46 +777,78 @@ return
 declare function tei-to-html:dispatch($node as node()*, $options) as item()* {
     typeswitch($node)
         case text() return $node
-        case element(tei:TEI) return tei-to-html:recurse($node, $options)
-        case element(tei:text) return tei-to-html:recurse($node, $options)
-        case element(tei:front) return tei-to-html:recurse($node, $options)
-        case element(tei:body) return tei-to-html:recurse($node, $options)
-        case element(tei:back) return tei-to-html:recurse($node, $options)
-        case element(tei:div) return tei-to-html:div($node, $options)
-        case element(tei:head) return tei-to-html:head($node, $options)
-        case element(tei:p) return tei-to-html:p($node, $options)
-        case element(tei:hi) return tei-to-html:hi($node, $options)
-        case element(tei:list) return tei-to-html:list($node, $options)
-        case element(tei:item) return tei-to-html:item($node, $options)
-        case element(tei:label) return tei-to-html:label($node, $options)
-        case element(tei:ref) return tei-to-html:ref($node, $options)
-        case element(tei:said) return tei-to-html:said($node, $options)
+        case element(tei:TEI) 
+          return tei-to-html:recurse($node, $options)
+        case element(tei:text) 
+          return tei-to-html:recurse($node, $options)
+        case element(tei:front) 
+          return tei-to-html:recurse($node, $options)
+        case element(tei:body) 
+          return tei-to-html:recurse($node, $options)
+        case element(tei:back) 
+          return tei-to-html:recurse($node, $options)
+        case element(tei:div) 
+          return tei-to-html:div($node, $options)
+        case element(tei:head) 
+          return tei-to-html:head($node, $options)
+        case element(tei:p) 
+          return tei-to-html:p($node, $options)
+        case element(tei:hi) 
+          return tei-to-html:hi($node, $options)
+        case element(tei:list) 
+          return tei-to-html:list($node, $options)
+        case element(tei:item) 
+          return tei-to-html:item($node, $options)
+        case element(tei:label) 
+          return tei-to-html:label($node, $options)
+        case element(tei:ref) 
+          return tei-to-html:ref($node, $options)
+        case element(tei:said) 
+          return tei-to-html:said($node, $options)
         case element(tei:lb) return &lt;br/>
-        case element(tei:figure) return tei-to-html:figure($node, $options)
-        case element(tei:graphic) return tei-to-html:graphic($node, $options)
-        case element(tei:table) return tei-to-html:table($node, $options)
-        case element(tei:row) return tei-to-html:row($node, $options)
-        case element(tei:cell) return tei-to-html:cell($node, $options)
-        case element(tei:pb) return tei-to-html:pb($node, $options)
-        case element(tei:lg) return tei-to-html:lg($node, $options)
-        case element(tei:l) return tei-to-html:l($node, $options)
-        case element(tei:name) return tei-to-html:name($node, $options)
-        case element(tei:milestone) return tei-to-html:milestone($node, $options)
-        case element(tei:quote) return tei-to-html:quote($node, $options)
-        case element(tei:said) return tei-to-html:said($node, $options)
-        default return tei-to-html:recurse($node, $options)
+        case element(tei:figure) 
+          return tei-to-html:figure($node, $options)
+        case element(tei:graphic) 
+          return tei-to-html:graphic($node, $options)
+        case element(tei:table) 
+          return tei-to-html:table($node, $options)
+        case element(tei:row) 
+          return tei-to-html:row($node, $options)
+        case element(tei:cell) 
+          return tei-to-html:cell($node, $options)
+        case element(tei:pb) 
+          return tei-to-html:pb($node, $options)
+        case element(tei:lg) 
+          return tei-to-html:lg($node, $options)
+        case element(tei:l) 
+          return tei-to-html:l($node, $options)
+        case element(tei:name) 
+          return tei-to-html:name($node, $options)
+        case element(tei:milestone) 
+          return tei-to-html:milestone($node, $options)
+        case element(tei:quote) 
+          return tei-to-html:quote($node, $options)
+        case element(tei:said) 
+          return tei-to-html:said($node, $options)
+        default 
+          return tei-to-html:recurse($node, $options)
 };</programlisting></para>
                 <para>For example, when the Typeswitch expression encounters a TEI
                         <code>&lt;hi></code> element, it calls the <code>tei-to-html:hi()</code>
-                    function:<programlisting>declare function tei-to-html:hi($node as element(tei:hi), $options) as element()* {
+                    function:<programlisting>declare function tei-to-html:hi($node as element(tei:hi), 
+                                             $options) as element()* {
     let $rend := $node/@rend
     return
         if ($rend eq "it") then
             &lt;em>{ tei-to-html:recurse($node, $options) }&lt;/em>
         else if ($rend eq "sc") then
-            &lt;span style="font-variant: small-caps;">{ tei-to-html:recurse($node, $options) }&lt;/span>
+            &lt;span style="font-variant: small-caps;">{
+            tei-to-html:recurse($node, $options)
+            }&lt;/span>
         else 
-            &lt;span class="hi">{ tei-to-html:recurse($node, $options) }&lt;/span>
+            &lt;span class="hi">{
+            tei-to-html:recurse($node, $options) 
+            }&lt;/span>
 };</programlisting></para>
                 <para>While this transformation module is provided as is to the participants (a
                     concession to time limitations), they do have the opportunity to experiment by
@@ -999,7 +1040,7 @@ let $text := $doc/id($section)</programlisting></para>
                 applications, like TEI Publisher itself, can be distributed as <emphasis role="ital"
                     >xar</emphasis> archives and installed into any running eXist-db instance.<footnote>
                     <para>eXist-db app packaging is described in <xref linkend="xar"/>.</para>
-                </footnote></para>
+                </footnote></para><!-- IDE xar explanation superfluous? -->
             <para>PM is a TEI-native vocabulary for expressing how XML documents should be
                 transformed and rendered into various output formats (HTML, EPUB, PDF, etc.). It
                 builds on the TEI ODD (<quote>one document does it all</quote>, <xref linkend="odd"
@@ -1142,7 +1183,8 @@ let $text := $doc/id($section)</programlisting></para>
                 of TEI Publisher provided a way to extend the behaviors defined in the TEI
                 Guidelines by writing additional XQuery functions. For example, if this new behavior
                 was to be called <emphasis role="ital">emphasis</emphasis>, it could be written
-                as:<programlisting>declare function pmf:emphasis($config as map(*), $node as node(), $class as xs:string+, $content) {
+                as:<programlisting>declare function pmf:emphasis($config as map(*), $node as node(),
+                    $class as xs:string+, $content) {
     &lt;em>{pmf:apply-children($config, $node, $content)}&lt;/em>
 };</programlisting>The
                 corresponding ODD model specification could then be mapped to this new behavior as
@@ -1267,6 +1309,7 @@ let $text := $doc/id($section)</programlisting></para>
                 purposes. Doing that within the framework of TEI Publisher, they will then produce
                 new template designs—or views—that could potentially be shared by pushing them to
                 the Open Source code repository of TEI Publisher.</para>
+            <!-- The following paragraph is a bit lengthy. Can it be shortened? -->
             <para>To be sure, what is at stake here is not only, or even primarily, the technical
                 reusability of the UI web blocks; it is also the underlying theoretical approach
                 supporting the design of the interface template. For that reason, the theoretical
@@ -1442,7 +1485,7 @@ let $text := $doc/id($section)</programlisting></para>
                 increasingly greater coordination across parts of the CMS. For example, all of the
                 code for the middleware approach, as the developer sees it, it located in just two
                 places: the scripting language (such as PHP), which processes user input and creates
-                output views, and the XQuery inside eXist, which retrieves information from the
+                output views, and the XQuery inside eXist-db, which retrieves information from the
                 model. At the other extreme, TEI Publisher information may be distributed over
                 multiple files in multiple libraries, and while in many cases the user may not have
                 to interact explicitly with most of them, customization (such as the incorporation
