@@ -212,15 +212,15 @@
             </mediaobject>
         </figure>
         <para>Meanwhile, in a galaxy far, far away, the eXist-db native XML database was born in
-            2001. Created by Wolfgang Meier, who at the time was a researcher in the field of
+            2000.<xref linkend="meier-2003"/> Created by Wolfgang Meier, who at the time was a researcher in the field of
             sociology, to support projects that required the efficient processing of XML documents,
             eXist-db was released as a free, open source project that has enjoyed a broad following
             in the world of XML and NoSQL databases. In particular, eXist-db has often been used in
-            publishing digital editon projects in the humanities, including some designed and
-            implemented by authors of the present report, Since its inception, eXist-db has provided
+            publishing and digital edition projects in the humanities, including some designed and
+            implemented by authors of the present report. Since its inception, eXist-db has provided
             the services one expects from any database management system (DBMS): it stores records
             (XML documents), builds persistent indexes, supports retrieval with a query language
-            (first DOM and XPath, and later XQuery), and provides the housekeeping functionality
+            (XQuery), and provides the housekeeping functionality
             (e.g., user authentication) those processes require. eXist-db is commonly hosted inside
             an HTTP server and servlet container (it ships with <xref linkend="Jetty"/>, but other
             hosts are also supported), which mediates between the user and the eXist-db
@@ -347,14 +347,13 @@
                     letter as exposed to readers must incorporate information drawn from the site
                     index.</para>
             </footnote> How will the content on the front end be created and presented? Transformed
-            to HTML or SVG or somethhing else using XSLT, XQuery, some other mechanism? When will
+            to HTML or SVG or somethhing else using XSLT, XQuery, or some other mechanism? When will
             that conversion occur—ahead of time or upon request? Will the conversion be cached or
             always live? Will it happen on the server or in the browser? Bound up with these
             questions is the decision of how to structure the software that mediates between the
             back-end content and the front-end presentation. We use eXist-db as the data store in
-            all of the examples below, but in each case we will have to make different choices about
-            how much of the application logic and source-conversion will be handled by eXist-db
-            itself.</para>
+            all of the examples below, but each example makes different choices about
+            the proportion of application logic and source-conversion entrusted to eXist-db.</para>
         <para>The decision of where to place the application logic of a digital edition and how to
             structure it may be influenced by many factors, including performance, available
             developer expertise, and software functionality. The latter issue can be acute because
@@ -366,7 +365,7 @@
                 [<xref linkend="saxon"/>], and the same is true of Saxon-JS [<xref linkend="saxonjs"
             />]. eXist-db supports XQuery 3.1, but a decision to use it as a complete solution may
             mean relying upon it for things like user management and other functionality that could
-            be easier to implement on top of a web framework. In addition, it is likely to be easier
+            be easier to implement on top of a web framework. In addition, it may be easier
             to find developers qualified to work with a common web application framework than with
             eXist-db. With all of that said, there are obvious advantages to working with
             XML-related processing solutions when dealing with XML data resources.</para>
@@ -472,8 +471,7 @@
                     <code>transform:transform()</code> function<footnote>
                     <para>As of Version 4.6.1 (March 2019) eXist-db supports a custom
                             <code>transform:transform()</code> function in a custom namespace, but
-                        not yet the standard XPath 3.1 <code>fn:transform()</code> function in the
-                        standard XPath 3.1 namespace.</para>
+                        not yet the standard XPath 3.1 <code>fn:transform()</code> function.</para>
                 </footnote> instead of by the PHP script after the eXist-db query returns. Looser
                 implementations might also store the XQuery script inside eXist-db and pass it
                 user-supplied parameters, instead of integrating the parameters into the query
@@ -487,12 +485,12 @@
                 Controller, is reducing dependency on custom features of eXist-db. To the extent
                 that this separation of concerns allows the use of standard XQuery, with no
                 non-standard, implementation-specific features, users may replace eXist-db with an
-                alternative XML DBMS, such as BaseX [<xref linkend="basex"/>] or Marklogic [<xref
+                alternative XML DBMS, such as BaseX [<xref linkend="basex"/>] or MarkLogic [<xref
                     linkend="marklogic"/>], with minimal adjustment to the Controller. However,
                 insofar as all XML DBMSs rely to some extent on custom functions in custom namespaces<footnote>
                     <para>See <link>https://exist-db.org/exist/apps/fundocs/browse.html</link> for
                         eXist-db modules, <link>http://docs.basex.org/wiki/Module_Library</link> for
-                        BaseX modules, and <link>https://docs.marklogic.com/all</link> for Marklogic
+                        BaseX modules, and <link>https://docs.marklogic.com/all</link> for MarkLogic
                         modules.</para>
                 </footnote>, it is unlikely that a useful application of any complexity will be able
                 to avoid proprietary features entirely. It is nonetheless the case that an
@@ -582,9 +580,12 @@ echo file_get_contents($xql);</programlisting></para>
                 <para>The previous section relegated eXist-db to the MySQL portion of the
                     prototypical LAMP stack. However, it is also possible to build applications
                     purely with XQuery. In this architecture, eXist-db functions as the entire AMP
-                    portion of the stack—handling the model, view, and controller (perhaps with a
-                    reverse proxy like Apache or Nginx in production scenarios for security
-                    purposes). The primary advantage of this model is that the edition’s developer
+                    portion of the stack—handling the model, view, and controller.<footnote>
+                        <para>The eXist-db documentation provides advice about
+                            deploying the database in production with a reverse
+                            proxy for security [<xref linkend="proxying-exist"/>].</para>
+                    </footnote> 
+                    The primary advantage of this model is that the edition’s developer
                     need master only one core technology—XQuery—rather than many disparate ones.
                     Kurt Cagle articulated this potential in an article published just months after
                     XQuery achieved 1.0 status as a W3C Recommendation in 2007: <blockquote>
@@ -612,8 +613,8 @@ echo file_get_contents($xql);</programlisting></para>
                     ability to access HTTP request parameters (as well as host names, server ports,
                     etc.), control session parameters, and return HTTP responses with customized
                     status, headers, and body. An eXist-db application can even serve customized URL
-                    endpoints via its native URL Rewriting facility or through its support for
-                    RESTXQ.</para>
+                    endpoints via its native <xref linkend="exist-url-rewriting"/> or through its support for
+                    <xref linkend="exist-restxq"/>.</para>
                 <para>To illustrate the appeal of such an architecture, we explore here the syllabus
                     of a half-day long seminar taught by one of this paper’s authors at digital
                     humanities institutes to participants who had already completed a Text Encoding
@@ -671,7 +672,7 @@ echo file_get_contents($xql);</programlisting></para>
                     shows a list of issues and lets readers choose an issue to view. They begin this
                     process by opening a new XQuery window in eXide and creating an XPath expression
                     that points to the titles of all issues in the
-                    collection:<programlisting>collection('/db/apps/punch/data')
+                    collection:<programlisting>collection("/db/apps/punch/data")
 /tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title</programlisting></para>
                 <para>Submitting this query in eXide returns a sequence of TEI
                         <code>&lt;title></code> elements. Participants then extend this core XPath
@@ -680,7 +681,7 @@ echo file_get_contents($xql);</programlisting></para>
                         <code>&lt;li></code> elements. The <code>return</code> statement in their
                     XQuery uses an enclosed expression to obtain the string value of the title,
                     preceded by an <code>order by</code> clause to sort the sequence
-                    alphabetically:<programlisting>for $issue in collection('/db/apps/punch/data')/tei:TEI
+                    alphabetically:<programlisting>for $issue in collection("/db/apps/punch/data")/tei:TEI
 let $title := 
   $issue/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title
   order by $title
@@ -704,8 +705,8 @@ let $title :=
                         >http://localhost:8080/exist/apps/punch/v1/list-issues.xq</emphasis>. This
                     URL is serviced by eXist-db’s Jetty server, which is configured to execute
                     queries stored within the <emphasis role="ital">/db/apps</emphasis> database
-                    collection via the <code>/exist/apps</code> URL space. By itself the FLWOR
-                    expression returns raw XML, which is not the desired result, so the participants
+                    collection via the <code>/exist/apps</code> URL space. By default the query 
+                    returns raw XML, which is not the desired result, so the participants
                     next learn how to add an XQuery serialization declaration to their query, which
                     instructs eXist-db to return the HTML result of the query as a web page instead
                     of as raw XML. Finally, the participants wrap an HTML link around each title,
@@ -733,9 +734,9 @@ let $text := $doc//tei:text
                         <code>&lt;div&gt;</code>
                     element:<programlisting>(: continued :)
 let $title := 
-  $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title/text()
-  return
-     &lt;html xmlns="http://www.w3.org/1999/xhtml">
+    $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title/text()
+return
+    &lt;html xmlns="http://www.w3.org/1999/xhtml">
         &lt;head>
             &lt;title>{$title}&lt;/title>
         &lt;/head>
@@ -778,62 +779,64 @@ let $title :=
  : (e.g. text), or handles it directly (e.g. lb). :)
 declare function tei-to-html:dispatch($node as node()*, $options) as item()* {
     typeswitch($node)
-        case text() return $node
+        case text() 
+            return $node
         case element(tei:TEI) 
-          return tei-to-html:recurse($node, $options)
+            return tei-to-html:recurse($node, $options)
         case element(tei:text) 
-          return tei-to-html:recurse($node, $options)
+            return tei-to-html:recurse($node, $options)
         case element(tei:front) 
-          return tei-to-html:recurse($node, $options)
+            return tei-to-html:recurse($node, $options)
         case element(tei:body) 
-          return tei-to-html:recurse($node, $options)
+            return tei-to-html:recurse($node, $options)
         case element(tei:back) 
-          return tei-to-html:recurse($node, $options)
+            return tei-to-html:recurse($node, $options)
         case element(tei:div) 
-          return tei-to-html:div($node, $options)
+            return tei-to-html:div($node, $options)
         case element(tei:head) 
-          return tei-to-html:head($node, $options)
+            return tei-to-html:head($node, $options)
         case element(tei:p) 
-          return tei-to-html:p($node, $options)
+            return tei-to-html:p($node, $options)
         case element(tei:hi) 
-          return tei-to-html:hi($node, $options)
+            return tei-to-html:hi($node, $options)
         case element(tei:list) 
-          return tei-to-html:list($node, $options)
+            return tei-to-html:list($node, $options)
         case element(tei:item) 
-          return tei-to-html:item($node, $options)
+            return tei-to-html:item($node, $options)
         case element(tei:label) 
-          return tei-to-html:label($node, $options)
+            return tei-to-html:label($node, $options)
         case element(tei:ref) 
-          return tei-to-html:ref($node, $options)
+            return tei-to-html:ref($node, $options)
         case element(tei:said) 
-          return tei-to-html:said($node, $options)
-        case element(tei:lb) return &lt;br/>
+            return tei-to-html:said($node, $options)
+        case element(tei:lb) 
+            return &lt;br/>
         case element(tei:figure) 
-          return tei-to-html:figure($node, $options)
+            return tei-to-html:figure($node, $options)
         case element(tei:graphic) 
-          return tei-to-html:graphic($node, $options)
+            return tei-to-html:graphic($node, $options)
         case element(tei:table) 
-          return tei-to-html:table($node, $options)
+            return tei-to-html:table($node, $options)
         case element(tei:row) 
-          return tei-to-html:row($node, $options)
+            return tei-to-html:row($node, $options)
         case element(tei:cell) 
-          return tei-to-html:cell($node, $options)
+            return tei-to-html:cell($node, $options)
         case element(tei:pb) 
-          return tei-to-html:pb($node, $options)
+            return tei-to-html:pb($node, $options)
         case element(tei:lg) 
-          return tei-to-html:lg($node, $options)
+            return tei-to-html:lg($node, $options)
         case element(tei:l) 
-          return tei-to-html:l($node, $options)
+            return tei-to-html:l($node, $options)
         case element(tei:name) 
-          return tei-to-html:name($node, $options)
+            return tei-to-html:name($node, $options)
         case element(tei:milestone) 
-          return tei-to-html:milestone($node, $options)
+            return tei-to-html:milestone($node, $options)
         case element(tei:quote) 
-          return tei-to-html:quote($node, $options)
+            return tei-to-html:quote($node, $options)
         case element(tei:said) 
-          return tei-to-html:said($node, $options)
+            return tei-to-html:said($node, $options)
         default 
-          return tei-to-html:recurse($node, $options)
+            return tei-to-html:recurse($node, $options)
 };</programlisting></para>
                 <para>For example, when the Typeswitch expression encounters a TEI
                         <code>&lt;hi></code> element, it calls the <code>tei-to-html:hi()</code>
@@ -845,11 +848,11 @@ declare function tei-to-html:dispatch($node as node()*, $options) as item()* {
             &lt;em>{ tei-to-html:recurse($node, $options) }&lt;/em>
         else if ($rend eq "sc") then
             &lt;span style="font-variant: small-caps;">{
-            tei-to-html:recurse($node, $options)
+                tei-to-html:recurse($node, $options)
             }&lt;/span>
         else 
             &lt;span class="hi">{
-            tei-to-html:recurse($node, $options) 
+                tei-to-html:recurse($node, $options) 
             }&lt;/span>
 };</programlisting></para>
                 <para>While this transformation module is provided as is to the participants (a
@@ -865,7 +868,7 @@ declare function tei-to-html:dispatch($node as node()*, $options) as item()* {
                     the institute context of allowing learners to focus their limited time on
                     mastering XQuery. It is certainly a better alternative to forcing them to learn
                     another language before being able to transform their data. which plainly would
-                    not be possible in the space of a 3-hour seminar. For users who have mastered
+                    not be possible in the length of such a seminar. For users who have mastered
                     XSLT or are interested in learning it, though, eXist-db has a
                         <code>transform:transform()</code> function for performing XSLT
                     transformations, which passes the node and stylesheet to a Saxon servlet that
@@ -933,7 +936,7 @@ let $text := $doc/id($section)</programlisting></para>
                                 linkend="exist_indexing"/> for details.</para>
                     </footnote></para>
                 <para>The final step is to add a few files needed to distribute our application as
-                    an EXPath Package. The final project is available in a GitHub repository. [<xref
+                    an EXPath Package [<xref linkend="xar"/>]. The final project is available in a GitHub repository. [<xref
                         linkend="punch"/>]</para>
             </section>
             <section>
@@ -1402,7 +1405,7 @@ let $text := $doc/id($section)</programlisting></para>
                         reusable access to all work products.</para>
                 </footnote> The TEI XML alone is not the full or only scholarly product, and neither
                 is its transformation with a generic presentation script, such as that provided by
-                uncustomized use of TEi Boilerplate or the TEI Stylesheets. [<xref
+                uncustomized use of TEI Boilerplate or the TEI Stylesheets. [<xref
                     linkend="boilerplate"/>, <xref linkend="tei_stylesheets"/>] For that reason, a
                 digital edition publishing framework, such as the four explored in this study,
                 should be 1) maximally configurable and 2) usable by digitally capable and digitally
@@ -1429,11 +1432,11 @@ let $text := $doc/id($section)</programlisting></para>
                 DBMS/CMS environment. But that transparency may be of limited immediate value to a
                 user who is comfortable at the application level with XQuery, but not at the higher
                 level required for migrating from the eXist-db infrastructure to that of BaseX or
-                Marklogic. On the other hand, the extent to which a commitment to one of the four
+                MarkLogic. On the other hand, the extent to which a commitment to one of the four
                 methods described above entails a commitment to a specific platform, such as
                 eXist-db, may be less important when we consider the lock-in aspects of the eXist-db
                 URL rewriting facility, its Lucene-based full text index and query functions, and
-                its newest feature in the forthcoming eXist-db 5, faceted browsing (also using
+                its newest feature in the forthcoming eXist-db 5, faceted browsing (which also uses
                 Lucene). A project concerned about lock-in might be advised to worry more about
                 those layers than about HTML templating or TEI Publisher per se.</para>
             <para>TEI Publisher, by any fair measure, exemplifies an integrated and well-developed,
@@ -1470,16 +1473,16 @@ let $text := $doc/id($section)</programlisting></para>
             <para>All methods described above except the middleware one can use eXist-db’s <emphasis
                     role="ital">xar</emphasis> packaging for one-step replication, distribution, and
                 deployment. In contrast, porting a middleware implementation means configuring PHP
-                and eXist-db to commmunicate, which is much more complicated to set up, to
+                and eXist-db to communicate, which is much more complicated to set up, to
                 troubleshoot, and to maintain. A researcher end-user can more easily install
                 eXist-db on a laptop and deploy an edition as a drop-in <emphasis role="ital"
                     >xar</emphasis> file than install eXist-db, load data and XQuery into it, and
                 also install and configure Apache, install and configure PHP scripts, and ensure
-                that the pieces all commmunicate effectively.</para>
+                that the pieces all communicate effectively.</para>
         </section>
         <section>
             <title>Ease of use</title>
-            <para>Ease of use may be experienced in different ways. On the one hand, the four
+            <para>Ease of use may be measured in different ways. On the one hand, the four
                 methods described above, in order from first to last, increasingly simplify
                 configuration and customization within anticipated, supported parameters, requiring
                 less—and often much less—custom code than a traditional LAMP architecture. On the
@@ -1506,7 +1509,7 @@ let $text := $doc/id($section)</programlisting></para>
             <title>So what about those peanut bugger cups?</title>
             <para>If we return to our analogy of eXist-db’s XML DBMS services as the peanut butter
                 core of a Reese’s Peanut Butter Cup and other eXist-db services (not only Jetty
-                HTTPS servcies, but now also app processing, HTML templating, and PM), we might say
+                HTTPS services, but now also app processing, HTML templating, and PM), we might say
                 that the researcher has a choice. With any of the frameworks described above the
                 developer has control over the selection, arrangement, and presentation of the
                 information. But to what extent do you want to combine your own peanut butter with
@@ -1587,6 +1590,14 @@ let $text := $doc/id($section)</programlisting></para>
             <quote>eXist-db: HTML Templating Module.</quote>
             <link>https://exist-db.org/exist/apps/doc/templating.xml</link>
         </bibliomixed>
+        <bibliomixed xml:id="meier-2003" xreflabel="Meier 2003">Meier, Wolfgang.
+                <quote>eXist: An Open Source Native XML Database.</quote> In
+            Chaudhri A.B., Jeckle M., Rahm E., Unland R. (eds) <emphasis
+                role="ital">Web, Web-Services, and Database Systems. NODe
+                2002</emphasis>. Lecture Notes in Computer Science, vol 2593.
+            Springer, Berlin, Heidelberg.
+                <link>https://link.springer.com/chapter/10.1007/3-540-36560-5_13</link>
+        </bibliomixed>
         <bibliomixed xml:id="Jetty" xreflabel="Jetty">Eclipse Jetty.
                 <link>https://www.eclipse.org/jetty/</link></bibliomixed>
         <bibliomixed xml:id="marklogic" xreflabel="Marklogic">MarkLogic | Data Integration and NoSQL
@@ -1613,6 +1624,15 @@ let $text := $doc/id($section)</programlisting></para>
                 application written in XQuery for eXist-db demonstrating how to create a dynamic,
                 searchable website for TEI text.</quote>
             <link>https://github.com/joewiz/punch</link></bibliomixed>
+        <bibliomixed xreflabel="Proxying eXist-db" xml:id="proxying-exist"
+            >Production use - Proxying eXist-db behind a Web Server.
+                <link>https://exist-db.org/exist/apps/doc/production_web_proxying</link></bibliomixed>
+        <bibliomixed xreflabel="RESTXQ" xml:id="exist-restxq"
+            >XQuery in eXist-db: RESTXQ.
+            <link>https://exist-db.org/exist/apps/doc/xquery#restxq</link></bibliomixed>
+        <bibliomixed xreflabel="URL Rewriting Facility" xml:id="exist-url-rewriting"
+            >URL Rewriting.
+            <link>https://exist-db.org/exist/apps/doc/urlrewrite</link></bibliomixed>
         <bibliomixed xreflabel="React" xml:id="React.js">React. A JavaScript library for building
             user interfaces. <link>https://reactjs.org/</link></bibliomixed>
         <bibliomixed xml:id="reenskaug" xreflabel="Reenskaug">Reenskaug, Trygve M. H. <quote>MVC.
