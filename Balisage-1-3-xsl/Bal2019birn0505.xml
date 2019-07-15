@@ -936,7 +936,7 @@ let $text := $doc/id($section)</programlisting></para>
                 rewritten. It is also likely that instead of migration from a translation of web componenents into a new
                 technology it will prove more efficient to start anew at the source of the intention, that is, the
                 formal TEI expression of user output expectations or instructions. From that perspective, within PM the
-                publication framework is documentation driven. By this we mean that because TEI publisher forces the
+                publication framework is documentation driven. By this we mean that because TEI Publisher forces the
                 user to define these instructions in a declarative manner, it can be said that it enforces format- and
                 software-agnostic documentation, which may provide the best guarantee we can have for a long term
                 transmission if not of the result, at least of the scholarly editorial intention. The TEI Publisher
