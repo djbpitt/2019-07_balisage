@@ -1154,7 +1154,7 @@ let $text := $doc/id($section)</programlisting></para>
             <para>The library part of TEI Publisher (<emphasis role="ital"
                     >tei-publisher-lib</emphasis>) release 2.5.0 introduced support for templates
                 and user-defined behaviors within the ODD that lets the user write the same new
-                behavior directly in the ODD. For example, this emphasis behaviour could(= should)
+                behavior directly in the ODD. For example, this emphasis behaviour could (= should)
                 now be written as:
                 <programlisting>&lt;pb:behaviour ident="emphasis">
     &lt;desc xml:lang="en">custom emphasis&lt;/desc>
@@ -1173,8 +1173,8 @@ let $text := $doc/id($section)</programlisting></para>
                         by building reusable components with React.js [<xref linkend="React.js"/>],
                         which brings it closer to web apps, as described above.</para>
                 </footnote></para>
-            <para>The Web Components are an upcoming W3C standard (or meta-specification) that
-                provides web developers with a mean to easily create reusable UI building block that
+            <para>Web Components are an upcoming W3C standard (or meta-specification) that provides
+                web developers with a mean to easily create reusable UI building block that
                 encapsulates all the HTML, CSS and JavaScript-based logic required to render it. The
                 large number of Web Components already available makes most adaptations possible
                 with just some foundational knowledge of HTML, but users with advanced requirements
@@ -1220,13 +1220,13 @@ let $text := $doc/id($section)</programlisting></para>
             <para>With regard to the question of potential future migration, it is illuminating to
                 reverse the perspective and see it throught the implementation of the TEI Processing
                 models as documentation driven. If one accepts the possibility that in the long
-                term, should HTML and web components become outdated and replaced by other
+                term, should HTML and Web Components become outdated and replaced by other
                 technologies, the technology-agnostic aspect of the formal documentation within PM
                 will provide consistent and sufficient information about the logics of the intended
                 processing and rendering of the elements. The eventual transformation to new output
                 code may be inevitable, but the output-independent aspects of PM can at least
                 shorten the portion of the pipeline that will need to be rewritten. It is also
-                likely that instead of migration from a translation of web components into a new
+                likely that instead of migration from a translation of Web Components into a new
                 technology it will prove more efficient to start anew at the source of the
                 intention, that is, the formal TEI expression of user output expectations or
                 instructions. From that perspective, within PM the publication framework is
@@ -1377,7 +1377,7 @@ let $text := $doc/id($section)</programlisting></para>
                 reliance comes a greater dependence on functionality implemented in a specific way
                 in (or perhaps available only within) eXist-db. That eXist-db HTML templating and
                 TEI Publisher are implemented entirely with standardized technologies like XQuery
-                and web components mitigates the lock-in effect because it means that the
+                and Web Components mitigates the lock-in effect because it means that the
                 implementations <emphasis role="ital">could</emphasis> be ported to a different
                 DBMS/CMS environment. But that transparency may be of limited immediate value to a
                 user who is comfortable at the application level with XQuery, but not at the higher
@@ -1626,11 +1626,11 @@ let $text := $doc/id($section)</programlisting></para>
             <quote>eXist-db: Getting started with Web application development.</quote>
             <link>https://exist-db.org/exist/apps/doc/development-starter</link>
         </bibliomixed>
-        <bibliomixed xml:id="webComponents" xreflabel="Web components">webcomponents.org.
+        <bibliomixed xml:id="webComponents" xreflabel="Web Components">webcomponents.org.
                 <quote>Introduction.</quote>
             <link>https://www.webcomponents.org/introduction</link></bibliomixed>
-        <bibliomixed xml:id="webComponents_tei_pb" xreflabel="Web components (TEI Publisher)"> TEI
-            Publisher. <quote>Web components.</quote>
+        <bibliomixed xml:id="webComponents_tei_pb" xreflabel="Web Components (TEI Publisher)"> TEI
+            Publisher. <quote>Web Components.</quote>
             <link>https://teipublisher.com/exist/apps/tei-publisher/doc/documentation.xml?odd=docbook.odd&amp;root=2.7.12.8</link></bibliomixed>
         <bibliomixed xml:id="wicentowski_2016" xreflabel="Wicentowski and Turska 2016">Wicentowski,
             Joseph C. and Magdalena Turska. <quote>Bringing TEI PM to Foggy Bottom.</quote> Claudia
