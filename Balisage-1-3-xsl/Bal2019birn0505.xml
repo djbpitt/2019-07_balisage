@@ -1174,17 +1174,16 @@ let $text := $doc/id($section)</programlisting></para>
                         which brings it closer to web apps, as described above.</para>
                 </footnote></para>
             <para>Web Components are an upcoming W3C standard (or meta-specification) that provides
-                web developers with a mean to easily create reusable UI building block that
-                encapsulates all the HTML, CSS and JavaScript-based logic required to render it. The
-                large number of Web Components already available makes most adaptations possible
+                web developers with a means to easily create reusable UI building blocks that
+                encapsulates all the HTML-, CSS-, and JavaScript-based logic required to render it.
+                The large number of Web Components already available makes most adaptations possible
                 with just some foundational knowledge of HTML, but users with advanced requirements
                 can implement additional components on the basis of modeling experience and
                 knowledge of the HTML5 specification, and specifically of defining new Web
-                Components. If TEI Publisher 4.0 adds a collection of Web Components targetted at
-                creating digital editions, most users, however, are likely to find that TEI
-                Publisher without that level of customization already provides ways to embed texts
-                into an application context, supporting the integration of navigation, pagination,
-                search, facsimile display, and more.</para>
+                Components. As TEI Publisher 4.0 includes a collection of Web Components targeted at
+                creating digital editions, users are likely to find that without customization it
+                already provides ways to embed texts into an application context, supporting the
+                integration of navigation, pagination, search, facsimile display, and more.</para>
             <para>The principal advantage of TEI Publisher, emphasized in the documentation, is that
                 by relying on reusable high-level, generic behaviors, it can substantially reduce
                 the amount of code needed to create transformation, a benefit that inheres both in
@@ -1219,75 +1218,78 @@ let $text := $doc/id($section)</programlisting></para>
                 cost and the cost of potential future migration.</para>
             <para>With regard to the question of potential future migration, it is illuminating to
                 reverse the perspective and see it throught the implementation of the TEI Processing
-                models as documentation driven. If one accepts the possibility that in the long
-                term, should HTML and Web Components become outdated and replaced by other
-                technologies, the technology-agnostic aspect of the formal documentation within PM
-                will provide consistent and sufficient information about the logics of the intended
-                processing and rendering of the elements. The eventual transformation to new output
-                code may be inevitable, but the output-independent aspects of PM can at least
-                shorten the portion of the pipeline that will need to be rewritten. It is also
-                likely that instead of migration from a translation of Web Components into a new
-                technology it will prove more efficient to start anew at the source of the
-                intention, that is, the formal TEI expression of user output expectations or
-                instructions. From that perspective, within PM the publication framework is
-                documentation driven. By this we mean that because TEI Publisher forces the user to
-                define these instructions in a declarative manner, it can be said that it enforces
-                format- and software-agnostic documentation, which may provide the best guarantee we
-                can have for a long term transmission if not of the result, at least of the
-                scholarly editorial intention. </para>
+                Model as documentation driven. If one accepts the possibility that in the long term
+                HTML and Web Components might become outdated and replaced by other technologies,
+                the technology-agnostic aspect of the formal documentation within PM will provide
+                consistent and sufficient information about the logic of the intended processing and
+                rendering of the elements. Eventual transformation to new output code may be
+                inevitable, but the output-independent aspects of PM can at least shorten the
+                portion of the pipeline that will need to be rewritten. It is also likely that
+                instead of migration from a translation of Web Components into a new technology it
+                will prove more efficient to start anew at the source of the intention, that is, the
+                formal TEI expression of user output expectations or instructions. From that
+                perspective, within PM the publication framework is documentation driven. By this we
+                mean that because PM forces the user to define these instructions in a declarative
+                manner, it can be said that it enforces format- and software-agnostic documentation,
+                which may provide the best guarantee we can have for a long term transmission if not
+                of the result, at least of the scholarly editorial intention. </para>
             <para>The TEI Publisher implementation of PM acts, then, in a controller context,
-                establishing an efficient binding from model to view but also largely independent of
-                the latter. Using the technology of the Web Components, the views may be seen as
-                modeling streams of documents as autonomous APIs, which can be fit together like
-                pre-assemblable modular blocks, and which will constitute a collection of
+                establishing an efficient binding from model to view that is also largely
+                independent of the latter. Using the technology of the Web Components, the views may
+                be seen as modeling streams of documents as autonomous APIs, which can be fitted
+                together like assemblable modular blocks, and which will constitute a collection of
                 standardized base units that are highly reusable. To illustrate this design
                 orientation towards web standards and the reusability principle, the blog post
-                written by TEI Publisher's main developer Wolfgang Maier use the metaphor of Lego
-                blocks: <blockquote>
-                    <para>Moving towards the emerging web component standard, TEI Publisher 4.0
-                        implements all this functionality as small "lego" blocks to be freely
-                        arranged, recombined and extended.</para>
-                </blockquote><footnote>
-                    <para>See also the new menu entry "vision" that outilines the positionning of
-                        TEI Publisher as a community effort firmly grounded in the principles of
-                        Open Source, standards and reusability.</para>
-                </footnote>The TEI Publisher documentation states that: <quote>You do not need to
-                    know much about Web Components to use them in TEI Publisher.</quote> As a matter
-                of fact, a user has just to understand how the web component she wants to use can be
-                connected to the corresponding PM defined in a given ODD. The connection is done by
-                setting the Components properties via attributes. As the Web Components shipped in
-                the TEI Publisher are presentend under the form of an API documentation, the user
-                will be able to understand which attributes he will need to use. When setting
-                himself to the task of designing a new template page for its edition, he then will
-                have to slot the interface Components he wishes use either from the TEI publisher
-                built-in Web Components or from external libraries like Polyfills or other
-                libraries. But it's firstly because he masters the data model of his corpus of XML
-                encoded files -the model- that he will be able to establish that connection
-                successfully and with relevance with regard to his editorial approach. Doing that
-                within the framework of TEI Publisher, he will then produce new template designs -or
-                views- that could potentially be easily shared in return if pushed to the Open
-                Source code repository of TEI Publisher. Of course, what is at stake here is not
-                just the technical reusability of the UI web blocks, it's also the theoretical
-                underlying approach supporting the design of the interface template. The greater
-                theoretical potential of TEI Publisher will then be attained when collections of
-                shipped-in Web Components will be grounded in a robust editorial theory or a series
-                of editorial theories, each potentially populated by a subcollection of Web
-                Components, and all of that supported by several community of users commited to
-                share them through an Open Source digital ecosystem. If the design of the view is a
-                legitimate part of the scholarship, then it requires an open infrastructure for
-                peer-review and reuse. Then it could be possible that the lego blocks interface
-                design approach implemented by TEI Publisher can play a major role in easying the
-                design tasks of the digital scholarly editor and by this way realizing not just a
-                toolbox to build interface but the toolbox to elaborate proposals of scholarly
-                editorial models <quote>theoretically and editorially based.</quote> offering
-                    <quote>a stable infrastructure for digital editions</quote> allowing a community
-                of academic users <quote>to reflect on the features that the scholarly community
-                    will consider essential to a particular type of text or scholarly problem and to
+                written by TEI Publisher's principal developer, Wolfgang Maier, employs the metaphor
+                of Lego blocks:</para>
+            <blockquote>
+                <para>Moving towards the emerging web component standard, TEI Publisher 4.0
+                    implements all this functionality as small <quote>lego</quote> blocks to be
+                    freely arranged, recombined and extended.<footnote>
+                        <para>See also the new menu entry "vision" that outlines the positioning
+                            of TEI Publisher as a community effort firmly grounded in the principles
+                            of Open Source, standards, and reusability.</para>
+                    </footnote></para>
+            </blockquote>
+            <para>The TEI Publisher documentation states that: <quote>You do not need to know much
+                    about Web Components to use them in TEI Publisher.</quote> In fact, users need
+                to understand only how the web components they want to use can be connected to the
+                corresponding PM specification in an associated ODD, a connection that is
+                implemented by setting the Components properties via attributes. As the Web
+                Components shipped in the TEI Publisher are presented in the form of API
+                documentation, users will be able to understand which attributes they will need to
+                use. When setting themselves the task of designing a new template page for an
+                edition, they will then have to specify the interface Components they wish to use
+                either from among the TEI Publisher built-in Web Components or from external
+                libraries, such as Polyfills. But insofar as the user will have mastered the data
+                model of the corpus of XML encoded files—the model—they will be able to establish
+                that connection successfully and in a way that is appropriate for their editorial
+                purposes. Doing that within the framework of TEI Publisher, they will then produce
+                new template designs—or views—that could potentially be shared by pushing them to
+                the Open Source code repository of TEI Publisher.</para>
+            <para>To be sure, what is at stake here is not only, or even primarily, the technical
+                reusability of the UI web blocks; it is also the underlying theoretical approach
+                supporting the design of the interface template. For that reason, the theoretical
+                potential of TEI Publisher will be for fully attained when collections of built-in
+                Web Components will be grounded in a robust editorial theory or a series of
+                editorial theories, each potentially populated by a subcollection of Web Components,
+                all supported by communities of users commited to sharing them through an Open
+                Source digital ecosystem. Insofar as the design of the view is a legitimate part of
+                the scholarship, it, too, requires an open infrastructure for peer review and reuse.
+                In this way it could be possible that the Lego blocks interface design approach
+                implemented by TEI Publisher could play a major role in simplifying the design tasks
+                of the digital scholarly editor, thus not only realizing a toolbox to build
+                interfaces, but also a toolbox to elaborate proposals of scholarly editorial models
+                that are <quote>theoretically and editorially based</quote>, offering <quote>a
+                    stable infrastructure for digital editions</quote> and allowing a community of
+                academic users <quote>to reflect on the features that the scholarly community will
+                    consider essential to a particular type of text or scholarly problem and to
                     agree on some essential models which take into account the new affordances
-                    offered by the digital. </quote>. In other terms, not just a new flavour
-                accidentally brought to the market, but a laboratory of taste, helping a XXX to
-                collectively invent, experiment, compare, and refine the new flavours and meals
-                adapted to its lifestyle and aspirations.</para>
+                    offered by the digital.</quote>. In other terms, the architecture underlying TEI
+                Publisher may be regarded not only a new flavor accidentally brought to the market,
+                but as a laboratory of taste, helping users to collectively invent, experiment,
+                compare, and refine the new flavors and meals adapted to their lifestyles and
+                aspirations.</para>
         </section>
     </section>
     <section>
