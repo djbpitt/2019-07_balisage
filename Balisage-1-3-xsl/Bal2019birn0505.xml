@@ -1246,9 +1246,9 @@ let $text := $doc/id($section)</programlisting></para>
                 <para>Moving towards the emerging web component standard, TEI Publisher 4.0
                     implements all this functionality as small <quote>lego</quote> blocks to be
                     freely arranged, recombined and extended.<footnote>
-                        <para>See also the new menu entry "vision" that outlines the positioning
-                            of TEI Publisher as a community effort firmly grounded in the principles
-                            of Open Source, standards, and reusability.</para>
+                        <para>See also the new menu entry "vision" that outlines the positioning of
+                            TEI Publisher as a community effort firmly grounded in the principles of
+                            Open Source, standards, and reusability.</para>
                     </footnote></para>
             </blockquote>
             <para>The TEI Publisher documentation states that: <quote>You do not need to know much
@@ -1285,11 +1285,11 @@ let $text := $doc/id($section)</programlisting></para>
                 academic users <quote>to reflect on the features that the scholarly community will
                     consider essential to a particular type of text or scholarly problem and to
                     agree on some essential models which take into account the new affordances
-                    offered by the digital.</quote>. In other terms, the architecture underlying TEI
-                Publisher may be regarded not only a new flavor accidentally brought to the market,
-                but as a laboratory of taste, helping users to collectively invent, experiment,
-                compare, and refine the new flavors and meals adapted to their lifestyles and
-                aspirations.</para>
+                    offered by the digital.</quote>. [<xref linkend="pierazzo"/>] In other word, the
+                architecture underlying TEI Publisher may be regarded not only a new flavor
+                accidentally brought to the market, but as a laboratory of taste, helping users to
+                collectively invent, experiment, compare, and refine the new flavors and meals
+                adapted to their lifestyles and aspirations.</para>
         </section>
     </section>
     <section>
@@ -1559,6 +1559,11 @@ let $text := $doc/id($section)</programlisting></para>
             <quote>PHP: hypertext preprocessor.</quote>
             <link>https://www.php.net/</link>
         </bibliomixed>
+        <bibliomixed xml:id="pierazzo" xreflabel="Pierazzo 2019">Pierazzo, Elena. <quote>What future
+                for digital scholarly editions? From Haute Couture to Prêt-à-Porter</quote>July
+            2019, Volume 1, Issue 2, pp 209–20. <emphasis role="ital">International journal of
+                Digital Humanities</emphasis> (2019) 1: 179.
+                <link>https://doi.org/10.1007/s42803-019-00019-3</link></bibliomixed>
         <bibliomixed xml:id="punch" xreflabel="Punch">Wicentowski, Joe. <quote>Punch. A simple
                 application written in XQuery for eXist-db demonstrating how to create a dynamic,
                 searchable website for TEI text.</quote>
