@@ -950,31 +950,26 @@ let $text := $doc/id($section)</programlisting></para>
                     >xar</emphasis> archives and installed into any running eXist-db instance.<footnote>
                     <para>eXist-db app packaging is described in <xref linkend="xar"/>.</para>
                 </footnote></para>
-            <para>PM is a TEI-native vocabulary for expressing how XML documents should be
-                transformed and rendered into various output formats (HTML, EPUB, PDF, etc.). It
-                builds on the TEI ODD (<quote>one document does it all</quote>, <xref linkend="odd"
-                />), a specification originally designed to integrate formalized documentation into
-                customizations and modifications of the TEI. Because no document is likely to make
-                use of the almost six hundred elements provided by the TEI, developers can use the
-                ODD to constrain their project-specific schemas by including, excluding, modifying,
-                or extending TEI components. The ODD can then export schemas in Relax NG, W3Schema,
-                and DTD format, and because the ODD incorporates formalized, machine-actionable
-                documentation, the developer can also generate reference documentation to be
-                consulted during tagging. Although this is not always the way developers operate,
-                the TEI intends that all TEI projects should be customized and documented with ODD.<footnote>
-                    <para><quote>Each and every project using the TEI Guidelines is already
-                            dependent upon some form of customisation even if it is the <emphasis
-                                role="ital">tei_all</emphasis> example customisation with absolutely
-                            everything in the TEI Guidelines. For many projects this is enough, but
-                            it does projects a disservice if they do not constrain and control the
-                            data entry for their project and document it with a TEI
-                            customisation.</quote> [<xref linkend="cummings_2012"/>]</para>
-                </footnote> In its early days the TEI regarded the <emphasis role="ital"
-                    >E</emphasis> part of its name as definitive: the TEI was about text <emphasis
-                    role="ital">encoding</emphasis>, and not about text processing. PM moves beyond
-                that earlier perspective by incorporating processing information, in a formalized
-                declarative and output-agnnostic format, into the ODD alongside the information
-                needed to create schemas and human-readable documentation.</para>
+            <para>PM is a TEI-native vocabulary for expressing how XML documents should be transformed and rendered into
+                various output formats (HTML, EPUB, PDF, etc.). It builds on the TEI ODD (<quote>one document does it
+                all</quote>, <xref linkend="odd"/>), a specification originally designed to integrate formalized
+                documentation into customizations and modifications of the TEI. Because no document is likely to make
+                use of the almost six hundred elements provided by the TEI, developers can use the ODD to constrain
+                their project-specific schemas by including, excluding, modifying, or extending TEI components. The ODD
+                can then export schemas in Relax NG, W3Schema, and DTD format, and because the ODD incorporates
+                formalized, machine-actionable documentation, the developer can also generate reference documentation to
+                be consulted during tagging. Although this is not always the way developers operate, the TEI intends
+                that all TEI projects should be customized and documented with ODD.<footnote>
+                <para><quote>Each and every project using the TEI Guidelines is already dependent upon some form of
+                    customisation even if it is the <emphasis role="ital">tei_all</emphasis> example customisation with
+                    absolutely everything in the TEI Guidelines. For many projects this is enough, but it does projects
+                    a disservice if they do not constrain and control the data entry for their project and document it
+                    with a TEI customisation.</quote> [<xref linkend="cummings_2012"/>]</para>
+                </footnote> In its early days the TEI regarded the <emphasis role="ital">E</emphasis> part of its name
+                as definitive: the TEI was about text <emphasis role="ital">encoding</emphasis>, and not about text
+                processing. PM moves beyond that earlier perspective by incorporating processing information, in a
+                formalized declarative and output-agnostic format, into the ODD alongside the information needed to
+                create schemas and human-readable documentation.</para>
             <para>PM lets users map TEI structures onto some two dozen fundamental abstract
                 processing or rendering primitives called <emphasis role="ital"
                 >behaviors</emphasis>, which declare abstract rendering information like
