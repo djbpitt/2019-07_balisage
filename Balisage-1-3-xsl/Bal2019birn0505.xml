@@ -1021,7 +1021,7 @@ let $text := $doc/id($section)</programlisting></para>
                     >E</emphasis> part of its name as definitive: the TEI was about text <emphasis
                     role="ital">encoding</emphasis>, and not about text processing. PM moves beyond
                 that earlier perspective by incorporating processing information, in a formalized
-                declarative and output-agnnostic format, into the ODD alongside the information
+                declarative and output-agnostic format, into the ODD alongside the information
                 needed to create schemas and human-readable documentation.</para>
             <para>PM lets users map TEI structures onto some two dozen fundamental abstract
                 processing or rendering primitives called <emphasis role="ital"
@@ -1079,11 +1079,30 @@ let $text := $doc/id($section)</programlisting></para>
                 text in a tooltip displayed on mouseover, or vice versa, but because the PM
                 specification is high-level, abstract, and declarative, it can also be used during
                 print output to write one value into the running text and the other after it inside
-                parentheses. The PM specification for this type of alternate behavior might look
-                like:
-                <programlisting>
-                    [ADD EXAMPLE]
-                </programlisting>
+                parentheses. The PM specification for these two combines types of behavior might
+                look like:
+                <programlisting>&lt;elementSpec ident="choice" mode="change"&gt;
+    &lt;model output="web" predicate="orig and reg" behaviour="alternate"&gt;
+        &lt;param name="default" value="reg[1]"/&gt;
+        &lt;param name="alternate" value="orig[1]"/&gt;
+    &lt;/model&gt;
+    &lt;modelSequence output="web" predicate="orig and reg"&gt;
+        &lt;model behaviour="inline"&gt;
+            &lt;param name="content" value="reg"/&gt;
+        &lt;/model&gt;
+        &lt;model behaviour="inline">
+            &lt;param name="content" value="orig"/>
+            &lt;outputRendition scope="before"&gt;content:" (";&lt;/outputRendition&gt;
+            &lt;outputRendition scope="after"&gt;content:") ";&lt;/outputRendition&gt;
+        &lt;/model&gt;
+    &lt;/modelSequence&gt;
+&lt;/elementSpec&gt;
+&lt;elementSpec ident="reg" mode="change"&gt;
+    &lt;model behaviour="inline"/&gt;
+&lt;/elementSpec&gt;
+&lt;elementSpec ident="orig" mode="change"&gt;
+    &lt;model behaviour="inline"/&gt;
+&lt;/elementSpec&gt;</programlisting>
                 The value of <code>@behaviour</code> can be set to <code>omit</code> if the matched
                 element is not be included in the output. For example, TEI page beginning
                     (<code>&lt;pb&gt;</code>) elements can be omitted during rendering with: <programlisting>&lt;elementSpec mode="change" ident="pb"&gt;
@@ -1113,13 +1132,13 @@ let $text := $doc/id($section)</programlisting></para>
                 function in the <emphasis role="ital">Punch</emphasis> tutorial described above, we
                 see that it requires mapping a <code>&lt;hi&gt;</code> element with a
                     <code>@rend</code> attribute set to <code>it</code>
-                    (<code>&lt;hi[@rend='it']&gt;</code>) in a way that is not served the list of
+                    (<code>&lt;hi[@rend='it']&gt;</code>) in a way that is not served in the list of
                 common behaviors defined by the TEI Guidelines and used mainly in the TEI Simple
                 schema that serves as a default PM specification for TEI Publisher. Earlier versions
                 of TEI Publisher provided a way to extend the behaviors defined in the TEI
                 Guidelines by writing additional XQuery functions. For example, if this new behavior
                 was to be called <emphasis role="ital">emphasis</emphasis>, it could be written
-                as:<programlisting>declare function pmf:emphais($config as map(*), $node as node(), $class as xs:string+, $content) {
+                as:<programlisting>declare function pmf:emphasis($config as map(*), $node as node(), $class as xs:string+, $content) {
     &lt;em>{pmf:apply-children($config, $node, $content)}&lt;/em>
 };</programlisting>The
                 corresponding ODD model specification could then be mapped to this new behavior as
@@ -1133,8 +1152,8 @@ let $text := $doc/id($section)</programlisting></para>
                 and user-defined behaviors within the ODD that lets the user write the same new
                 behavior directly in the ODD. For example, this emphasis behaviour could(= should)
                 now be written as:
-                <programlisting>&lt;pb:behaviour ident="emphasis-custom">
-    &lt;desc xml:lang="en">emphasis custom&lt;/desc>
+                <programlisting>&lt;pb:behaviour ident="emphasis">
+    &lt;desc xml:lang="en">custom emphasis&lt;/desc>
     &lt;pb:template>
         &lt;em xmlns="">[[content]]&lt;/em>
     &lt;/pb:template>
@@ -1150,26 +1169,29 @@ let $text := $doc/id($section)</programlisting></para>
                         by building reusable components with React.js [<xref linkend="React.js"/>],
                         which brings it closer to web apps, as described above.</para>
                 </footnote></para>
-            <para>xxxx</para>
-            <para>The large number of web components already available makes most adaptations
-                possible with just some foundational knowledge of HTML, but users with advanced
-                requirements can implement additional components on the basis of modeling experience
-                and knowledge of the HTML5 specification, and specifically of defining new web
-                components. Most users, however, are likely to find that TEI Publisher without that
-                level of customization already provides ways to embed texts into an application
-                context, supporting the integration of navigation, pagination, search, facsimile
-                display, and more.</para>
+            <para>The Web Components are an upcoming W3C standard (or meta-specification) that
+                provides web developers with a mean to easily create reusable UI building block that
+                encapsulates all the HTML, CSS and JavaScript-based logic required to render it. The
+                large number of Web Components already available makes most adaptations possible
+                with just some foundational knowledge of HTML, but users with advanced requirements
+                can implement additional components on the basis of modeling experience and
+                knowledge of the HTML5 specification, and specifically of defining new Web
+                Components. If TEI Publisher 4.0 adds a collection of Web Components targetted at
+                creating digital editions, most users, however, are likely to find that TEI
+                Publisher without that level of customization already provides ways to embed texts
+                into an application context, supporting the integration of navigation, pagination,
+                search, facsimile display, and more.</para>
             <para>The principal advantage of TEI Publisher, emphasized in the documentation, is that
                 by relying on reusable high-level, generic behaviors, it can substantially reduce
                 the amount of code needed to create transformation, a benefit that inheres both in
-                code creation and in code maintenance. For example, Turska and Cummings write that <blockquote>
+                code creation and in code maintenance. For example, Turska and Cummings write that: <blockquote>
                     <para>For the Office of Historian project figures suggest code reduction by at
                         least two-thirds in size. Numbers are even more impressive realizing that
                         the resulting ODD file is not only smaller, but much less dense, consisting
                         mostly of formulaic <code>&lt;model></code> expressions that make it easier
                         to read, understand and maintain, even by less skilled developers. [<xref
                             linkend="turska_2016"/>]</para>
-                </blockquote> Wicentowski and Turska describe the advantaage of TEI Publisher for
+                </blockquote> Wicentowski and Turska describe the advantage of TEI Publisher for
                 this same set of projects as follows: <blockquote>
                     <para>[T]he new TEI Processing Model (TEI PM) played a key role in the site’s
                         plan for scalability and sustainability. By replacing custom-written code
@@ -1192,31 +1214,76 @@ let $text := $doc/id($section)</programlisting></para>
                 (such as HTML5) and de facto (such as TEI) standards, it reduces both the start-up
                 cost and the cost of potential future migration.</para>
             <para>With regard to the question of potential future migration, it is illuminating to
-                reverse the persepective and see it throught the implementation of the TEI
-                Processing models as documentation driven. If one accepts the possibility that in
-                the long term, should HTML and web components become outdated and replaced by other
+                reverse the perspective and see it throught the implementation of the TEI Processing
+                models as documentation driven. If one accepts the possibility that in the long
+                term, should HTML and web components become outdated and replaced by other
                 technologies, the technology-agnostic aspect of the formal documentation within PM
                 will provide consistent and sufficient information about the logics of the intended
                 processing and rendering of the elements. The eventual transformation to new output
                 code may be inevitable, but the output-independent aspects of PM can at least
                 shorten the portion of the pipeline that will need to be rewritten. It is also
-                likely that instead of migration from a translation of web componenents into a new
+                likely that instead of migration from a translation of web components into a new
                 technology it will prove more efficient to start anew at the source of the
                 intention, that is, the formal TEI expression of user output expectations or
                 instructions. From that perspective, within PM the publication framework is
-                documentation driven. By this we mean that because TEI publisher forces the user to
+                documentation driven. By this we mean that because TEI Publisher forces the user to
                 define these instructions in a declarative manner, it can be said that it enforces
                 format- and software-agnostic documentation, which may provide the best guarantee we
                 can have for a long term transmission if not of the result, at least of the
-                scholarly editorial intention. The TEI Publisher implementation of PM acts, then, in
-                a controller context, establishing an efficient binding from model to view but also
-                largely independent of the latter. The views, expressed as templates within TEI
-                Publisher, may be seen as modeling streams of documents as autonomous APIs, which
-                can be assembled like Lego blocks, and which will constitute a collection of
-                primitives that are highly reusable from one template to another. The greater
-                theoretical potential of TEI Publisher will be attained when this collection of web
-                components will be grounded in a robust editorial theory or a series of editorial
-                theories, each potentially populated by a subcollection of web components.</para>
+                scholarly editorial intention. </para>
+            <para>The TEI Publisher implementation of PM acts, then, in a controller context,
+                establishing an efficient binding from model to view but also largely independent of
+                the latter. Using the technology of the Web Components, the views may be seen as
+                modeling streams of documents as autonomous APIs, which can be fit together like
+                pre-assemblable modular blocks, and which will constitute a collection of
+                standardized base units that are highly reusable. To illustrate this design
+                orientation towards web standards and the reusability principle, the blog post
+                written by TEI Publisher's main developer Wolfgang Maier use the metaphor of Lego
+                blocks: <blockquote>
+                    <para>Moving towards the emerging web component standard, TEI Publisher 4.0
+                        implements all this functionality as small "lego" blocks to be freely
+                        arranged, recombined and extended.</para>
+                </blockquote><footnote>
+                    <para>See also the new menu entry "vision" that outilines the positionning of
+                        TEI Publisher as a community effort firmly grounded in the principles of
+                        Open Source, standards and reusability.</para>
+                </footnote>The TEI Publisher documentation states that: <quote>You do not need to
+                    know much about Web Components to use them in TEI Publisher.</quote> As a matter
+                of fact, a user has just to understand how the web component she wants to use can be
+                connected to the corresponding PM defined in a given ODD. The connection is done by
+                setting the Components properties via attributes. As the Web Components shipped in
+                the TEI Publisher are presentend under the form of an API documentation, the user
+                will be able to understand which attributes he will need to use. When setting
+                himself to the task of designing a new template page for its edition, he then will
+                have to slot the interface Components he wishes use either from the TEI publisher
+                built-in Web Components or from external libraries like Polyfills or other
+                libraries. But it's firstly because he masters the data model of his corpus of XML
+                encoded files -the model- that he will be able to establish that connection
+                successfully and with relevance with regard to his editorial approach. Doing that
+                within the framework of TEI Publisher, he will then produce new template designs -or
+                views- that could potentially be easily shared in return if pushed to the Open
+                Source code repository of TEI Publisher. Of course, what is at stake here is not
+                just the technical reusability of the UI web blocks, it's also the theoretical
+                underlying approach supporting the design of the interface template. The greater
+                theoretical potential of TEI Publisher will then be attained when collections of
+                shipped-in Web Components will be grounded in a robust editorial theory or a series
+                of editorial theories, each potentially populated by a subcollection of Web
+                Components, and all of that supported by several community of users commited to
+                share them through an Open Source digital ecosystem. If the design of the view is a
+                legitimate part of the scholarship, then it requires an open infrastructure for
+                peer-review and reuse. Then it could be possible that the lego blocks interface
+                design approach implemented by TEI Publisher can play a major role in easying the
+                design tasks of the digital scholarly editor and by this way realizing not just a
+                toolbox to build interface but the toolbox to elaborate proposals of scholarly
+                editorial models <quote>theoretically and editorially based.</quote> offering
+                    <quote>a stable infrastructure for digital editions</quote> allowing a community
+                of academic users <quote>to reflect on the features that the scholarly community
+                    will consider essential to a particular type of text or scholarly problem and to
+                    agree on some essential models which take into account the new affordances
+                    offered by the digital. </quote>. In other terms, not just a new flavour
+                accidentally brought to the market, but a laboratory of taste, helping a XXX to
+                collectively invent, experiment, compare, and refine the new flavours and meals
+                adapted to its lifestyle and aspirations.</para>
         </section>
     </section>
     <section>
