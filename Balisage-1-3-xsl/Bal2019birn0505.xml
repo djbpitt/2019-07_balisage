@@ -1015,11 +1015,11 @@ let $text := $doc/id($section)</programlisting></para>
                 possible that the lego blocks interface design approach implemented by TEI Publisher can play a major
                 role in easying the design tasks of the digital scholarly editor and by this way realizing not just a
                 toolbox to build interface but the toolbox to elaborate proposals of scholarly editorial models
-                <quote>theoretically and editorially based.</quote> offering <quote>a stable infrastructure for digital
+                <quote>theoretically and editorially based</quote>, offering <quote>a stable infrastructure for digital
                 editions</quote> allowing a community of academic users <quote>to reflect on the features that the
                 scholarly community will consider essential to a particular type of text or scholarly problem and to
-                agree on some essential models which take into account the new affordances offered by the digital.
-                </quote>. In other terms, not just a new flavour accidentally brought to the market, but a laboratory of
+                agree on some essential models which take into account the new affordances offered by the digital
+                </quote> [<xref linkend="pierazzo"/>]. In other terms, not just a new flavour accidentally brought to the market, but a laboratory of
                 taste, helping a XXX to collectively invent, experiment, compare, and refine the new flavours and meals
                 adapted to its lifestyle and aspirations.</para>
         </section>
