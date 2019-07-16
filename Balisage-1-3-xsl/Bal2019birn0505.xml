@@ -150,39 +150,6 @@
     as much as possible editors of scholarly digital editions should not be distracted from editorial tasks 
     by technological concerns if these technological concerns do not affect their edition
     
-    a truly conceptual editorial object is malleable and recombinable, and an encoded edition, by itself, 
-    is not [... but ...] by forcing us to formalise some of our assumptions, the structures and vocabularies 
-    of an encoded edition do help us foreground the theories of text we use when creating scholarly digital 
-    editions
-    
-    djb: In adjudicating the extent to which the data and the presentation participate in constituting the digital
-    edition, Cummings 2019 strikes a middle ground. The data is essential, the presentation is an aspect of
-    the scholarship, and interaction with the afforded presentations addresses the need for malleability and
-    recombination. But insofar as presentations may be limited by what the editor has anticipaated, envisioned,
-    and facilitated, an API with which the scholarly reader can engege addresses both the editor’s scholarly
-    responsibility and the extent to which the reader’s decisions may also be part of what makes an edition.
-    
-    it is not the presentation layer that is a requirement, as the presentation layer is merely one or more 
-    additional views on the data. Rather, it is the ability to reshape, query, transform, and reconceive of 
-    the data in the same way as (and in the case of a digital edition in more ways than) a reader might do 
-    when translating a printed critical apparatus into a mental construct representing the various document 
-    instances and their relationship to the work [... ]the true form of a scholarly digital edition would be 
-    better expressed as a well-documented API for the manipulation and description of editorial objects 
-    following an open international standard for the representation of digital text
-    
-    djb: Cummings 2019 focuses on the reuse of the editorial objects underlying  an edition by others when he
-    writes the following (see paragraph below). This view is compatible with regarding the original editor, 
-    that is, the person who
-    encodes the digital objects, as the first such researcher. In that capacity, the digital objects (in, for
-    example, TEI XML) are one scholarly product, the views created by that editor iss a different scholarly
-    product (cite Andrews and Zundert), and the API that Cummings advocates is yet another scholarly product.
-    All,then, are digital scholarly parts of a digital scholarly edition.
-    
-    the underlying data may in fact have been created not for a scholarly digital edition as a publication, but 
-    as a resource to be interrogated, analysed, or queried, rather than published. The publication of a scholarly 
-    digital edition can, and perhaps more often should, be a mere byproduct of the real research undertaken. That 
-    such information resources, in this case datasets of editorial objects, become corpora for research analysis
-    
     -->
     <section>
         <title>Introduction</title>
@@ -212,19 +179,20 @@
             </mediaobject>
         </figure>
         <para>Meanwhile, in a galaxy far, far away, the eXist-db native XML database was born in
-            2000.<xref linkend="meier-2003"/> Created by Wolfgang Meier, who at the time was a researcher in the field of
-            sociology, to support projects that required the efficient processing of XML documents,
-            eXist-db was released as a free, open source project that has enjoyed a broad following
-            in the world of XML and NoSQL databases. In particular, eXist-db has often been used in
-            publishing and digital edition projects in the humanities, including some designed and
-            implemented by authors of the present report. Since its inception, eXist-db has provided
-            the services one expects from any database management system (DBMS): it stores records
-            (XML documents), builds persistent indexes, supports retrieval with a query language
-            (XQuery), and provides the housekeeping functionality
-            (e.g., user authentication) those processes require. eXist-db is commonly hosted inside
-            an HTTP server and servlet container (it ships with <xref linkend="Jetty"/>, but other
-            hosts are also supported), which mediates between the user and the eXist-db
-            functionality, as is illustrated in this image from <xref linkend="exist-book"/>:</para>
+                2000.<xref linkend="meier-2003"/> Created by Wolfgang Meier, who at the time was a
+            researcher in the field of sociology, to support projects that required the efficient
+            processing of XML documents, eXist-db was released as a free, open source project that
+            has enjoyed a broad following in the world of XML and NoSQL databases. In particular,
+            eXist-db has often been used in publishing and digital edition projects in the
+            humanities, including some designed and implemented by authors of the present report.
+            Since its inception, eXist-db has provided the services one expects from any database
+            management system (DBMS): it stores records (XML documents), builds persistent indexes,
+            supports retrieval with a query language (XQuery), and provides the housekeeping
+            functionality (e.g., user authentication) those processes require. eXist-db is commonly
+            hosted inside an HTTP server and servlet container (it ships with <xref linkend="Jetty"
+            />, but other hosts are also supported), which mediates between the user and the
+            eXist-db functionality, as is illustrated in this image from <xref linkend="exist-book"
+            />:</para>
         <figure xml:id="exist-book-jetty"
             xreflabel="eXist-db web application platform architecture (Siegel and Retter 2014: 72)">
             <mediaobject>
@@ -352,8 +320,8 @@
             always live? Will it happen on the server or in the browser? Bound up with these
             questions is the decision of how to structure the software that mediates between the
             back-end content and the front-end presentation. We use eXist-db as the data store in
-            all of the examples below, but each example makes different choices about
-            the proportion of application logic and source-conversion entrusted to eXist-db.</para>
+            all of the examples below, but each example makes different choices about the proportion
+            of application logic and source-conversion entrusted to eXist-db.</para>
         <para>The decision of where to place the application logic of a digital edition and how to
             structure it may be influenced by many factors, including performance, available
             developer expertise, and software functionality. The latter issue can be acute because
@@ -581,11 +549,10 @@ echo file_get_contents($xql);</programlisting></para>
                     prototypical LAMP stack. However, it is also possible to build applications
                     purely with XQuery. In this architecture, eXist-db functions as the entire AMP
                     portion of the stack—handling the model, view, and controller.<footnote>
-                        <para>The eXist-db documentation provides advice about
-                            deploying the database in production with a reverse
-                            proxy for security [<xref linkend="proxying-exist"/>].</para>
-                    </footnote> 
-                    The primary advantage of this model is that the edition’s developer
+                        <para>The eXist-db documentation provides advice about deploying the
+                            database in production with a reverse proxy for security [<xref
+                                linkend="proxying-exist"/>].</para>
+                    </footnote> The primary advantage of this model is that the edition’s developer
                     need master only one core technology—XQuery—rather than many disparate ones.
                     Kurt Cagle articulated this potential in an article published just months after
                     XQuery achieved 1.0 status as a W3C Recommendation in 2007: <blockquote>
@@ -613,8 +580,8 @@ echo file_get_contents($xql);</programlisting></para>
                     ability to access HTTP request parameters (as well as host names, server ports,
                     etc.), control session parameters, and return HTTP responses with customized
                     status, headers, and body. An eXist-db application can even serve customized URL
-                    endpoints via its native <xref linkend="exist-url-rewriting"/> or through its support for
-                    <xref linkend="exist-restxq"/>.</para>
+                    endpoints via its native <xref linkend="exist-url-rewriting"/> or through its
+                    support for <xref linkend="exist-restxq"/>.</para>
                 <para>To illustrate the appeal of such an architecture, we explore here the syllabus
                     of a half-day long seminar taught by one of this paper’s authors at digital
                     humanities institutes to participants who had already completed a Text Encoding
@@ -705,15 +672,15 @@ let $title :=
                         >http://localhost:8080/exist/apps/punch/v1/list-issues.xq</emphasis>. This
                     URL is serviced by eXist-db’s Jetty server, which is configured to execute
                     queries stored within the <emphasis role="ital">/db/apps</emphasis> database
-                    collection via the <code>/exist/apps</code> URL space. By default the query 
-                    returns raw XML, which is not the desired result, so the participants
-                    next learn how to add an XQuery serialization declaration to their query, which
-                    instructs eXist-db to return the HTML result of the query as a web page instead
-                    of as raw XML. Finally, the participants wrap an HTML link around each title,
-                    pointing to a second stored query and including a URL parameter, called
-                        <code>issue</code>, containing the issue’s unique identifier (the issue’s
-                    file name). This will be used to return a specified issue when a site visitor
-                    eventually clicks on an issue title in the list of issues.</para>
+                    collection via the <code>/exist/apps</code> URL space. By default the query
+                    returns raw XML, which is not the desired result, so the participants next learn
+                    how to add an XQuery serialization declaration to their query, which instructs
+                    eXist-db to return the HTML result of the query as a web page instead of as raw
+                    XML. Finally, the participants wrap an HTML link around each title, pointing to
+                    a second stored query and including a URL parameter, called <code>issue</code>,
+                    containing the issue’s unique identifier (the issue’s file name). This will be
+                    used to return a specified issue when a site visitor eventually clicks on an
+                    issue title in the list of issues.</para>
                 <para>To provide that issue view, participants next create a second module,
                         <emphasis role="ital">v1/view-whole-issue.xq</emphasis>, which calls on
                     eXist-db’s <code>request:get-parameter()</code> function to retrieve the
@@ -936,8 +903,8 @@ let $text := $doc/id($section)</programlisting></para>
                                 linkend="exist_indexing"/> for details.</para>
                     </footnote></para>
                 <para>The final step is to add a few files needed to distribute our application as
-                    an EXPath Package [<xref linkend="xar"/>]. The final project is available in a GitHub repository. [<xref
-                        linkend="punch"/>]</para>
+                    an EXPath Package [<xref linkend="xar"/>]. The final project is available in a
+                    GitHub repository. [<xref linkend="punch"/>]</para>
             </section>
             <section>
                 <title>Discussion</title>
@@ -1288,16 +1255,15 @@ let $text := $doc/id($section)</programlisting></para>
                 standardized base units that are highly reusable. To illustrate this design
                 orientation towards web standards and the reusability principle, the blog post
                 written by TEI Publisher's principal developer, Wolfgang Maier, employs the metaphor
-                of Lego blocks:</para>
-            <blockquote>
-                <para>Moving towards the emerging web component standard, TEI Publisher 4.0
-                    implements all this functionality as small <quote>lego</quote> blocks to be
-                    freely arranged, recombined and extended.<footnote>
-                        <para>See also the new menu entry "vision" that outlines the positioning of
-                            TEI Publisher as a community effort firmly grounded in the principles of
-                            Open Source, standards, and reusability.</para>
-                    </footnote></para>
-            </blockquote>
+                of Lego blocks: <blockquote>
+                    <para>Moving towards the emerging web component standard, TEI Publisher 4.0
+                        implements all this functionality as small <quote>lego</quote> blocks to be
+                        freely arranged, recombined and extended.<footnote>
+                            <para>See also the new menu entry "vision" that outlines the positioning
+                                of TEI Publisher as a community effort firmly grounded in the
+                                principles of Open Source, standards, and reusability.</para>
+                        </footnote></para>
+                </blockquote></para>
             <para>The TEI Publisher documentation states that: <quote>You do not need to know much
                     about Web Components to use them in TEI Publisher.</quote> In fact, users need
                 to understand only how the web components they want to use can be connected to the
@@ -1352,10 +1318,10 @@ let $text := $doc/id($section)</programlisting></para>
                 a scholarly obligation to consider its meaning, because with or without their active
                 intellectual engagement, the way a digital edition communicates with its readers is
                 part of how it expresses and argues for a theory of the text. And this, in turn,
-                means, among other things, that the way TEI XML is rendered in an edition is not an
-                independent presentation of a scholarly argument that inheres entirely in the TEI
-                XML markup, but an inalienable part of that argument. Tara Andrews and Joris van
-                Zundert write that: <blockquote>
+                means, among other things, that the way TEI XML is rendered in an edition is not a
+                neutral presentation of a scholarly argument that inheres entirely in the TEI XML
+                markup, but an inalienable part of that argument. Tara Andrews and Joris van Zundert
+                write that: <blockquote>
                     <para>The user interface of digital scholarly editions is often treated as a
                         content-free and ideally interchangeable appendage to that which is actually
                         considered the scholarly effort or work–the examination and preparation of
@@ -1376,7 +1342,7 @@ let $text := $doc/id($section)</programlisting></para>
                         messages that the editor wishes to convey about the text. (30) [<xref
                             linkend="andrews"/>]</para>
                 </blockquote></para>
-            <para>Wout Dillen advocated for a similar perspective:<blockquote>
+            <para>Wout Dillen advocates for a similar perspective:<blockquote>
                     <para>[D]ata visualisations or interfaces are not the endpoints of our research,
                         they are just the beginning. We use them to try to make a point about our
                         data (36) …[T]he interface can be regarded as a second layer of editorial
@@ -1395,24 +1361,99 @@ let $text := $doc/id($section)</programlisting></para>
                         an important place for the editor to convey her views on the material. 42)
                             [<xref linkend="dillen"/> 36]</para>
                 </blockquote></para>
-            <para>To the extent that the presentation of the edition information, then, is a
-                scholarly product, it is the proper business of scholars.<footnote>
+            <para>To the extent that the <emphasis role="ital">presentation</emphasis> of the
+                edition data, then, is a scholarly product, it is the proper business of scholars.<footnote>
                     <para>The acknowledgement that interface is scholarship should not be
                         misconstrued as advocating against providing full and open access to all
-                        data, which may include TEI XML document instances and the ODD that defines
-                        and documents how TEI has been used in the edition. There is no
+                        research data, which may include TEI XML document instances and the ODD that
+                        defines and documents how TEI has been used in the edition. There is no
                         incompatibility between regarding the interface as scholarship and providing
                         reusable access to all work products.</para>
                 </footnote> The TEI XML alone is not the full or only scholarly product, and neither
                 is its transformation with a generic presentation script, such as that provided by
                 uncustomized use of TEI Boilerplate or the TEI Stylesheets. [<xref
-                    linkend="boilerplate"/>, <xref linkend="tei_stylesheets"/>] For that reason, a
-                digital edition publishing framework, such as the four explored in this study,
-                should be 1) maximally configurable and 2) usable by digitally capable and digitally
-                willing textual scholars. Each of the four frameworks is fully configurable,
-                although they differ in their ease of use, perhaps in general, and certainly
-                according to an individual researcher’s technical expertise. Those differences are
-                explored below.</para>
+                    linkend="boilerplate"/>, <xref linkend="tei_stylesheets"/>] If it is to fulfill
+                its scholarly potential, then, a digital edition publishing framework, such as the
+                four explored in this study, should be 1) maximally configurable and 2) usable by
+                digitally capable and digitally willing textual scholars. Each of the four
+                frameworks is fully configurable, although they differ in their ease of use, perhaps
+                in general, and certainly according to an individual researcher’s technical
+                expertise. Those differences are explored below.</para>
+            <para>In his 2019 consideration of, among other things, the extent to which the data and
+                the presentation contribute to constituting the digital edition, James Cummings
+                acknowledges the fundamental role of the data; the analytical, interpretive, and
+                communicative scholarly importance of the interface; and the unique value of
+                API-mediated access in supporting reuse, that is, scholarship that the original
+                editor may not have envisioned. Thus:<itemizedlist>
+                    <listitem>
+                        <para><quote>[T]he encoded data is a good representation of the scholarly
+                                edition and one I care about deeply.</quote> That is, the data are
+                            essential. This echoes Dillen’s <quote>Without […] data, there are no
+                                editions–be they digital or in print. The same cannot be said about
+                                interfaces.</quote> [<xref linkend="dillen"/> 36])</para>
+                    </listitem>
+                    <listitem>
+                        <para><quote>If part of the point of editing a work is to make it more
+                                accessible, in all senses of that word, then usually some
+                                presentation view of the edition is required.</quote> That is, the
+                            presentation is a way of facilitating scholarship by communicating
+                            scholarly interpretation. In part this echoes Andrews and van Zundert,
+                            cited above: <quote>The interface is thus an integral part of the
+                                argument that an edition makes about a text.</quote> Dillen writes,
+                            similarly: <quote>[…] it is exactly by reconfiguring our materials in
+                                new ways, by constructing an interface around those materials, by
+                                interacting with other people, and by seeing how the interface
+                                shapes <emphasis role="ital">their</emphasis> interpretation of the
+                                data, that we keep developing our own interpretations of those
+                                materials.</quote> [<xref linkend="dillen"/> 36])</para>
+                        <para>Cummings, however, concentrates on the communicative potential of the
+                            interface in a way that seems to downplay what Andrews, van Zundert, and
+                            Dillen see as its added value as scholarly analysis and interpretation,
+                            and not merely the communication of scholarly analysis and
+                            interpretation that happens elsewhere. We thus disagree with the
+                            implicitly invidious rhetorical use of <quote>merely</quote> in
+                            Cummings’s <quote>the presentation layer is merely one or more
+                                additional views on the data</quote>. But insofar as a view on the
+                            data is analytical and interpretive, and therefore informational,
+                            Cummings’s position may understood as valorizing the scholarly value of
+                            the presentation while emphasizing that no interpretation should be
+                            regarded as exhaustive or definitive, and that edition data can and
+                            should be made reusable for alternative analyses and
+                            interpretations.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Cummings advocates for the importance of this reuse when he writes
+                            that <quote>a truly conceptual editorial object is malleable and
+                                recombinable, and an encoded edition, by itself, is not […] the true
+                                form of a scholarly digital edition would be better expressed as a
+                                well-documented API for the manipulation and description of
+                                editorial objects following an open international standard for the
+                                representation of digital text</quote>. We disagree with the
+                            rhetorical use of <quote>the true form</quote>, where the definite
+                            article invidiously implies that there is only one, and
+                                <quote>true</quote> invidiously implies that others are false. But
+                            insofar as presentations may be limited by what the editor has
+                            anticipated, envisioned, recognized, understood, and facilitated, we
+                            agree completely that TEI XML plus specific presentational decisions do
+                            not exhaust the potential information value of an edition.</para>
+                    </listitem>
+                </itemizedlist></para>
+            <para>Cummings focuses on the primacy—at least in some cases—of reuse of the editorial
+                objects underlying an edition by others when he writes the following:<blockquote>
+                    <para>[…] the underlying data may in fact have been created not for a scholarly
+                        digital edition as a publication, but as a resource to be interrogated,
+                        analysed, or queried, rather than published. The publication of a scholarly
+                        digital edition can, and perhaps more often should, be a mere byproduct of
+                        the real research undertaken. That such information resources, in this case
+                        datasets of editorial objects, become corpora for research analysis. [<xref
+                            linkend="cummings_2019"/>]</para>
+                </blockquote> This view is compatible with regarding the original editor, that is,
+                the person who encodes the digital objects, as the first such researcher. In that
+                capacity, fixed digital objects (in, for example, TEI XML) are one scholarly
+                product, the interpretive and rhetorical views created by the editor are a different
+                scholarly product (thus <xref linkend="andrews"/> and <xref linkend="dillen"/>), and
+                the API is yet another scholarly product (thus <xref linkend="cummings_2019"/>).
+                All, then, are digital scholarly components of a digital scholarly edition.</para>
         </section>
         <section>
             <title>General</title>
@@ -1420,52 +1461,53 @@ let $text := $doc/id($section)</programlisting></para>
                 edition from TEI XML source using eXist-db, and the differences among them may be
                 understood as including, among other things, the extent to which they rely on
                 eXist-db-specific functionality. Increasing reliance on eXist-db for executing the
-                transformation typically conveys an increasing advantage of lessening the extent to
-                which the developer is required to write and maintain bespoke code for the edition,
-                since the developer instead takes advantage, to varying extents, of what eXist-db
-                (or eXist-db enhanced with PM support) already knows how to do. But with this
-                reliance comes a greater dependence on functionality implemented in a specific way
-                in (or perhaps available only within) eXist-db. That eXist-db HTML templating and
-                TEI Publisher are implemented entirely with standardized technologies like XQuery
-                and Web Components mitigates the lock-in effect because it means that the
-                implementations <emphasis role="ital">could</emphasis> be ported to a different
-                DBMS/CMS environment. But that transparency may be of limited immediate value to a
-                user who is comfortable at the application level with XQuery, but not at the higher
-                level required for migrating from the eXist-db infrastructure to that of BaseX or
-                MarkLogic. On the other hand, the extent to which a commitment to one of the four
-                methods described above entails a commitment to a specific platform, such as
-                eXist-db, may be less important when we consider the lock-in aspects of the eXist-db
-                URL rewriting facility, its Lucene-based full text index and query functions, and
-                its newest feature in the forthcoming eXist-db 5, faceted browsing (which also uses
-                Lucene). A project concerned about lock-in might be advised to worry more about
-                those layers than about HTML templating or TEI Publisher per se.</para>
+                transformation from model to view typically conveys an increasing advantage of
+                lessening the extent to which the developer is required to write and maintain
+                bespoke code for the edition, since the developer instead takes advantage, to
+                varying extents, of what eXist-db (or eXist-db enhanced with PM support) already
+                knows how to do. But with this reliance comes a greater dependence on functionality
+                implemented in a specific way in (or perhaps available only within) eXist-db. That
+                eXist-db HTML templating and TEI Publisher are implemented entirely with
+                standardized technologies like XQuery and Web Components mitigates the lock-in
+                effect because it means that the implementations <emphasis role="ital"
+                    >could</emphasis> be ported to a different DBMS/CMS environment. But that
+                transparency may be of limited immediate value to a user who is comfortable at the
+                application level with XQuery, but not at the higher level required for migrating
+                from the eXist-db infrastructure to that of BaseX or MarkLogic. On the other hand,
+                the extent to which a commitment to one of the four methods described above entails
+                a commitment to a specific platform, such as eXist-db, may be less important when we
+                consider the lock-in aspects of the eXist-db URL rewriting facility, its
+                Lucene-based full text index and query functions, and its newest feature in the
+                forthcoming eXist-db 5, faceted browsing (which also uses Lucene). A project
+                concerned about lock-in might be advised to worry more about those layers than about
+                HTML templating or TEI Publisher per se.</para>
             <para>TEI Publisher, by any fair measure, exemplifies an integrated and well-developed,
                 whole-cloth conception of a starter system for publishing editions. The philosophy
                 underlying TEI Publisher prioritizes exposing more control over the output
                 specification while requiring less programming expertise. With that said, each
                 project needs to evaluate which model serves it best, assessing the importance of
-                each of the following considerations in the context of the project:</para>
-            <itemizedlist>
-                <listitem>
-                    <para>minimizing the dependence on any specific DBMS, so that the M layer of the
-                        LAMP stack is limited to the storage and retrieval of data, using, as much
-                        as possible, open and broadly supported standards, such as pure XQuery and
-                        XPath</para>
-                </listitem>
-                <listitem>
-                    <para>minimizing the number of layers and languages (XQuery does it all)</para>
-                </listitem>
-                <listitem>
-                    <para>separating concerns and required skills by segregating HTML templates from
-                        the XQuery code that dynamically populates the templates (XQuery does it all
-                        except HTML scaffolding and superstructure)</para>
-                </listitem>
-                <listitem>
-                    <para>minimizing custom transformation code and leveraging common behaviors (One
-                        Document Does it All, except HTML scaffolding, with XQuery limited to
-                        extension behaviors)</para>
-                </listitem>
-            </itemizedlist>
+                each of the following considerations in the context of the project: <itemizedlist>
+                    <listitem>
+                        <para>minimizing the dependence on any specific DBMS, so that the M layer of
+                            the LAMP stack is limited to the storage and retrieval of data, using,
+                            as much as possible, open and broadly supported standards, such as pure
+                            XQuery and XPath</para>
+                    </listitem>
+                    <listitem>
+                        <para>minimizing the number of layers and languages (XQuery does it
+                            all)</para>
+                    </listitem>
+                    <listitem>
+                        <para>separating concerns and required skills by segregating HTML templates
+                            from the XQuery code that dynamically populates the templates (XQuery
+                            does it all except HTML scaffolding and superstructure)</para>
+                    </listitem>
+                    <listitem>
+                        <para>minimizing custom transformation code and leveraging common behaviors
+                            (One Document Does it All, except HTML scaffolding, with XQuery limited
+                            to extension behaviors)</para>
+                    </listitem>
+                </itemizedlist></para>
             <para>Different projects might reasonably make different choices from this menu.</para>
         </section>
         <section>
@@ -1482,28 +1524,49 @@ let $text := $doc/id($section)</programlisting></para>
         </section>
         <section>
             <title>Ease of use</title>
-            <para>Ease of use may be measured in different ways. On the one hand, the four
-                methods described above, in order from first to last, increasingly simplify
-                configuration and customization within anticipated, supported parameters, requiring
-                less—and often much less—custom code than a traditional LAMP architecture. On the
-                other hand, in distributing responsibilities these more CMS-like methods may require
-                increasingly greater coordination across parts of the CMS. For example, all of the
-                code for the middleware approach, as the developer sees it, it located in just two
-                places: the scripting language (such as PHP), which processes user input and creates
-                output views, and the XQuery inside eXist-db, which retrieves information from the
-                model. At the other extreme, TEI Publisher information may be distributed over
-                multiple files in multiple libraries, and while in many cases the user may not have
-                to interact explicitly with most of them, customization (such as the incorporation
-                of a new behavior) requires the ability to navigate a more complex resource
-                structure. It may be helpful in this context to think of different roles in the
-                development process. From this perspective, the greater complexity of the TEI
-                Publisher model may fall only to a professional developer, who can reasonably be
-                expected to have or to acquire the necessary skill. Meanwhile, the scholar-editor
-                may need only to choose among supported behaviors and CSS-like rendering
-                instructions, which is a low requirement for technical expertise. In comparison, the
-                middleware organization, while architecturally simpler overall than TEI Publisher,
-                requires much more advanced programming skills from the user because it does not aim
-                to distinguish clearly a scholar-editor role and a developer role.</para>
+            <para> Cummings argues that <quote>as much as possible editors of scholarly digital
+                    editions should not be distracted from editorial tasks by technological concerns
+                        <emphasis role="ital">if these technological concerns do not affect their
+                        edition</emphasis>.</quote> [<xref linkend="cummings_2019"/>, emphasis
+                added] This idea, and the way it is worded, strikes a wise middle ground between two
+                extremes. One extreme is the largely unrealistic requirement, implicit in the
+                complexity of some infrastructure and application architectures, that the scholar
+                will have highly developed programming skills. This is true of some digital
+                scholarly editors, but not of all. The other extreme is the naive assumption,
+                implicit in tools that wholly isolate the researcher from the methods implemented in
+                the software, that if the researcher focuses on the content, the technology can be
+                left in the hands of programmers. Among other things, software may embed scholarly
+                assumptions that researches need to understand if they are to accept responsibility
+                for adopting the decisions the software makes on their behalf.<footnote>
+                    <para>For a thoughtful perspective on how the use of software may or may not
+                        entail the acceptance of scholarly judgments by others see <xref
+                            linkend="zundert"/>.</para>
+                </footnote> Ease of use may thus be understood as not requiring unnecessary
+                technological expertise from the researcher, while also recognizing that some
+                technological concerns affect the edition, and thus must be made accessible to the
+                researcher.</para>
+            <para>Ease of use may be measured in different ways. On the one hand, the four methods
+                described above, in order from first to last, increasingly simplify configuration
+                and customization within anticipated, supported parameters, requiring less—and often
+                much less—custom code than a traditional LAMP architecture. On the other hand, in
+                distributing responsibilities these more CMS-like methods may require increasingly
+                greater coordination across parts of the CMS. For example, all of the code for the
+                middleware approach, as the developer sees it, it located in just two places: the
+                scripting language (such as PHP), which processes user input and creates output
+                views, and the XQuery inside eXist-db, which retrieves information from the model.
+                At the other extreme, TEI Publisher information may be distributed over multiple
+                files in multiple libraries, and while in many cases the user may not have to
+                interact explicitly with most of them, customization (such as the incorporation of a
+                new behavior) requires the ability to navigate a more complex resource structure. It
+                may be helpful in this context to think of different roles in the development
+                process. From this perspective, the greater complexity of the TEI Publisher model
+                may fall only to a professional developer, who can reasonably be expected to have or
+                to acquire the necessary skill. Meanwhile, the scholar-editor may need only to
+                choose among supported behaviors and CSS-like rendering instructions, which is a low
+                requirement for technical expertise. In comparison, the middleware organization,
+                while architecturally simpler overall than TEI Publisher, requires much more
+                advanced programming skills from the user because it does not aim to distinguish
+                clearly a scholar-editor role and a developer role.</para>
         </section>
         <section>
             <title>So what about those peanut butter cups?</title>
@@ -1590,13 +1653,11 @@ let $text := $doc/id($section)</programlisting></para>
             <quote>eXist-db: HTML Templating Module.</quote>
             <link>https://exist-db.org/exist/apps/doc/templating.xml</link>
         </bibliomixed>
-        <bibliomixed xml:id="meier-2003" xreflabel="Meier 2003">Meier, Wolfgang.
-                <quote>eXist: An Open Source Native XML Database.</quote> In
-            Chaudhri A.B., Jeckle M., Rahm E., Unland R. (eds) <emphasis
-                role="ital">Web, Web-Services, and Database Systems. NODe
-                2002</emphasis>. Lecture Notes in Computer Science, vol 2593.
-            Springer, Berlin, Heidelberg.
-                <link>https://link.springer.com/chapter/10.1007/3-540-36560-5_13</link>
+        <bibliomixed xml:id="meier-2003" xreflabel="Meier 2003">Meier, Wolfgang. <quote>eXist: An
+                Open Source Native XML Database.</quote> In Chaudhri A.B., Jeckle M., Rahm E.,
+            Unland R. (eds) <emphasis role="ital">Web, Web-Services, and Database Systems. NODe
+                2002</emphasis>. Lecture Notes in Computer Science, vol 2593. Springer, Berlin,
+            Heidelberg. <link>https://link.springer.com/chapter/10.1007/3-540-36560-5_13</link>
         </bibliomixed>
         <bibliomixed xml:id="Jetty" xreflabel="Jetty">Eclipse Jetty.
                 <link>https://www.eclipse.org/jetty/</link></bibliomixed>
@@ -1624,15 +1685,13 @@ let $text := $doc/id($section)</programlisting></para>
                 application written in XQuery for eXist-db demonstrating how to create a dynamic,
                 searchable website for TEI text.</quote>
             <link>https://github.com/joewiz/punch</link></bibliomixed>
-        <bibliomixed xreflabel="Proxying eXist-db" xml:id="proxying-exist"
-            >Production use - Proxying eXist-db behind a Web Server.
+        <bibliomixed xreflabel="Proxying eXist-db" xml:id="proxying-exist">Production use - Proxying
+            eXist-db behind a Web Server.
                 <link>https://exist-db.org/exist/apps/doc/production_web_proxying</link></bibliomixed>
-        <bibliomixed xreflabel="RESTXQ" xml:id="exist-restxq"
-            >XQuery in eXist-db: RESTXQ.
-            <link>https://exist-db.org/exist/apps/doc/xquery#restxq</link></bibliomixed>
-        <bibliomixed xreflabel="URL Rewriting Facility" xml:id="exist-url-rewriting"
-            >URL Rewriting.
-            <link>https://exist-db.org/exist/apps/doc/urlrewrite</link></bibliomixed>
+        <bibliomixed xreflabel="RESTXQ" xml:id="exist-restxq">XQuery in eXist-db: RESTXQ.
+                <link>https://exist-db.org/exist/apps/doc/xquery#restxq</link></bibliomixed>
+        <bibliomixed xreflabel="URL Rewriting Facility" xml:id="exist-url-rewriting">URL Rewriting.
+                <link>https://exist-db.org/exist/apps/doc/urlrewrite</link></bibliomixed>
         <bibliomixed xreflabel="React" xml:id="React.js">React. A JavaScript library for building
             user interfaces. <link>https://reactjs.org/</link></bibliomixed>
         <bibliomixed xml:id="reenskaug" xreflabel="Reenskaug">Reenskaug, Trygve M. H. <quote>MVC.
@@ -1691,6 +1750,11 @@ let $text := $doc/id($section)</programlisting></para>
                 of Reese’s Peanut Butter Cups.</quote>
             <emphasis role="ital">Business insider.</emphasis> June 30, 2013.
                 <link>https://www.businessinsider.com/the-fascinating-rise-of-reeses-peanut-butter-cups-2013-6</link></bibliomixed>
+        <bibliomixed xml:id="zundert" xreflabel="van Zundert and Haentjens Dekker 2017">van Zundert,
+            Joris J. and Ronald Haentjens Dekker. <quote>Code, scholarship, and criticism: when is
+                code scholarship and when is it not?</quote>
+            <emphasis role="ital">Digital scholarship in the humanities</emphasis>, Vol. 32,
+            Supplement 1, 2017, i121–33.</bibliomixed>
         <bibliomixed xml:id="versioning" xreflabel="Versioning Machine">Versioning Machine 5.0 A
             tool for displaying and comparing different versions of a literary text.
                 <link>http://v-machine.org/</link></bibliomixed>
