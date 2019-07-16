@@ -360,15 +360,15 @@
             of the stagnation of XML technology development in some areas. Common application
             frameworks such as Ruby on Rails [<xref linkend="ruby"/>], Flask (Python) [<xref
                 linkend="flask"/>], or Django (Python) [<xref linkend="django"/>] rely on libxml2
-            and libxslt for XML processing, and there are restricted to XSLT 1.0. Java or
+            and libxslt for XML processing, and therefore are restricted to XSLT 1.0. Java or
             ASP.Net-based systems can make use of the more modern XSLT support available in Saxon
                 [<xref linkend="saxon"/>], and the same is true of Saxon-JS [<xref linkend="saxonjs"
             />]. eXist-db supports XQuery 3.1, but a decision to use it as a complete solution may
             mean relying upon it for things like user management and other functionality that could
-            be easier to implement on top of a web framework. In addition, it may be easier
-            to find developers qualified to work with a common web application framework than with
-            eXist-db. With all of that said, there are obvious advantages to working with
-            XML-related processing solutions when dealing with XML data resources.</para>
+            be easier to implement on top of a web framework. In addition, it may be easier to find
+            developers qualified to work with a common web application framework than with eXist-db.
+            With all of that said, there are obvious advantages to working with XML-related
+            processing solutions when dealing with XML data resources.</para>
         <para>MVC is an architecture that separates an application into three components: Model,
             View, and Controller.<footnote>
                 <para>For a history of MVC see <xref linkend="reenskaug"/>.</para>
@@ -1506,7 +1506,7 @@ let $text := $doc/id($section)</programlisting></para>
                 to distinguish clearly a scholar-editor role and a developer role.</para>
         </section>
         <section>
-            <title>So what about those peanut bugger cups?</title>
+            <title>So what about those peanut butter cups?</title>
             <para>If we return to our analogy of eXist-db’s XML DBMS services as the peanut butter
                 core of a Reese’s Peanut Butter Cup and other eXist-db services (not only Jetty
                 HTTPS services, but now also app processing, HTML templating, and PM), we might say
