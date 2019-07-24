@@ -179,7 +179,7 @@
             </mediaobject>
         </figure>
         <para>Meanwhile, in a galaxy far, far away, the eXist-db native XML database was born in
-                2000.<xref linkend="meier-2003"/> Created by Wolfgang Meier, who at the time was a
+            2000. [<xref linkend="meier-2003"/>] Created by Wolfgang Meier, who at the time was a
             researcher in the field of sociology, to support projects that required the efficient
             processing of XML documents, eXist-db was released as a free, open source project that
             has enjoyed a broad following in the world of XML and NoSQL databases. In particular,
@@ -607,7 +607,8 @@ echo file_get_contents($xql);</programlisting></para>
                             <para>sorting the results with XQuery</para>
                         </listitem>
                         <listitem>
-                            <para>creating HTML and serializing it in response to requests from web browsers</para>
+                            <para>creating HTML and serializing it in response to requests from web
+                                browsers</para>
                         </listitem>
                         <listitem>
                             <para>transforming TEI into HTML</para>
@@ -738,8 +739,8 @@ return
                 <para>The TEI-to-HTML module’s primary function, <code>tei-to-html:render()</code>,
                     does a bit of housekeeping and then calls <code>tei-to-html:dispatch()</code>,
                     which recursively walks through the entire TEI document, using the XQuery
-                        <code>typeswitch</code> expression to look at each node of the TEI
-                    document and pass it to the appropriate function:
+                        <code>typeswitch</code> expression to look at each node of the TEI document
+                    and pass it to the appropriate function:
                     <programlisting>(: Typeswitch routine: Takes any node in a TEI content and 
  : either dispatches it to a dedicated function that handles that 
  : content (e.g. div), ignores it by passing it to the recurse() 
