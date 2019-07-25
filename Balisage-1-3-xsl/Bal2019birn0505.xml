@@ -1576,12 +1576,13 @@ let $text := $doc/id($section)</programlisting></para>
             <title>So what about those peanut butter cups?</title>
             <para>If we return to our analogy of eXist-db’s XML DBMS services as the peanut butter
                 core of a Reese’s Peanut Butter Cup and other eXist-db services (not only Jetty
-                HTTPS services, but now also app processing, HTML templating, and PM), we might say
-                that the researcher has a choice. With any of the frameworks described above the
-                developer has control over the selection, arrangement, and presentation of the
-                information. But to what extent do you want to combine your own peanut butter with
-                your own chocolate and to what extent do you feel that the combination offered by
-                Reese’s is superior to what you might produce yourself?</para>
+                HTTPS services, but now also app processing, HTML templating, and PM) as the
+                surrounding chocolate , we might say that the researcher has a choice. With any of
+                the frameworks described above the developer has control over the selection,
+                arrangement, and presentation of the information. But to what extent do you want to
+                combine your own peanut butter with your own chocolate and to what extent do you
+                feel that the combination offered by Reese’s is superior to what you might produce
+                yourself?</para>
         </section>
     </section>
     <bibliography>
