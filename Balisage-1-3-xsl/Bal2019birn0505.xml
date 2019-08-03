@@ -1388,60 +1388,46 @@ let $text := $doc/id($section)</programlisting></para>
                 acknowledges the fundamental role of the data; the analytical, interpretive, and
                 communicative scholarly importance of the interface; and the unique value of
                 API-mediated access in supporting reuse, that is, scholarship that the original
-                editor may not have envisioned. Thus:<itemizedlist>
-                    <listitem>
-                        <para><quote>[T]he encoded data is a good representation of the scholarly
-                                edition and one I care about deeply.</quote> That is, the data are
-                            essential. This echoes Dillen’s <quote>Without […] data, there are no
-                                editions–be they digital or in print. The same cannot be said about
-                                interfaces.</quote> [<xref linkend="dillen"/> 36]</para>
-                    </listitem>
-                    <listitem>
-                        <para><quote>If part of the point of editing a work is to make it more
-                                accessible, in all senses of that word, then usually some
-                                presentation view of the edition is required.</quote> That is, the
-                            presentation is a way of facilitating scholarship by communicating
-                            scholarly interpretation. In part this echoes Andrews and van Zundert,
-                            cited above: <quote>The interface is thus an integral part of the
-                                argument that an edition makes about a text.</quote> Dillen writes,
-                            similarly: <quote>[…] it is exactly by reconfiguring our materials in
-                                new ways, by constructing an interface around those materials, by
-                                interacting with other people, and by seeing how the interface
-                                shapes <emphasis role="ital">their</emphasis> interpretation of the
-                                data, that we keep developing our own interpretations of those
-                                materials.</quote> [<xref linkend="dillen"/> 36]</para>
-                        <para>Cummings, however, concentrates on the communicative potential of the
-                            interface in a way that seems to downplay what Andrews, van Zundert, and
-                            Dillen see as its added value as scholarly analysis and interpretation,
-                            and not merely the communication of scholarly analysis and
-                            interpretation that happens elsewhere. We thus disagree with the
-                            implicitly invidious rhetorical use of <quote>merely</quote> in
-                            Cummings’s <quote>the presentation layer is merely one or more
-                                additional views on the data</quote>. But insofar as a view on the
-                            data is analytical and interpretive, and therefore informational,
-                            Cummings’s position may be understood as valorizing the scholarly value
-                            of the presentation while emphasizing that no interpretation should be
-                            regarded as exhaustive or definitive, and that edition data can and
-                            should be made reusable for alternative analyses and
-                            interpretations.</para>
-                    </listitem>
-                    <listitem>
-                        <para>Cummings advocates for the importance of this reuse when he writes
-                            that <quote>a truly conceptual editorial object is malleable and
-                                recombinable, and an encoded edition, by itself, is not […] the true
-                                form of a scholarly digital edition would be better expressed as a
-                                well-documented API for the manipulation and description of
-                                editorial objects following an open international standard for the
-                                representation of digital text</quote>. We disagree with the
-                            rhetorical use of <quote>the true form</quote>, where the definite
-                            article invidiously implies that there is only one, and
-                                <quote>true</quote> invidiously implies that others are false. But
-                            insofar as presentations may be limited by what the editor has
-                            anticipated, envisioned, recognized, understood, and facilitated, we
-                            agree completely that TEI XML plus specific presentational decisions do
-                            not exhaust the potential information value of an edition.</para>
-                    </listitem>
-                </itemizedlist></para>
+                editor may not have envisioned. About the centrality of the data Cummings writes
+                that <quote>The encoded data is a good representation of the scholarly edition and
+                    one I care about deeply.</quote> That is, the data are essential. This echoes
+                Dillen’s <quote>Without […] data, there are no editions–be they digital or in print.
+                    The same cannot be said about interfaces.</quote> [<xref linkend="dillen"/> 36]
+                Turning to interface, Cummings then adds that <quote>[i]f part of the point of
+                    editing a work is to make it more accessible, in all senses of that word, then
+                    usually some presentation view of the edition is required.</quote> That is, the
+                presentation is a way of facilitating scholarship by communicating scholarly
+                interpretation. In part this echoes Andrews and van Zundert, cited above: <quote>The
+                    interface is thus an integral part of the argument that an edition makes about a
+                    text.</quote> Dillen writes, similarly: <quote>[…] it is exactly by
+                    reconfiguring our materials in new ways, by constructing an interface around
+                    those materials, by interacting with other people, and by seeing how the
+                    interface shapes <emphasis role="ital">their</emphasis> interpretation of the
+                    data, that we keep developing our own interpretations of those
+                    materials.</quote> [<xref linkend="dillen"/> 36]</para>
+            <para>Cummings, however, concentrates on the communicative potential of the interface in
+                a way that seems to downplay what Andrews, van Zundert, and Dillen see as its added
+                value as scholarly analysis and interpretation, and not merely the communication of
+                scholarly analysis and interpretation that happens elsewhere. We thus disagree with
+                the implicitly invidious rhetorical use of <quote>merely</quote> in Cummings’s
+                    <quote>the presentation layer is merely one or more additional views on the
+                    data</quote>. But insofar as a view on the data is analytical and interpretive,
+                and therefore informational, Cummings’s position may be understood as valorizing the
+                scholarly value of the presentation while emphasizing that no interpretation should
+                be regarded as exhaustive or definitive, and that edition data can and should be
+                made reusable for alternative analyses and interpretations.</para>
+            <para>Cummings advocates for the importance of this reuse when he writes that <quote>a
+                    truly conceptual editorial object is malleable and recombinable, and an encoded
+                    edition, by itself, is not […] the true form of a scholarly digital edition
+                    would be better expressed as a well-documented API for the manipulation and
+                    description of editorial objects following an open international standard for
+                    the representation of digital text</quote>. We disagree with the rhetorical use
+                of <quote>the true form</quote>, where the definite article invidiously implies that
+                there is only one, and <quote>true</quote> invidiously implies that others are
+                false. But insofar as presentations may be limited by what the editor has
+                anticipated, envisioned, recognized, understood, and facilitated, we agree
+                completely that TEI XML plus specific presentational decisions do not exhaust the
+                potential information value of an edition.</para>
             <para>Cummings focuses on the primacy—at least in some cases—of reuse of the editorial
                 objects underlying an edition by others when he writes the following:<blockquote>
                     <para>[…] the underlying data may in fact have been created not for a scholarly
