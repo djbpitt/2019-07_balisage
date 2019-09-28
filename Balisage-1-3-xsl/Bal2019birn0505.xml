@@ -161,15 +161,15 @@
             deployed an advertising campaign that portrayed the idea of eating chocolate and peanut
             butter together as a serendipitous pleasure. In one television advertisement (<xref
                 linkend="reeses"/>), two persons accidentally walk into each other on the street, he
-            eating a chocolate bar and she (perhaps surprisingly) eating peanut butter out of a jar
-            with her finger. They collide, the chocolate bar winds up embedded in the peanut butter,
-            and they protest, in unison: <quote>You got your chocolate in my peanut butter</quote>
-            and <quote>You got peanut butter on my chocolate!</quote> They both then,
-            simultaneously, realize that they like the taste of the combination, and proclaim, still
-            in unison, <quote>Delicious!</quote>, as an older man (apparently a grocer; he wears an
-            apron) suddenly materializes between them, standing uncomfortably close and silently
-            ogling the packaged Reese’s Peanut Butter Cups that he holds up (for the camera; it is
-            behind the field of view of the two principals).</para>
+            eating a chocolate bar and she eating peanut butter out of a jar with—perhaps
+            surprisingly—her finger. They collide, the chocolate bar winds up embedded in the peanut
+            butter, and they protest, in unison: <quote>You got your chocolate in my peanut
+                butter</quote> and <quote>You got peanut butter on my chocolate!</quote> They both
+            then, simultaneously, realize that they like the taste of the combination, and proclaim,
+            still in unison, <quote>Delicious!</quote>, as an older man (apparently a grocer; he
+            wears an apron) suddenly materializes between them, standing uncomfortably close and
+            silently ogling the packaged Reese’s Peanut Butter Cups that he holds up (for the
+            camera; it is behind the field of view of the two principals).</para>
         <figure xml:id="reeses_image"
             xreflabel="Reese’s Peanut Butter Cups (advertisement; product)">
             <mediaobject>
@@ -224,13 +224,17 @@
             architectures, the release of TEI Publisher 4.0 in December 2018 [<xref
                 linkend="teiPublisher4.0"/>] provides an opportunity for creators of digital
             editions, such as the authors of this paper, to review and assess the existing
-            architectures in the context of this new one. An implementation of the TEI Processing
-            Model [<xref linkend="tei_pm"/>, <xref linkend="turska_pm"/>] that leverages Web
-            Components for its default user interface [<xref linkend="webComponents"/>], TEI
-            Publisher can be said to turn eXist-db into a hosting platform for digital editions that
-            both goes very far beyond traditional DBMS services and provides functionality that
-            would normally be expected from a CMS. The TEI Publisher documentation says as much
-            explicitly (see especially the paragraph below the numbered list):<blockquote>
+            architectures in the context of this new one.<footnote>
+                <para>The release of TEI Publisher 5.0 was announced on August 2, 2019, too late for
+                    it to be included in this report. For details see <xref linkend="teiPublishe5.0"
+                    />.</para>
+            </footnote> An implementation of the TEI Processing Model [<xref linkend="tei_pm"/>,
+                <xref linkend="turska_pm"/>] that leverages Web Components for its default user
+            interface [<xref linkend="webComponents"/>], TEI Publisher can be said to turn eXist-db
+            into a hosting platform for digital editions that both goes very far beyond traditional
+            DBMS services and provides functionality that would normally be expected from a CMS. The
+            TEI Publisher documentation says as much explicitly (see especially the paragraph below
+            the numbered list):<blockquote>
                 <para>Despite its elegant simplicity, various projects we realized in the past prove
                     that the TEI Processing Model is: <blockquote>
                         <para>1. powerful enough to cover complex transformation needs</para>
@@ -1719,6 +1723,9 @@ let $text := $doc/id($section)</programlisting></para>
         <bibliomixed xml:id="teiPublisher4.0" xreflabel="TEI Publisher 4.0"><quote>TEI Publisher
                 4.0.</quote> Product announcement. 2018-12-20.
                 <link>https://teipublisher.com/exist/apps/tei-publisher/doc/blog/tei-publisher-40.xml</link></bibliomixed>
+        <bibliomixed xml:id="teiPublishe5.0" xreflabel="TEI Publisher 5.0"><quote>TEI Publisher
+                5.0.</quote> Product announcement. 2019-08-02.
+                <link>https://teipublisher.com/exist/apps/tei-publisher/doc/blog/tei-publisher-50.xml</link></bibliomixed>
         <bibliomixed xml:id="teiPublisherQuick" xreflabel="TEI Publisher Quickstart">
             <quote>TEI Publisher Quickstart.</quote>
             <link>https://teipublisher.com/exist/apps/tei-publisher/doc/documentation.xml</link>
