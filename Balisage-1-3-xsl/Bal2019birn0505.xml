@@ -995,7 +995,7 @@ let $text := $doc/id($section)</programlisting></para>
                 type conversion. The logic underlying parameter injection means that the template
                 processing makes best guesses about what the developer intends, which requires the
                 developer to observe certain conventions. This has the virtue of reducing the
-                behaviors that must be described through project-specific code, including annoyingly
+                behaviours that must be described through project-specific code, including annoyingly
                 long and repetitive sequences of assignments from
                     <code>request:get-parameter()</code> calls, but because some aspects of
                 processing are no longer coded explicitly by the developer, it requires that the
@@ -1006,7 +1006,7 @@ let $text := $doc/id($section)</programlisting></para>
                 parameter value only by asking for it specifically with
                     <code>request:get-parameter()</code>, you are less likely to become confused
                 about where it comes from.</para>
-            <para>Beyond the inherent cost (and benefit) of ceding control to implicit behaviors,
+            <para>Beyond the inherent cost (and benefit) of ceding control to implicit behaviours,
                 the principal cost of HTML templating is the possible need to translate
                 idiosyncrasies of the templates as implemented inside eXist-db to a different
                 template language. However, even in that case the initial domain knowledge and
@@ -1051,13 +1051,13 @@ let $text := $doc/id($section)</programlisting></para>
                 needed to create schemas and human-readable documentation.</para>
             <para>PM lets users map TEI structures onto some two dozen fundamental abstract
                 processing or rendering primitives called <emphasis role="ital"
-                >behaviors</emphasis>, which can be used to declare abstract rendering information
+                >behaviours</emphasis>, which can be used to declare abstract rendering information
                 like <quote>render <code>&lt;p></code> elements as <emphasis role="ital"
                         >blocks</emphasis></quote>, <quote>render <code>&lt;hi></code> elements as
                         <emphasis role="ital">inline</emphasis></quote>, <quote>render
                         <code>&lt;list></code> and <code>&lt;item></code> elements as components of
                         <emphasis role="ital">list</emphasis> structures</quote>, etc.<footnote>
-                    <para>For more information about PM behaviors see <xref linkend="tei_pm"
+                    <para>For more information about PM behaviours see <xref linkend="tei_pm"
                         />.</para>
                 </footnote> The PM thus provides formal, machine-actionable declarative processing
                 instructions, expressed in TEI, that are independent of any specific output format
@@ -1069,7 +1069,7 @@ let $text := $doc/id($section)</programlisting></para>
                     <code>&lt;model&gt;</code> child elements to the specification of an element in
                 the ODD file, and the <code>&lt;model&gt;</code> elements use attributes to bind
                 these processing expectations for a element (either globally or in a narrower XPath
-                context) to a behavior. For example, a user could specify how a
+                context) to a behaviour. For example, a user could specify how a
                     <code>&lt;hi&gt;</code> element should be rendered along the lines of:
                 <programlisting>&lt;elementSpec ident="hi" mode="change">
      &lt;model predicate="@rend ='it'" behaviour="inline">
@@ -1105,7 +1105,7 @@ let $text := $doc/id($section)</programlisting></para>
                 text in a tooltip displayed on mouseover, or vice versa, but because the PM
                 specification is high-level, abstract, and declarative, it can also be used during
                 print output to write one value into the running text and the other after it inside
-                parentheses. The PM specification for these two combines types of behavior might
+                parentheses. The PM specification for these two combines types of behaviour might
                 look like:
                 <programlisting>&lt;elementSpec ident="choice" mode="change"&gt;
     &lt;model output="web" predicate="orig and reg" behaviour="alternate"&gt;
@@ -1130,8 +1130,8 @@ let $text := $doc/id($section)</programlisting></para>
     &lt;model behaviour="inline"/&gt;
 &lt;/elementSpec&gt;</programlisting>
                 If no output rendition is specified, the built-in XQuery function for the designated
-                combination of behavior and output format will be used. In the preceding example,
-                    <code>alternate</code> is a predefined behavior that creates the tooltip
+                combination of behaviour and output format will be used. In the preceding example,
+                    <code>alternate</code> is a predefined behaviour that creates the tooltip
                 rendering for web output.</para>
             <para>The value of <code>@behaviour</code> can be set to <code>omit</code> if the
                 matched element is not to be included in the output. For example, TEI page beginning
@@ -1149,7 +1149,7 @@ let $text := $doc/id($section)</programlisting></para>
                         adequate for a wide variety of encoding projects. But TEI simplePrint goes
                         beyond merely customizing the TEI schema by also specifying rendering
                         preferences in a formal way through the use of PM.</para>
-                </footnote> TEI publisher implements PM with a library of built-in behaviors defined
+                </footnote> TEI publisher implements PM with a library of built-in behaviours defined
                 as XQuery functions for each output format. This implementation strategy offers sane
                 default mapping from PM’s CSS-based style language to the various output formats. It
                 also supports overriding these defaults with custom, output format-specific
@@ -1161,16 +1161,16 @@ let $text := $doc/id($section)</programlisting></para>
                 see that it requires mapping a <code>&lt;hi&gt;</code> element with a
                     <code>@rend</code> attribute set to <code>it</code>
                     (<code>&lt;hi[@rend='it']&gt;</code>) in a way that is not served in the list of
-                common behaviors defined by the TEI Guidelines and used mainly in the TEI Simple
+                common behaviours defined by the TEI Guidelines and used mainly in the TEI Simple
                 schema that serves as a default PM specification for TEI Publisher. Earlier versions
-                of TEI Publisher provided a way to extend the behaviors defined in the TEI
-                Guidelines by writing additional XQuery functions. For example, if this new behavior
+                of TEI Publisher provided a way to extend the behaviours defined in the TEI
+                Guidelines by writing additional XQuery functions. For example, if this new behaviour
                 was to be called <emphasis role="ital">emphasis</emphasis>, it could be written
                 as:<programlisting>declare function pmf:emphasis($config as map(*), $node as node(),
                     $class as xs:string+, $content) {
     &lt;em>{pmf:apply-children($config, $node, $content)}&lt;/em>
 };</programlisting>The
-                corresponding ODD model specification could then be mapped to this new behavior as
+                corresponding ODD model specification could then be mapped to this new behaviour as
                 follows:<programlisting>&lt;elementSpec ident="hi" mode="change">
     &lt;model predicate="@rend ='it'" behaviour="emphasis">
         &lt;param name="content" value="."/>                       
@@ -1178,8 +1178,8 @@ let $text := $doc/id($section)</programlisting></para>
 &lt;/elementSpec></programlisting></para>
             <para>The library part of TEI Publisher (<emphasis role="ital"
                     >tei-publisher-lib</emphasis>) release 2.5.0 introduced support for templates
-                and user-defined behaviors within the ODD that lets the user write the same new
-                behavior directly in the ODD. For example, this emphasis behaviour could (= should)
+                and user-defined behaviours within the ODD that lets the user write the same new
+                behaviour directly in the ODD. For example, this emphasis behaviour could (= should)
                 now be written as:
                 <programlisting>&lt;pb:behaviour ident="emphasis">
     &lt;desc xml:lang="en">custom emphasis&lt;/desc>
@@ -1210,7 +1210,7 @@ let $text := $doc/id($section)</programlisting></para>
                 already provides ways to embed texts into an application context, supporting the
                 integration of navigation, pagination, search, facsimile display, and more.</para>
             <para>The principal advantage of TEI Publisher, emphasized in the documentation, is that
-                by relying on reusable high-level, generic behaviors, it can substantially reduce
+                by relying on reusable high-level, generic behaviours, it can substantially reduce
                 the amount of code needed to create transformation, a benefit that inheres both in
                 code creation and in code maintenance. For example, Turska and Cummings write that: <blockquote>
                     <para>For the Office of Historian project figures suggest code reduction by at
@@ -1343,7 +1343,7 @@ let $text := $doc/id($section)</programlisting></para>
                             <para>Galey, Alan. <quote>The human presence in digital
                                     artifacts.</quote> Willard McCarty, ed., <emphasis role="ital"
                                     >Text and genre in reconstruction: effects of digitalization on
-                                    ideas, behaviors, products and institutions</emphasis>, 93–118.
+                                    ideas, behaviours, products and institutions</emphasis>, 93–118.
                                 Open Book Publishers, 2010.</para>
                         </footnote> We contend, moreover, that visual display and interactive
                         functionality are an integral part of rhetorical form. The interface is thus
@@ -1500,9 +1500,9 @@ let $text := $doc/id($section)</programlisting></para>
                             does it all except HTML scaffolding and superstructure)</para>
                     </listitem>
                     <listitem>
-                        <para>minimizing custom transformation code and leveraging common behaviors
+                        <para>minimizing custom transformation code and leveraging common behaviours
                             (One Document Does it All, except HTML scaffolding, with XQuery limited
-                            to extension behaviors)</para>
+                            to extension behaviours)</para>
                     </listitem>
                 </itemizedlist></para>
             <para>Different projects might reasonably make different choices from this menu.</para>
@@ -1554,12 +1554,12 @@ let $text := $doc/id($section)</programlisting></para>
                 At the other extreme, TEI Publisher information may be distributed over multiple
                 files in multiple libraries, and while in many cases the user may not have to
                 interact explicitly with most of them, customization (such as the incorporation of a
-                new behavior written in XQuery) requires the ability to navigate a more complex
+                new behaviour written in XQuery) requires the ability to navigate a more complex
                 resource structure. It may be helpful in this context to think of different roles in
                 the development process. From this perspective, the greater complexity of the TEI
                 Publisher model may fall only to a professional developer, who can reasonably be
                 expected to have or to acquire the necessary skill. Meanwhile, the scholar-editor
-                may need only to choose among supported behaviors and CSS-like rendering
+                may need only to choose among supported behaviours and CSS-like rendering
                 instructions, which is a low requirement for technical expertise. In comparison, the
                 middleware organization, while architecturally simpler overall than TEI Publisher,
                 requires much more advanced programming skills from the user because it does not aim
