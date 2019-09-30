@@ -914,7 +914,7 @@ let $text := $doc/id($section)</programlisting></para>
                 TEI Lite [<xref linkend="tei_lite"/>], TEI simplePrint offers a subset of TEI elements and attributes
                 regarded as adequate for a wide variety of encoding projects. But TEI simplePrint goes beyond merely
                 customizing the TEI schema by also specifying rendering preferences in a formal way through the use of
-                PM.</para> </footnote> TEI publisher implements PM with a library of built-in behaviours defined as
+                PM.</para> </footnote> TEI Publisher implements PM with a library of built-in behaviours defined as
                 XQuery functions for each output format. This implementation strategy offers sane default mapping from
                 PM’s CSS-based style language to the various output formats. It also supports overriding these defaults
                 with custom, output format-specific affordances, such as LaTeX boilerplate or XSL-FO font definitions,
@@ -1372,7 +1372,7 @@ let $text := $doc/id($section)</programlisting></para>
             <emphasis role="ital">P5: Guidelines for electronic text encoding and interchange</emphasis>.)
             <link>https://www.tei-c.org/release/doc/tei-p5-doc/en/html/TD.html#TDPMPM</link></bibliomixed>
         <bibliomixed xml:id="teiPublisher" xreflabel="TEI Publisher">
-            <quote>TEI publisher.</quote>
+            <quote>TEI Publisher.</quote>
             <link>https://teipublisher.com</link>
         </bibliomixed>
         <bibliomixed xml:id="teiPublisher4.0" xreflabel="TEI Publisher 4.0"><quote>TEI Publisher 4.0.</quote> Product
