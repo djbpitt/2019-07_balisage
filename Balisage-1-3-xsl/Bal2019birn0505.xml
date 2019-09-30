@@ -870,7 +870,7 @@ let $text := $doc/id($section)</programlisting></para>
                 involves <emphasis role="ital">appearance</emphasis> values for the <code>&lt;outputRendition&gt;</code>
                 child element, which might specify italics or small caps. As a more complex example, to render related
                 regularization (TEI <code>&lt;reg&gt;</code>) and original (TEI <code>&lt;orig&gt;</code>) values inside
-                a TEI <code>&lt;choose&gt;</code> wrapper, the developer can specify the <code>@behaviour</code> value
+                a TEI <code>&lt;choice&gt;</code> wrapper, the developer can specify the <code>@behaviour</code> value
                 as <code>alternate</code>. With HTML output, this might put the content of the regularization in the
                 base text and the original source text in a tooltip displayed on mouseover, or vice versa, but because
                 the PM specification is high-level, abstract, and declarative, it can also be used during print output
