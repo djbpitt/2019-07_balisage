@@ -1002,7 +1002,7 @@ let $text := $doc/id($section)</programlisting></para>
                 intention, that is, the formal TEI expression of user output expectations or instructions. From that
                 perspective, within PM the publication framework is documentation driven. By this we mean that because
                 PM forces the user to define these instructions in a declarative manner, it can be said that it enforces
-                format—and software—agnostic documentation, which may provide the best guarantee we can have for a long
+                format- and software-agnostic documentation, which may provide the best guarantee we can have for a long
                 term transmission if not of the result, at least of the scholarly editorial intention. </para>
             <para>The TEI Publisher implementation of PM acts, then, in a controller context, establishing an efficient
                 binding from model to view that is also largely independent of the latter. Using the technology of Web
